@@ -1,6 +1,11 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { Box, TextField, Typography } from '@mui/material'
+
+const defaultTextFieldStyle = {
+  variant: 'standard',
+}
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -12,24 +17,41 @@ function App() {
     })
   }, [])
 
+  if (characters.length === 0) return null
+
   return (
     <div>
-      <form>
-        <div>
-          Character: <input value={characters[60].character} />
-        </div>
-
-        {characters[60].decrepitude.effectsOfAging.map((d) => (
-          <div>{d.score}</div>
+      <Box component="form">
+        <Typography>Character: </Typography>
+        <TextField defaultValue={characters[0].character}></TextField>
+      </Box>
+      <br />
+      <Box component="form">
+        <Typography>Decrepitude: </Typography>
+        <TextField
+          label="Helper text"
+          value={characters[0].decrepitude.score}
+        ></TextField>
+        <Typography>Effects of aging: </Typography>
+        {characters[0].decrepitude.effectsOfAging.map((n) => (
+          <TextField
+            placeholder={1}
+            sx={{ ...defaultTextFieldStyle }}
+            defaultValue={n}
+          />
         ))}
-        {characters[60].characteristics.map((c) => (
+      </Box>
+      <br />
+      <Box component="form">
+        <Typography>Characteristics</Typography>
+        {characters[0].characteristics.map((c) => (
           <div>
-            {c.characteristic}
-            {c.description}
-            {c.score}
+            <Typography>{c.characteristic}</Typography>
+            <TextField value={c.description} />
+            <TextField value={c.score} />
           </div>
         ))}
-      </form>
+      </Box>
     </div>
   )
 }
