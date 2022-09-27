@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -7,11 +8,24 @@ import {
   Typography,
   TableRow,
   Table,
-  TableCell,
   TableContainer,
+  TableCell,
   TableHead,
   Paper,
+  TableBody,
+  Stack,
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
 } from '@mui/material'
+import { border } from '@mui/system'
+import { alpha, styled } from '@mui/material/styles'
+import CloisterBlackLight from './media/CloisterBlackLight-axjg.ttf'
+
+const CustomTableCell = styled(TableCell)({
+  padding: 0,
+  border: 'none',
+})
 
 const defaultTextFieldStyle = {
   variant: 'standard',
@@ -20,10 +34,30 @@ const defaultTextFieldStyle = {
 const formBoxStyle = {
   mt: 1,
   ml: 1,
-  padding: 2,
+  padding: 1,
   maxWidth: 500,
   boxShadow: 6,
 }
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ['CloisterBlackLight', 'Roboto'].join(','),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'CloisterBlackLight';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 400;
+          src: local('CloisterBlackLight-axjg.ttf'), local('CloisterBlackLight-axjg.ttf'), url(${CloisterBlackLight}) format('ttf');
+          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+        }
+      `,
+    },
+  },
+})
 
 function App() {
   const [character, setCharacter] = useState([])
@@ -33,84 +67,136 @@ function App() {
       console.log(character)
       setCharacter(response.data[0])
     })
+    // eslint-disable-next-line
   }, [])
 
   if (!character.character) return null
 
   return (
-    <div>
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <td>Character: </td>
-              <td>
-                <input defaultValue={character.character} />
-              </td>
-            </tr>
-            <tr>
-              <td>Player:</td>
-              <td>
-                <input defaultValue={character.player} />
-              </td>
-            </tr>
-            <tr>
-              <td>Saga:</td>
-              <td>
-                <input defaultValue={character.saga} />
-              </td>
-            </tr>
-            <tr>
-              <td>Setting: </td>
-              <td>
-                <input defaultValue={character.setting} />
-              </td>
-              <td>Current Year</td>
-              <td>
-                <input defaultValue={character.currentYear} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-      <TableContainer component={Paper} sx={{ ...formBoxStyle }}>
-        <Typography>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="none" align="left">
-                  Character:
-                </TableCell>
-                <TableCell align="left">
-                  <TextField
-                    variant="standard"
-                    defaultValue={character.character}
-                  ></TextField>
-                </TableCell>
-              </TableRow>
-              Player:<TextField defaultValue={character.player}></TextField>
-              <TextField defaultValue={character.saga}></TextField>
-              <TextField defaultValue={character.setting}></TextField>
-              <TextField defaultValue={character.currentYear}></TextField>
-              <TextField defaultValue={character.house}></TextField>
-              <TextField defaultValue={character.age}></TextField>
-              <TextField defaultValue={character.size}></TextField>
-              <TextField defaultValue={character.confidence}></TextField>
-            </TableHead>
-          </Table>
-        </Typography>
-      </TableContainer>
-      <br />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <Box
+          sx={{
+            fontFamily: 'CloisterBlackLight',
+            border: '1px solid',
+            p: 2,
+            maxWidth: 600,
+          }}
+        >
+          <Stack direction="row" spacing={2}>
+            <Typography>Character: </Typography>
+            <TextField variant="filled" defaultValue={character.character} />
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <Typography>Player: </Typography>
+            <TextField
+              variant="filled"
+              size="small"
+              defaultValue={character.player}
+            />
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <Typography>Saga: </Typography>
+            <TextField variant="filled" defaultValue={character.saga} />
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <Typography>Setting: </Typography>
+            <TextField
+              variant="filled"
+              size="small"
+              defaultValue={character.setting}
+            />
+            <Typography>Current Year: </Typography>
+            <TextField
+              variant="filled"
+              size="small"
+              defaultValue={character.currentYear}
+            />
+          </Stack>
+          <Stack direction="row" spacing={2}>
+            <Typography>House: </Typography>
+            <TextField variant="filled" defaultValue={character.house} />
+          </Stack>
 
-      <Box component="form">
+          <Stack direction="row" spacing={2}>
+            <Typography>Age: </Typography>
+            <TextField variant="filled" defaultValue={character.age} />
+            <Typography>Size: </Typography>
+            <TextField variant="filled" defaultValue={character.size} />
+            <Typography>Confidence: </Typography>
+            <TextField variant="filled" defaultValue={character.confidence} />
+          </Stack>
+        </Box>
+      </div>
+    </ThemeProvider>
+  )
+}
+
+/*
+<TableContainer variant="form" sx={{ maxWidth: 600, p: 1 }}>
+        <Table>
+          <TableRow>
+            <CustomTableCell>Character: </CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.character} />
+            </CustomTableCell>
+          </TableRow>
+          <TableRow size="small">
+            <CustomTableCell>Player:</CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.player} />
+            </CustomTableCell>
+          </TableRow>
+          <TableRow>
+            <CustomTableCell>Saga:</CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.saga} />
+            </CustomTableCell>
+          </TableRow>
+          <TableRow>
+            <CustomTableCell>Setting: </CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.setting} />
+            </CustomTableCell>
+            <CustomTableCell>Current Year</CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.currentYear} />
+            </CustomTableCell>
+          </TableRow>
+          <TableRow>
+            <CustomTableCell>House:</CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.house} />
+            </CustomTableCell>
+          </TableRow>
+          <TableRow>
+            <CustomTableCell>Age: </CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.age} />
+            </CustomTableCell>
+            <CustomTableCell>Size: </CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.size} />
+            </CustomTableCell>
+            <CustomTableCell>Confidence: </CustomTableCell>
+            <CustomTableCell>
+              <CustomTextField defaultValue={character.confidence} />
+            </CustomTableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+
+      <br />
+<Box component="form">
         <Typography>Decrepitude: </Typography>
-        <TextField
+        <CustomTextField
           label="Score"
           value={character.decrepitude.score}
-        ></TextField>
+        ></CustomTextField>
         <Typography>Effects of aging: </Typography>
         {character.decrepitude.effectsOfAging.map((n) => (
-          <TextField sx={{ ...defaultTextFieldStyle }} defaultValue={n} />
+          <CustomTextField sx={{ ...defaultTextFieldStyle }} defaultValue={n} />
         ))}
       </Box>
       <br />
@@ -120,13 +206,10 @@ function App() {
         {character.characteristics.map((c) => (
           <div>
             <Typography>{c.characteristic}</Typography>
-            <TextField value={c.description} />
-            <TextField value={c.score} />
+            <CustomTextField value={c.description} />
+            <CustomTextField value={c.score} />
           </div>
         ))}
       </Box>
-    </div>
-  )
-}
-
+      */
 export default App
