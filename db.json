@@ -1,0 +1,372 @@
+{
+  "characters": [
+    {
+      "character": "Jaume",
+      "player": "Mikkis",
+      "saga": "City of tiny lights",
+      "setting": "Jokusetting",
+      "currentYear": 1187,
+      "house": "Bonisagus",
+      "age": 88,
+      "size": 0,
+      "confidence": 3,
+      "decrepitude": {
+        "score": 2,
+        "effectsOfAging": [
+          "Hunchback",
+          "Wooden leg"
+        ]
+      },
+      "warping": {
+        "score": 1,
+        "effectsOfWarping": [
+          "Little bit hazy in the head"
+        ]
+      },
+      "descriptiveStats": [
+        {
+          "stat": "Birth Name",
+          "description": "Jaumehain"
+        },
+        {
+          "stat": "Handedness",
+          "description": "Right"
+        }
+      ],
+      "characteristics": [
+        {
+          "characteristic": "Intelligence",
+          "description": "Witty",
+          "score": 3
+        },
+        {
+          "characteristic": "Perception",
+          "description": "keen eye",
+          "score": 3
+        },
+        {
+          "characteristic": "Strength",
+          "description": "weak body",
+          "score": -3
+        },
+        {
+          "characteristic": "Stamina",
+          "description": "eats garlic",
+          "score": 2
+        },
+        {
+          "characteristic": "Presence",
+          "description": "looks strange",
+          "score": -2
+        },
+        {
+          "characteristic": "Communication",
+          "description": "verbally adept",
+          "score": 1
+        },
+        {
+          "characteristic": "Dexterity",
+          "description": "missing feet",
+          "score": -3
+        },
+        {
+          "characteristic": "Quickness",
+          "description": "missing feet",
+          "score": -3
+        }
+      ],
+      "virtues": [
+        "Knack with Corpus +3"
+      ],
+      "flaws": [
+        "Wooden leg -3"
+      ],
+      "abilities": [
+        {
+          "experience": 25,
+          "ability": "Speak Latin",
+          "specialty": "writing",
+          "score": 5
+        }
+      ],
+      "personalityTraits": [
+        {
+          "description": "Rude",
+          "score": 2
+        }
+      ],
+      "reputation": [
+        {
+          "description": "Respected among magis",
+          "type": {
+            "type": "covenfolk"
+          },
+          "score": 2
+        }
+      ],
+      "combat": {
+        "armor": "none",
+        "modifiers": [
+          "Add this"
+        ],
+        "soak": 2,
+        "load": 0
+      },
+      "fatigue": {
+        "value": 0,
+        "content": [
+          {
+            "title": "Fresh"
+          },
+          {
+            "penalty": 0,
+            "recovery": "2 min",
+            "title": "Winded"
+          },
+          {
+            "penalty": -1,
+            "recovery": "10 min",
+            "title": "Weary"
+          },
+          {
+            "penalty": -3,
+            "recovery": "30 min",
+            "title": "Tired"
+          },
+          {
+            "penalty": -5,
+            "recovery": "1 hr.",
+            "title": "Dazed"
+          },
+          {
+            "recovery": "2 hr.",
+            "title": "Unconscious"
+          }
+        ]
+      },
+      "wounds": {
+        "value": 0,
+        "content": [
+          {
+            "title": "Light Wounds",
+            "penalty": -1
+          },
+          {
+            "title": "Medium Wounds",
+            "penalty": -3
+          },
+          {
+            "title": "Heavy Wounds",
+            "penalty": -5
+          },
+          {
+            "title": "Incapacitated"
+          },
+          {
+            "title": "Dead"
+          }
+        ]
+      },
+      "weapons": [
+        {
+          "weapon": "Brawling",
+          "initModifier": -3,
+          "attackModifier": -2,
+          "defenseModifier": 2,
+          "damageModifier": -2,
+          "load": -2,
+          "Range": 0
+        }
+      ],
+      "equipment": [
+        {
+          "item": "Spell grimoire",
+          "load": 0
+        },
+        {
+          "item": "Magic wand",
+          "load": 0
+        }
+      ]
+    },
+    {
+      "character": "Jaume",
+      "player": "Mikkis",
+      "saga": "City of tiny lights",
+      "setting": "Jokusetting",
+      "currentYear": 1187,
+      "house": "Bonisagus",
+      "size": 0,
+      "confidence": 3,
+      "decrepitude": {
+        "score": 2,
+        "effectsOfAging": [
+          "Hunchback",
+          "Wooden leg"
+        ]
+      },
+      "warping": {
+        "score": 1,
+        "effectsOfWarping": [
+          "Little bit hazy in the head"
+        ]
+      },
+      "descriptiveStats": [
+        {
+          "stat": "Birth Name",
+          "description": "Jaumehain"
+        },
+        {
+          "stat": "Handedness",
+          "description": "Right"
+        }
+      ],
+      "characteristics": [
+        {
+          "characteristic": "Intelligence",
+          "description": "Witty",
+          "score": 3
+        },
+        {
+          "characteristic": "Perception",
+          "description": "keen eye",
+          "score": 3
+        },
+        {
+          "characteristic": "Strength",
+          "description": "weak body",
+          "score": -3
+        },
+        {
+          "characteristic": "Stamina",
+          "description": "eats garlic",
+          "score": 2
+        },
+        {
+          "characteristic": "Presence",
+          "description": "looks strange",
+          "score": -2
+        },
+        {
+          "characteristic": "Communication",
+          "description": "verbally adept",
+          "score": 1
+        },
+        {
+          "characteristic": "Dexterity",
+          "description": "missing feet",
+          "score": -3
+        },
+        {
+          "characteristic": "Quickness",
+          "description": "missing feet",
+          "score": -3
+        }
+      ],
+      "virtues": [
+        "Knack with Corpus +3"
+      ],
+      "flaws": [
+        "Wooden leg -3"
+      ],
+      "abilities": [
+        {
+          "experience": 25,
+          "ability": "Speak Latin",
+          "specialty": "writing",
+          "score": 5
+        }
+      ],
+      "personalityTraits": [
+        {
+          "description": null,
+          "score": null
+        }
+      ],
+      "reputation": [
+        {
+          "description": null,
+          "type": {
+            "type": null
+          },
+          "score": null
+        }
+      ],
+      "combat": {
+        "armor": null,
+        "modifiers": [
+          null
+        ],
+        "soak": 0,
+        "load": 0
+      },
+      "fatigue": {
+        "value": 0,
+        "content": [
+          {
+            "title": "Fresh"
+          },
+          {
+            "penalty": 0,
+            "recovery": "2 min",
+            "title": "Winded"
+          },
+          {
+            "penalty": -1,
+            "recovery": "10 min",
+            "title": "Weary"
+          },
+          {
+            "penalty": -3,
+            "recovery": "30 min",
+            "title": "Tired"
+          },
+          {
+            "penalty": -5,
+            "recovery": "1 hr.",
+            "title": "Dazed"
+          },
+          {
+            "recovery": "2 hr.",
+            "title": "Unconscious"
+          }
+        ]
+      },
+      "wounds": {
+        "value": 0,
+        "content": [
+          {
+            "title": "Light Wounds",
+            "penalty": -1
+          },
+          {
+            "title": "Medium Wounds",
+            "penalty": -3
+          },
+          {
+            "title": "Heavy Wounds",
+            "penalty": -5
+          },
+          {
+            "title": "Incapacitated"
+          },
+          {
+            "title": "Dead"
+          }
+        ]
+      },
+      "weapons": [
+        {
+          "weapon": null,
+          "initModifier": null,
+          "attackModifier": null,
+          "defenseModifier": null,
+          "damageModifier": null,
+          "load": null,
+          "Range": null
+        }
+      ],
+      "equipment": []
+    }
+  ]
+}
