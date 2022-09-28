@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import {
   Box,
-  TextField,
+  Input,
   Typography,
   TableRow,
   Table,
@@ -17,49 +17,158 @@ import {
   createTheme,
   ThemeProvider,
   CssBaseline,
+  TextField,
 } from '@mui/material'
-import { border } from '@mui/system'
-import { alpha, styled } from '@mui/material/styles'
-import CloisterBlackLight from './media/CloisterBlackLight-axjg.ttf'
 
-const CustomTableCell = styled(TableCell)({
-  padding: 0,
-  border: 'none',
-})
-
-const defaultTextFieldStyle = {
-  variant: 'standard',
+const basicInputSx = {
+  '& input': { backgroundColor: 'white', padding: 1 },
+  '& input:hover': { backgroundColor: 'whitesmoke' },
+  '& input:focus': { backgroundColor: '#cad9ec', borderBottom: '1px dotted' },
+  width: '100%',
 }
 
-const formBoxStyle = {
-  mt: 1,
-  ml: 1,
-  padding: 1,
-  maxWidth: 500,
-  boxShadow: 6,
-}
-
-const theme = createTheme({
+const sheetThemeAM = createTheme({
   typography: {
-    fontFamily: ['CloisterBlackLight', 'Roboto'].join(','),
-  },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: `
-        @font-face {
-          font-family: 'CloisterBlackLight';
-          font-style: normal;
-          font-display: swap;
-          font-weight: 400;
-          src: local('CloisterBlackLight-axjg.ttf'), local('CloisterBlackLight-axjg.ttf'), url(${CloisterBlackLight}) format('ttf');
-          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
-        }
-      `,
+    fontFamily: 'serif',
+    label: {
+      fontFamily: 'MedievalSharp',
+      fontSize: '1.5rem',
+      textAlign: 'center',
+    },
+    labelSm: {
+      fontSize: '1.1rem',
+      fontFamily: 'serif',
     },
   },
 })
 
-function App() {
+const Decrepitude = ({ character }) => {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        maxWidth: 230,
+        border: '1px solid',
+      }}
+    >
+      <Stack direction="row">
+        <Typography variant="label">Decrepitude:</Typography>
+        <Input
+          sx={{ ...basicInputSx }}
+          defaultValue={character.decrepitude.score}
+        />
+      </Stack>
+      <Typography variant="labelSm">Effects of aging: </Typography>
+      {character.decrepitude.effectsOfAging.map((n) => (
+        <Input sx={{ ...basicInputSx }} key={n} defaultValue={n} />
+      ))}
+    </Box>
+  )
+}
+const Warping = ({ character }) => {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        maxWidth: 230,
+        border: '1px solid',
+      }}
+    >
+      <Stack direction="row">
+        <Typography variant="label">Warping:</Typography>
+        <Input
+          sx={{ ...basicInputSx }}
+          defaultValue={character.warping.score}
+        />
+      </Stack>
+      <Typography variant="labelSm">Effects of warping: </Typography>
+      {character.warping.effectsOfWarping.map((n) => (
+        <Input sx={{ ...basicInputSx }} key={n} defaultValue={n} />
+      ))}
+    </Box>
+  )
+}
+const BasicData = ({ character }) => {
+  return (
+    <Box
+      sx={{
+        p: 2,
+        maxWidth: 500,
+      }}
+    >
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Character: </Typography>
+        <Input
+          sx={{ ...basicInputSx }}
+          disableUnderline
+          defaultValue={character.character}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Player: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.player}
+        />
+      </Stack>
+
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Saga: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          variant="filled"
+          defaultValue={character.saga}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Setting: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.setting}
+        />
+        <Typography variant="label">Current Year: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.currentYear}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">House: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.house}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Age: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.age}
+        />
+        <Typography variant="label">Size: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.size}
+        />
+        <Typography variant="label">Confidence: </Typography>
+        <Input
+          sx={basicInputSx}
+          disableUnderline
+          defaultValue={character.confidence}
+        />
+      </Stack>
+    </Box>
+  )
+}
+
+const App = () => {
   const [character, setCharacter] = useState([])
 
   useEffect(() => {
@@ -73,63 +182,14 @@ function App() {
   if (!character.character) return null
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <CssBaseline />
-      <div>
-        <Box
-          sx={{
-            fontFamily: 'CloisterBlackLight',
-            border: '1px solid',
-            p: 2,
-            maxWidth: 600,
-          }}
-        >
-          <Stack direction="row" spacing={2}>
-            <Typography>Character: </Typography>
-            <TextField variant="filled" defaultValue={character.character} />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <Typography>Player: </Typography>
-            <TextField
-              variant="filled"
-              size="small"
-              defaultValue={character.player}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <Typography>Saga: </Typography>
-            <TextField variant="filled" defaultValue={character.saga} />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <Typography>Setting: </Typography>
-            <TextField
-              variant="filled"
-              size="small"
-              defaultValue={character.setting}
-            />
-            <Typography>Current Year: </Typography>
-            <TextField
-              variant="filled"
-              size="small"
-              defaultValue={character.currentYear}
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <Typography>House: </Typography>
-            <TextField variant="filled" defaultValue={character.house} />
-          </Stack>
-
-          <Stack direction="row" spacing={2}>
-            <Typography>Age: </Typography>
-            <TextField variant="filled" defaultValue={character.age} />
-            <Typography>Size: </Typography>
-            <TextField variant="filled" defaultValue={character.size} />
-            <Typography>Confidence: </Typography>
-            <TextField variant="filled" defaultValue={character.confidence} />
-          </Stack>
-        </Box>
-      </div>
-    </ThemeProvider>
+      <ThemeProvider theme={sheetThemeAM}>
+        <BasicData character={character} />
+        <Decrepitude character={character} />
+        <Warping character={character} />
+      </ThemeProvider>
+    </div>
   )
 }
 
