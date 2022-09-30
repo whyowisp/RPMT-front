@@ -10,3 +10,4 @@
 | 27.9 | 6h | dummy db:n teko, Mui dokumentaation lukemista, char sheet form demo |
 | 28.9 | 5h | Mui dokumentaatio perehtyminen; tyylittelyt ym. , fonttien valinta, char sheet:n edistämistä |
 | 29.9 | 5h | Work around form state management + planning and working on how to pass data between client and server |
+| 30.9 | 4h | character form logiikkaa + reduxin configurointia |

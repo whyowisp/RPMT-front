@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Box,
   Input,
@@ -8,6 +9,9 @@ import {
   ThemeProvider,
 } from '@mui/material'
 
+import { characterEdition } from '../reducers/characterReducer'
+
+//remove
 import charService from '../services/characters'
 
 const plainInputSx = {
@@ -50,6 +54,8 @@ const Decrepitude = ({ character }) => {
     character.decrepitude.effectsOfAging
   )
 
+  const dispatch = useDispatch()
+
   const appendField = () => {
     setEffectsOfAge(effectsOfAge.concat(['']))
   }
@@ -78,11 +84,8 @@ const Decrepitude = ({ character }) => {
         effectsOfAging: effectsOfAge,
       },
     }
-    charService
-      .updateChar(updatedData, character._id)
-      .then((result) =>
-        console.log('result of update: ' + JSON.stringify(result))
-      )
+
+    dispatch(characterEdition(updatedData, character._id))
   }
 
   console.log(

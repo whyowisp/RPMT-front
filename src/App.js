@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { CssBaseline } from '@mui/material'
-import charService from './services/characters'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { initCharactersReducer } from './reducers/characterReducer'
 
 import CharacterSheet from './components/CharacterSheet'
 
 const App = () => {
-  const [characters, setCharacter] = useState()
+  const characters = useSelector((state) => state.characters)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    charService.getAll().then((response) => {
-      setCharacter(response)
-    })
-    // eslint-disable-next-line
-  }, [])
+    dispatch(initCharactersReducer())
+  }, [dispatch])
+
   console.log(characters)
 
   if (!characters) return null
