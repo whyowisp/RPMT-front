@@ -52,8 +52,6 @@ const Decrepitude = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
 
-  const [score, setScore] = useState(character.decrepitude.score)
-  const [newEffect, setNewEffect] = useState('')
   const [effects, setEffects] = useState(character.decrepitude.effectsOfAging)
 
   const dispatch = useDispatch()
@@ -63,7 +61,6 @@ const Decrepitude = ({ id }) => {
       id: id,
       content: {
         decrepitude: {
-          score: score,
           effectsOfAging: effects.concat(['']),
         },
       },
@@ -75,39 +72,44 @@ const Decrepitude = ({ id }) => {
     setEffects(effects.filter((value) => (value === '' ? null : value)))
   }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, indexOfValue) => {
     e.preventDefault()
-    setNewEffect(e.target.value)
+
+    //Check this, removes ALL
+    setEffects(
+      effects.map((effect, i) => {
+        if (e.target.value === '') {
+          effects.filter((effect, i) => (i === indexOfValue ? null : effect))
+          return
+        }
+        return i === indexOfValue ? e.target.value : effect
+      })
+    )
     if (e.target.value === '') {
-      removeEmptyFields()
+      return
     }
+    console.log(effects)
   }
 
-  const submitUpdate = (indexOfValue) => {
+  const submitUpdate = () => {
     const data = {
       id: id,
       content: {
         decrepitude: {
-          score: score,
-          effectsOfAging: effects.map((effect, index) =>
-            index === indexOfValue ? newEffect : effect
-          ),
+          effectsOfAging: effects,
         },
       },
     }
-    setNewEffect('')
     dispatch(editCharacter(data))
   }
-  console.log('effects ' + effects)
+
   return (
-    <Box sx={smallBoxSx}>
+    <Box component="form" sx={smallBoxSx}>
       <Stack direction="row">
         <Typography variant="label">Decrepitude:</Typography>
         <Input
           sx={{ ...plainInputSx }}
-          defaultValue={character.decrepitude.score}
-          onChange={({ target }) => setScore(target.value)}
-          onBlur={() => submitUpdate()}
+          value={character.decrepitude.effectsOfAging.length}
         />
       </Stack>
       <Typography variant="labelSm">Effects of aging: </Typography>
@@ -116,11 +118,12 @@ const Decrepitude = ({ id }) => {
           sx={{ ...plainInputSx }}
           key={value}
           defaultValue={value}
-          onChange={(event) => handleInputChange(event)}
-          onBlur={() => submitUpdate(indexOfValue)}
+          onChange={(event) => handleInputChange(event, indexOfValue)}
+          onBlur={() => submitUpdate()}
         />
       ))}
-      {<button onClick={() => appendField()}>+</button>}
+      <button onClick={() => appendField()}>+</button>
+      <button onClick={() => submitUpdate()}>ok</button>
     </Box>
   )
 }

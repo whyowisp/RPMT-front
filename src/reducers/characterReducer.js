@@ -21,12 +21,24 @@ export const characterSlice = createSlice({
       console.log(charInEdit)
       state.map((character) => (character._id !== id ? character : charInEdit))
     },
+    singleFieldEdition(state, action) {
+      const id = action.payload.id
+      const content = action.payload.content
+      const charInEdit = state.find((character) => character._id === id)
+
+      charInEdit.decrepitude.effectsOfAging = content.effectsOfAging
+      console.log(charInEdit)
+      state.map((character) => (character._id !== id ? character : charInEdit))
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { charactersInitialization, characterEdition } =
-  characterSlice.actions
+export const {
+  charactersInitialization,
+  characterEdition,
+  singleFieldEdition,
+} = characterSlice.actions
 
 // *** START OF THUNK FUNCTIONS ***
 
