@@ -51,55 +51,54 @@ const Decrepitude = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-  console.log('score: ' + character.decrepitude.score)
+
   const [score, setScore] = useState(character.decrepitude.score)
-  const [effectsOfAging, setEffectsOfAging] = useState(
-    character.decrepitude.effectsOfAging
-  )
+  const [newEffect, setNewEffect] = useState('')
+  const [effects, setEffects] = useState(character.decrepitude.effectsOfAging)
 
   const dispatch = useDispatch()
 
-  /*const appendField = () => {
-    //setEffectsOfAge(effectsOfAge.concat(['']))
-  }
-*/
-  const removeEmptyFields = () => {
-    console.log('removeEmptyfields called')
-    setEffectsOfAging(
-      effectsOfAging.filter((value) => (value === '' ? null : value))
-    )
-  }
-
-  const handleInputChange = (e, indexOfValue) => {
-    console.log('handleINputChange called' + score)
-    e.preventDefault()
-    const newValue = e.target.value
-
-    setEffectsOfAging(
-      effectsOfAging.fill(newValue, indexOfValue, indexOfValue + 1)
-    )
-    if (newValue === '') {
-      removeEmptyFields()
-    }
-  }
-
-  const submitUpdate = () => {
-    console.log(
-      'submit called for: ' + character.character + ' new score: ' + score
-    )
+  const appendField = () => {
     const data = {
       id: id,
       content: {
         decrepitude: {
           score: score,
-          effectsOfAging: effectsOfAging,
+          effectsOfAging: effects.concat(['']),
         },
       },
     }
-
     dispatch(editCharacter(data))
   }
 
+  const removeEmptyFields = () => {
+    setEffects(effects.filter((value) => (value === '' ? null : value)))
+  }
+
+  const handleInputChange = (e) => {
+    e.preventDefault()
+    setNewEffect(e.target.value)
+    if (e.target.value === '') {
+      removeEmptyFields()
+    }
+  }
+
+  const submitUpdate = (indexOfValue) => {
+    const data = {
+      id: id,
+      content: {
+        decrepitude: {
+          score: score,
+          effectsOfAging: effects.map((effect, index) =>
+            index === indexOfValue ? newEffect : effect
+          ),
+        },
+      },
+    }
+    setNewEffect('')
+    dispatch(editCharacter(data))
+  }
+  console.log('effects ' + effects)
   return (
     <Box sx={smallBoxSx}>
       <Stack direction="row">
@@ -112,14 +111,16 @@ const Decrepitude = ({ id }) => {
         />
       </Stack>
       <Typography variant="labelSm">Effects of aging: </Typography>
-      {character.decrepitude.effectsOfAging.map((value, index) => (
+      {character.decrepitude.effectsOfAging.map((value, indexOfValue) => (
         <Input
           sx={{ ...plainInputSx }}
           key={value}
           defaultValue={value}
-          onChange={(event) => handleInputChange(event, index)}
+          onChange={(event) => handleInputChange(event)}
+          onBlur={() => submitUpdate(indexOfValue)}
         />
       ))}
+      {<button onClick={() => appendField()}>+</button>}
     </Box>
   )
 }

@@ -18,6 +18,7 @@ export const characterSlice = createSlice({
 
       //Thanks Immer, state can be mutated
       charInEdit.decrepitude = content.decrepitude
+      console.log(charInEdit)
       state.map((character) => (character._id !== id ? character : charInEdit))
     },
   },
@@ -38,6 +39,7 @@ export const initCharactersReducer = () => {
 }
 
 export const editCharacter = (data) => {
+  console.log(data)
   return async (dispatch) => {
     dispatch(characterEdition(data))
     await charService
