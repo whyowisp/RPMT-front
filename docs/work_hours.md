@@ -11,3 +11,4 @@
 | 28.9 | 5h | Mui dokumentaatio perehtyminen; tyylittelyt ym. , fonttien valinta, char sheet:n edistämistä |
 | 29.9 | 5h | Work around form state management + planning and working on how to pass data between client and server |
 | 30.9 | 4h | character form logiikkaa + reduxin configurointia |
+| 3.10 | 4h | reduxin jälkeistä character form refaktorointia |

@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
   Input,
@@ -8,11 +7,11 @@ import {
   createTheme,
   ThemeProvider,
 } from '@mui/material'
-
-import { characterEdition } from '../reducers/characterReducer'
+import { useState } from 'react'
+import { editCharacter } from '../reducers/characterReducer'
 
 //remove
-import charService from '../services/characters'
+//import charService from '../services/characters'
 
 const plainInputSx = {
   '& input': { backgroundColor: 'white', padding: 1 },
@@ -28,10 +27,10 @@ const smallBoxSx = {
   margin: '10px',
 }
 
-const commonBoxSx = {
+/*const commonBoxSx = {
   p: 2,
   maxWidth: 500,
-}
+}*/
 
 const sheetThemeAM = createTheme({
   typography: {
@@ -48,52 +47,58 @@ const sheetThemeAM = createTheme({
   },
 })
 
-const Decrepitude = ({ character }) => {
-  const [score, setScore] = useState(character.score)
-  const [effectsOfAge, setEffectsOfAge] = useState(
+const Decrepitude = ({ id }) => {
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
+  console.log('score: ' + character.decrepitude.score)
+  const [score, setScore] = useState(character.decrepitude.score)
+  const [effectsOfAging, setEffectsOfAging] = useState(
     character.decrepitude.effectsOfAging
   )
 
   const dispatch = useDispatch()
 
-  const appendField = () => {
-    setEffectsOfAge(effectsOfAge.concat(['']))
+  /*const appendField = () => {
+    //setEffectsOfAge(effectsOfAge.concat(['']))
   }
-
+*/
   const removeEmptyFields = () => {
-    setEffectsOfAge(
-      effectsOfAge.filter((value) => (value === '' ? null : value))
+    console.log('removeEmptyfields called')
+    setEffectsOfAging(
+      effectsOfAging.filter((value) => (value === '' ? null : value))
     )
   }
 
   const handleInputChange = (e, indexOfValue) => {
+    console.log('handleINputChange called' + score)
     e.preventDefault()
     const newValue = e.target.value
 
-    setEffectsOfAge(effectsOfAge.fill(newValue, indexOfValue, indexOfValue + 1))
+    setEffectsOfAging(
+      effectsOfAging.fill(newValue, indexOfValue, indexOfValue + 1)
+    )
     if (newValue === '') {
       removeEmptyFields()
     }
   }
 
   const submitUpdate = () => {
-    console.log('submit called for id: ' + character._id)
-    const updatedData = {
-      decrepitude: {
-        score: score,
-        effectsOfAging: effectsOfAge,
+    console.log(
+      'submit called for: ' + character.character + ' new score: ' + score
+    )
+    const data = {
+      id: id,
+      content: {
+        decrepitude: {
+          score: score,
+          effectsOfAging: effectsOfAging,
+        },
       },
     }
 
-    dispatch(characterEdition(updatedData, character._id))
+    dispatch(editCharacter(data))
   }
-
-  console.log(
-    'effectOfAge array content: ' +
-      effectsOfAge +
-      '. Array length: ' +
-      effectsOfAge.length
-  )
 
   return (
     <Box sx={smallBoxSx}>
@@ -107,24 +112,22 @@ const Decrepitude = ({ character }) => {
         />
       </Stack>
       <Typography variant="labelSm">Effects of aging: </Typography>
-      {effectsOfAge.map((value, index) => (
+      {character.decrepitude.effectsOfAging.map((value, index) => (
         <Input
           sx={{ ...plainInputSx }}
           key={value}
           defaultValue={value}
           onChange={(event) => handleInputChange(event, index)}
-          onBlur={() => submitUpdate()}
         />
       ))}
-      {effectsOfAge.length < score ? (
-        <button onClick={() => appendField()}>+</button>
-      ) : (
-        <button onClick={() => removeEmptyFields()}>-</button>
-      )}
     </Box>
   )
 }
-const Warping = ({ character }) => {
+/*
+const Warping = ({ id }) => {
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
   return (
     <Box sx={smallBoxSx}>
       <Stack direction="row">
@@ -262,22 +265,30 @@ const BasicData = ({ character }) => {
       </Stack>
     </Box>
   )
-}
+}*/
 
-const CharacterSheet = ({ character }) => {
-  if (!character) return null
+const CharacterSheet = ({ id }) => {
+  if (!id) return null
 
   return (
     <div>
       <ThemeProvider theme={sheetThemeAM}>
-        <BasicData character={character} />
-        <Stack direction={'row'}>
-          <Decrepitude character={character} />
-          <Warping character={character} />
-        </Stack>
+        <Decrepitude id={id} />
       </ThemeProvider>
     </div>
   )
+  /*
+  return (
+    <div>
+      <ThemeProvider theme={sheetThemeAM}>
+        <BasicData id={id} />
+        <Stack direction={'row'}>
+          <Decrepitude id={id} />
+          <Warping id={id} />
+        </Stack>
+      </ThemeProvider>
+    </div>
+  )*/
 }
 
 export default CharacterSheet

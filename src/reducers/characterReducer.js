@@ -12,11 +12,13 @@ export const characterSlice = createSlice({
       return action.payload
     },
     characterEdition(state, action) {
-      console.log(action.payload)
-      const content = action.payload
-      const character = state.find((c) => c.id === content.id)
-      const editedCharacter = { ...character, content }
-      return editedCharacter
+      const id = action.payload.id
+      const content = action.payload.content
+      const charInEdit = state.find((character) => character._id === id)
+
+      //Thanks Immer, state can be mutated
+      charInEdit.decrepitude = content.decrepitude
+      state.map((character) => (character._id !== id ? character : charInEdit))
     },
   },
 })
@@ -30,15 +32,16 @@ export const { charactersInitialization, characterEdition } =
 export const initCharactersReducer = () => {
   return async (dispatch) => {
     const charactersFromDb = await charService.getAll()
+    console.log(charactersFromDb)
     dispatch(charactersInitialization(charactersFromDb))
   }
 }
 
-export const editCharacter = (data, id) => {
+export const editCharacter = (data) => {
   return async (dispatch) => {
-    dispatch(characterEdition(data, id))
-    charService
-      .updateChar(data, id)
+    dispatch(characterEdition(data))
+    await charService
+      .updateChar(data.content, data.id)
       .then((result) =>
         console.log('result of update: ' + JSON.stringify(result))
       )

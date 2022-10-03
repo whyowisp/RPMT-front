@@ -12,6 +12,7 @@ const initNewChar = async (playerId) => {
 }
 
 const updateChar = async (reqData, charId) => {
+  console.log(reqData)
   const res = await axios.put(`${baseUrl}/${charId}`, reqData)
   return res.data
 }

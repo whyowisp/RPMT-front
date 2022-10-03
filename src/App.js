@@ -15,14 +15,12 @@ const App = () => {
     dispatch(initCharactersReducer())
   }, [dispatch])
 
-  console.log(characters)
-
   if (!characters) return null
-
+  console.log(characters)
   return (
     <div>
       <CssBaseline />
-      <CharacterSheet character={characters[0]} />
+      <CharacterSheet id={characters[0]._id} />
     </div>
   )
 }
