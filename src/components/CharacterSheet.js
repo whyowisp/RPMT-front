@@ -7,7 +7,7 @@ import {
   createTheme,
   ThemeProvider,
 } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { editCharacter } from '../reducers/characterReducer'
 
 //remove
@@ -48,17 +48,82 @@ const sheetThemeAM = createTheme({
 })
 
 const Decrepitude = ({ id }) => {
+  //Get character
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
 
-  const [effects, setEffects] = useState(character.decrepitude.effectsOfAging)
+  //State to represent form state 'now'
+  const [effectsOfAging, setEffectsOfAging] = useState([])
+
+  //Helper state to follow changes in 'effects' field. Appended to effectOfAging right after edit.
+  const [effectField, setEffectField] = useState('')
+  //Helper state to follow what index is being edited. Set to -1 when nothing is being edited
+  const [fieldIndex, setFieldIndex] = useState(-1)
+
+  //Decrepitude is a pre-filled form and it's filled with already existing data + one empty field.
+  useEffect(() => {
+    console.log('Use effect called')
+    setEffectsOfAging(character.decrepitude.effectsOfAging.concat(['']))
+  }, [character]) //CONTROLS RE-RENDERS, TAKE NOTE
 
   const dispatch = useDispatch()
 
+  const prepareEffects = () => {
+    setEffectsOfAging(
+      effectsOfAging.map((effect, index) =>
+        index === fieldIndex ? effectField : effect
+      )
+    )
+  }
+
+  const submitUpdate = (e) => {
+    e.preventDefault()
+    const data = {
+      id: id,
+      content: {
+        decrepitude: {
+          effectsOfAging: effectsOfAging,
+        },
+      },
+    }
+
+    dispatch(editCharacter(data))
+    setEffectField('')
+    setFieldIndex(-1)
+    //setEffectsOfAging([])
+  }
+  console.log(
+    'effectFieldValue: ' + effectField + ' field index: ' + fieldIndex
+  )
+  console.log('effectsOfAging NOW: ' + effectsOfAging)
+
+  //Prefilled form
+  return (
+    <Box component="form" sx={smallBoxSx}>
+      <Stack direction="row">
+        <Typography variant="label">Decrepitude:</Typography>
+        <Input sx={{ ...plainInputSx }} value={effectsOfAging.length} />
+      </Stack>
+      <Typography variant="labelSm">Effects of aging: </Typography>
+      {effectsOfAging.map((value, i) => (
+        <Input
+          sx={{ ...plainInputSx }}
+          key={value}
+          defaultValue={value}
+          onChange={({ target }) => {
+            setEffectField(target.value)
+            setFieldIndex(i)
+          }}
+          onBlur={() => prepareEffects()}
+        />
+      ))}
+      <button onClick={(e) => submitUpdate(e)}>ok</button>
+    </Box>
+  )
   /*const removeEmptyFields = () => {
     setEffects(effects.filter((value) => (value === '' ? null : value)))
-  }*/
+  }
 
   const appendField = () => {
     const data = {
@@ -106,30 +171,7 @@ const Decrepitude = ({ id }) => {
       },
     }
     dispatch(editCharacter(data))
-  }
-
-  return (
-    <Box component="form" sx={smallBoxSx}>
-      <Stack direction="row">
-        <Typography variant="label">Decrepitude:</Typography>
-        <Input
-          sx={{ ...plainInputSx }}
-          value={character.decrepitude.effectsOfAging.length}
-        />
-      </Stack>
-      <Typography variant="labelSm">Effects of aging: </Typography>
-      {character.decrepitude.effectsOfAging.map((value, indexOfValue) => (
-        <Input
-          sx={{ ...plainInputSx }}
-          key={value}
-          defaultValue={value}
-          onChange={(event) => handleInputChange(event, indexOfValue)}
-        />
-      ))}
-      <button onClick={() => appendField()}>+</button>
-      <button onClick={() => submitUpdate()}>ok</button>
-    </Box>
-  )
+  }*/
 }
 /*
 const Warping = ({ id }) => {

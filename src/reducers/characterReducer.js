@@ -45,6 +45,7 @@ export const initCharactersReducer = () => {
 }
 
 export const editCharacter = (data) => {
+  console.log('edit character thunk called')
   console.log(data)
   return async (dispatch) => {
     dispatch(characterEdition(data))
