@@ -12,3 +12,4 @@
 | 29.9 | 5h | Work around form state management + planning and working on how to pass data between client and server |
 | 30.9 | 4h | character form logiikkaa + reduxin configurointia |
 | 3.10 | 7h | reduxin jälkeistä state-sotkun selvittämistä |
+| 4.10 | 1h | - " - |

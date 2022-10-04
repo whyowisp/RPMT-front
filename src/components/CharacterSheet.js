@@ -56,6 +56,10 @@ const Decrepitude = ({ id }) => {
 
   const dispatch = useDispatch()
 
+  /*const removeEmptyFields = () => {
+    setEffects(effects.filter((value) => (value === '' ? null : value)))
+  }*/
+
   const appendField = () => {
     const data = {
       id: id,
@@ -68,26 +72,27 @@ const Decrepitude = ({ id }) => {
     dispatch(editCharacter(data))
   }
 
-  const removeEmptyFields = () => {
-    setEffects(effects.filter((value) => (value === '' ? null : value)))
-  }
-
   const handleInputChange = (e, indexOfValue) => {
     e.preventDefault()
 
-    //Check this, removes ALL
     setEffects(
       effects.map((effect, i) => {
         if (e.target.value === '') {
-          effects.filter((effect, i) => (i === indexOfValue ? null : effect))
+          setEffects(effects.pop())
+          const data = {
+            id: id,
+            content: {
+              decrepitude: {
+                effectsOfAging: effects,
+              },
+            },
+          }
+          dispatch(editCharacter(data))
           return
         }
         return i === indexOfValue ? e.target.value : effect
       })
     )
-    if (e.target.value === '') {
-      return
-    }
     console.log(effects)
   }
 
@@ -119,7 +124,6 @@ const Decrepitude = ({ id }) => {
           key={value}
           defaultValue={value}
           onChange={(event) => handleInputChange(event, indexOfValue)}
-          onBlur={() => submitUpdate()}
         />
       ))}
       <button onClick={() => appendField()}>+</button>
