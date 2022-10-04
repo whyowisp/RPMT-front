@@ -1,37 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit'
 import charService from '../services/characters'
 
-const initialState = null
+//ABOUT ACTION NAMING
+//Regular action naming convention: name actions as event (broader terms than simply 'setters')
+//House action naming rules: name as what is about to happen:
+//For example: What is about to happen? - characterInitialization is about to happen.
+
+//ABOUT HOW TO PASS DATA TO THIS REDUCER
+//Use format:
+/*
+{
+  id: <characterId>,
+  content: {}
+}
+*/
 
 export const characterSlice = createSlice({
   name: 'characters',
-  initialState,
+  initialState: null,
   reducers: {
     charactersInitialization(state, action) {
       console.log(action.payload)
       return action.payload
     },
     characterEdition(state, action) {
+      console.log(action)
       const id = action.payload.id
       const content = action.payload.content
-      const charInEdit = state.find((character) => character._id === id)
+      const propertyName = Object.keys(content)[0]
 
-      //Thanks Immer, state can be mutated
-      charInEdit.decrepitude = content.decrepitude
-      console.log(charInEdit)
-      state.map((character) => (character._id !== id ? character : charInEdit))
-    },
-    appendEmptyField(state, action) {
-      console.log('empty field called')
-      const id = action.payload
       const charInEdit = state.find((character) => character._id === id)
-      charInEdit.decrepitude.effectsOfAging.push([''])
+      //Explanation for next row
+      //Firstly, property is accessed by variable
+      //Secondly, Internally in actions state can be mutated because of Immer^TM
+      charInEdit[propertyName] = content[propertyName]
+
+      state.map((character) => (character._id !== id ? character : charInEdit))
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { charactersInitialization, characterEdition, appendEmptyField } =
+export const { charactersInitialization, characterEdition } =
   characterSlice.actions
 
 // *** START OF THUNK FUNCTIONS ***
@@ -49,11 +59,8 @@ export const editCharacter = (data) => {
   console.log(data)
   return async (dispatch) => {
     dispatch(characterEdition(data))
-    await charService
-      .updateChar(data.content, data.id)
-      .then((result) =>
-        console.log('result of update: ' + JSON.stringify(result))
-      )
+    await charService.updateChar(data.content, data.id)
+    //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
   }
 }
 

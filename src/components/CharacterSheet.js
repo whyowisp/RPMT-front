@@ -10,9 +10,6 @@ import {
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../reducers/characterReducer'
 
-//remove
-//import charService from '../services/characters'
-
 const plainInputSx = {
   '& input': { backgroundColor: 'white', padding: 1 },
   '& input:hover': { backgroundColor: 'whitesmoke' },
@@ -27,10 +24,10 @@ const smallBoxSx = {
   margin: '10px',
 }
 
-/*const commonBoxSx = {
+const commonBoxSx = {
   p: 2,
   maxWidth: 500,
-}*/
+}
 
 const sheetThemeAM = createTheme({
   typography: {
@@ -101,7 +98,7 @@ const Decrepitude = ({ id }) => {
     <Box component="form" sx={smallBoxSx}>
       <Stack direction="row">
         <Typography variant="label">Decrepitude:</Typography>
-        <Input sx={{ ...plainInputSx }} value={effectsOfAging.length} />
+        <Input sx={{ ...plainInputSx }} value={effectsOfAging.length - 1} />
       </Stack>
       <Typography variant="labelSm">Effects of aging: </Typography>
       {effectsOfAging.map((value, i) => (
@@ -120,7 +117,7 @@ const Decrepitude = ({ id }) => {
     </Box>
   )
 }
-/*
+
 const Warping = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
@@ -141,7 +138,10 @@ const Warping = ({ id }) => {
     </Box>
   )
 }
-const BasicData = ({ character }) => {
+const BasicData = ({ id }) => {
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
   const [characterName, setCharacterName] = useState(character.character)
   const [player, setPlayer] = useState(character.player)
   const [saga, setSaga] = useState(character.saga)
@@ -154,7 +154,7 @@ const BasicData = ({ character }) => {
 
   const submitUpdate = () => {
     console.log('submit called for id: ' + character._id)
-    const updatedData = {
+    /*const updatedData = {
       character: characterName,
       player: player,
       saga: saga,
@@ -165,15 +165,47 @@ const BasicData = ({ character }) => {
       size: size,
       confidence: confidence,
     }
+    
     charService
       .updateChar(updatedData, character._id)
       .then((result) =>
         console.log('result of update: ' + JSON.stringify(result))
-      )
+      )*/
+  }
+  const InputVariant = (props) => {
+    console.log(props)
+    const fieldValue = props.fieldValue
+    const onChangeMethod = props.method
+    return (
+      <Input
+        disableUnderline
+        sx={{ ...plainInputSx }}
+        onBlur={() => submitUpdate()}
+        defaultValue={fieldValue}
+        onChange={({ target }) => onChangeMethod(target.value)}
+      />
+    )
   }
 
   return (
     <Box sx={commonBoxSx}>
+      *** EXPERIMENTAL START ***
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Character: </Typography>
+        <InputVariant
+          fieldValue={character.character}
+          method={() => setCharacterName()}
+        />
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="label">Player: </Typography>
+        <InputVariant
+          fieldValue={character.player}
+          onChange={() => setPlayer()}
+        />
+      </Stack>
+      *** EXPERIMENTAL END ***
+      <br></br>
       <Stack direction="row" spacing={2}>
         <Typography variant="label">Character: </Typography>
         <Input
@@ -194,7 +226,6 @@ const BasicData = ({ character }) => {
           onBlur={() => submitUpdate()}
         />
       </Stack>
-
       <Stack direction="row" spacing={2}>
         <Typography variant="label">Saga: </Typography>
         <Input
@@ -262,7 +293,7 @@ const BasicData = ({ character }) => {
       </Stack>
     </Box>
   )
-}*/
+}
 
 const CharacterSheet = ({ id }) => {
   if (!id) return null
@@ -270,7 +301,11 @@ const CharacterSheet = ({ id }) => {
   return (
     <div>
       <ThemeProvider theme={sheetThemeAM}>
-        <Decrepitude id={id} />
+        <BasicData id={id} />
+        <Stack direction={'row'}>
+          <Decrepitude id={id} />
+          <Warping id={id} />
+        </Stack>
       </ThemeProvider>
     </div>
   )
