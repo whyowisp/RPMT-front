@@ -48,57 +48,55 @@ const sheetThemeAM = createTheme({
 })
 
 const Decrepitude = ({ id }) => {
-  //Get character
+  const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-
-  //State to represent form state 'now'
   const [effectsOfAging, setEffectsOfAging] = useState([])
-
-  //Helper state to follow changes in 'effects' field. Appended to effectOfAging right after edit.
-  const [effectField, setEffectField] = useState('')
+  const [inputField, setinputField] = useState('')
   //Helper state to follow what index is being edited. Set to -1 when nothing is being edited
   const [fieldIndex, setFieldIndex] = useState(-1)
 
   //Decrepitude is a pre-filled form and it's filled with already existing data + one empty field.
   useEffect(() => {
-    console.log('Use effect called')
     setEffectsOfAging(character.decrepitude.effectsOfAging.concat(['']))
-  }, [character]) //CONTROLS RE-RENDERS, TAKE NOTE
+  }, [character]) //CONTROLS IN RE-RENDERS, TAKE NOTE, Possible source of bugs
 
-  const dispatch = useDispatch()
-
+  //This method little bit hacky. It is called by onBlur. Purpose is to set new values to the effectsOfAging array.
+  //It seemed to be impossible to update it straight away in the input event (i.e. it was always lagging one re-render behind)
+  //OnBlur is called always before form submit event. Possible source of bugs.
   const prepareEffects = () => {
     setEffectsOfAging(
       effectsOfAging.map((effect, index) =>
-        index === fieldIndex ? effectField : effect
+        index === fieldIndex ? inputField : effect
       )
     )
   }
 
   const submitUpdate = (e) => {
     e.preventDefault()
+    const withoutEmptyFields = effectsOfAging.filter((effect) =>
+      effect === '' ? null : effect
+    )
     const data = {
       id: id,
       content: {
         decrepitude: {
-          effectsOfAging: effectsOfAging,
+          effectsOfAging: withoutEmptyFields,
         },
       },
     }
 
+    //Send to redux thunk functions
     dispatch(editCharacter(data))
-    setEffectField('')
-    setFieldIndex(-1)
-    //setEffectsOfAging([])
-  }
-  console.log(
-    'effectFieldValue: ' + effectField + ' field index: ' + fieldIndex
-  )
-  console.log('effectsOfAging NOW: ' + effectsOfAging)
 
-  //Prefilled form
+    //These calls could be removed, since component will be re-rendered right after this method is over
+    setinputField('')
+    setFieldIndex(-1)
+    setEffectsOfAging([])
+    // -> to rerender
+  }
+
   return (
     <Box component="form" sx={smallBoxSx}>
       <Stack direction="row">
@@ -109,10 +107,10 @@ const Decrepitude = ({ id }) => {
       {effectsOfAging.map((value, i) => (
         <Input
           sx={{ ...plainInputSx }}
-          key={value}
+          key={value + i}
           defaultValue={value}
           onChange={({ target }) => {
-            setEffectField(target.value)
+            setinputField(target.value)
             setFieldIndex(i)
           }}
           onBlur={() => prepareEffects()}
@@ -121,57 +119,6 @@ const Decrepitude = ({ id }) => {
       <button onClick={(e) => submitUpdate(e)}>ok</button>
     </Box>
   )
-  /*const removeEmptyFields = () => {
-    setEffects(effects.filter((value) => (value === '' ? null : value)))
-  }
-
-  const appendField = () => {
-    const data = {
-      id: id,
-      content: {
-        decrepitude: {
-          effectsOfAging: effects.concat(['']),
-        },
-      },
-    }
-    dispatch(editCharacter(data))
-  }
-
-  const handleInputChange = (e, indexOfValue) => {
-    e.preventDefault()
-
-    setEffects(
-      effects.map((effect, i) => {
-        if (e.target.value === '') {
-          setEffects(effects.pop())
-          const data = {
-            id: id,
-            content: {
-              decrepitude: {
-                effectsOfAging: effects,
-              },
-            },
-          }
-          dispatch(editCharacter(data))
-          return
-        }
-        return i === indexOfValue ? e.target.value : effect
-      })
-    )
-    console.log(effects)
-  }
-
-  const submitUpdate = () => {
-    const data = {
-      id: id,
-      content: {
-        decrepitude: {
-          effectsOfAging: effects,
-        },
-      },
-    }
-    dispatch(editCharacter(data))
-  }*/
 }
 /*
 const Warping = ({ id }) => {
