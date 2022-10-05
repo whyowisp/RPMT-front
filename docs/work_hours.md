@@ -13,3 +13,4 @@
 | 30.9 | 4h | character form logiikkaa + reduxin configurointia |
 | 3.10 | 7h | reduxin jälkeistä state-sotkun selvittämistä |
 | 4.10 | 6h | Breaktrough statemanagementin kanssa + pientä laittoa sieltä täältä |
+| 5.10 | 1h | character reducerin toiminnan parantelua |

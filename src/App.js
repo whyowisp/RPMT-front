@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { initCharactersReducer } from './reducers/characterReducer'
 
-import CharacterSheet from './components/CharacterSheet'
+import { sheetThemeAM } from './components/arsMagCharSheet/themeAndStyles'
+import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 
 const App = () => {
   const characters = useSelector((state) => state.characters)
