@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material'
 
 const plainInputSx = {
-  '& input': { backgroundColor: 'white', padding: 1 },
+  '& input': { backgroundColor: 'white', padding: 0.7 },
   '& input:hover': { backgroundColor: 'whitesmoke' },
   '& input:focus': { backgroundColor: '#cad9ec', borderBottom: '1px dotted' },
   width: '100%',
@@ -9,14 +9,16 @@ const plainInputSx = {
 
 const smallBoxSx = {
   p: 2,
-  maxWidth: 230,
+  maxWidth: 282,
   border: '1px solid',
-  margin: '10px',
+  margin: 1,
 }
 
 const commonBoxSx = {
   p: 2,
-  maxWidth: 500,
+  maxWidth: 580,
+  border: '1px solid',
+  margin: 1,
 }
 
 const sheetThemeAM = createTheme({

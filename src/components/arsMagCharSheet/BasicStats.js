@@ -39,9 +39,9 @@ const BasicData = ({ id }) => {
     dispatch(editCharacter(data))
   }
 
-  //Don't touch my spaghetti
+  //Don't touch my spaghetti (unless you have better ideas to keep)
   return (
-    <Box sx={commonBoxSx}>
+    <Box sx={{ ...commonBoxSx, border: 'none' }}>
       <Stack direction="row" spacing={2}>
         <Typography variant="label">Character: </Typography>
         <Input
