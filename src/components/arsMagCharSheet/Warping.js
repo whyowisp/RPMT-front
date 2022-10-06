@@ -56,14 +56,14 @@ const Warping = ({ id }) => {
         <Input sx={{ ...plainInputSx }} value={effectsOfWarping.length - 1} />
       </Stack>
       <Typography variant="labelSm">Effects of warping: </Typography>
-      {effectsOfWarping.map((value, i) => (
+      {effectsOfWarping.map((value, index) => (
         <Input
           sx={{ ...plainInputSx }}
-          key={value + i}
+          key={value + index}
           defaultValue={value}
           onChange={({ target }) => {
             setinputField(target.value)
-            setFieldIndex(i)
+            setFieldIndex(index)
           }}
           onBlur={() => prepareEffects()}
         />

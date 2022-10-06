@@ -3,8 +3,9 @@ import { Stack, ThemeProvider } from '@mui/material'
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'
 import Warping from './Warping'
-import BasicStats from './BasicStats'
-import DescriptiveStats from './DescriptiveStats'
+import BasicAttributes from './BasicAttributes'
+import DescriptiveAttributes from './DescriptiveAttributes'
+import Characteristics from './Characteristics'
 
 const CharacterSheet = ({ id }) => {
   if (!id) return null
@@ -12,27 +13,16 @@ const CharacterSheet = ({ id }) => {
   return (
     <div>
       <ThemeProvider theme={sheetThemeAM}>
-        <BasicStats id={id} />
+        <BasicAttributes id={id} />
         <Stack direction={'row'}>
           <Decrepitude id={id} />
           <Warping id={id} />
         </Stack>
-        <DescriptiveStats id={id} />
+        <DescriptiveAttributes id={id} />
+        <Characteristics id={id} />
       </ThemeProvider>
     </div>
   )
-  /*
-  return (
-    <div>
-      <ThemeProvider theme={sheetThemeAM}>
-        <BasicData id={id} />
-        <Stack direction={'row'}>
-          <Decrepitude id={id} />
-          <Warping id={id} />
-        </Stack>
-      </ThemeProvider>
-    </div>
-  )*/
 }
 
 export default CharacterSheet
