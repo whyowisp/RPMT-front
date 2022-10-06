@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Box,
   Input,
   Typography,
-  Stack,
   TableContainer,
   Table,
   TableHead,
@@ -15,21 +13,22 @@ import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx } from './themeAndStyles'
 
-const Characteristics = ({ id }) => {
+const Abilities = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-  const [characteristics, setCharacteristics] = useState()
+
+  const [abilities, setAbilites] = useState()
   const [fieldIndex, setFieldIndex] = useState(-1)
 
   useEffect(() => {
-    setCharacteristics(character.characteristics)
+    setAbilites(character.abilities.concat(['']))
   }, [character])
 
+  // { experience: Number, ability: String, specialty: String, score: Number }
   const prepareValues = (e, type) => {
     e.preventDefault()
-
     const newValue = e.target.value
     const indexOfNewValue = fieldIndex
 
@@ -37,15 +36,16 @@ const Characteristics = ({ id }) => {
       'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
     )
 
-    setCharacteristics(
-      characteristics.map((chr, i) =>
+    setAbilites(
+      abilities.map((abi, i) =>
         i === indexOfNewValue
           ? {
-              characteristic: chr.characteristic,
-              description: type === 'String' ? newValue : chr.description,
-              score: type === 'Number' ? newValue : chr.score,
+              experience: type === 'Exp' ? newValue : abi.experience,
+              ability: type === 'Ability' ? newValue : abi.ability,
+              specialty: type === 'Specialty' ? newValue : abi.specialty,
+              score: type === 'Score' ? newValue : abi.score,
             }
-          : chr
+          : abi
       )
     )
   }
@@ -53,67 +53,84 @@ const Characteristics = ({ id }) => {
   const submitUpdate = (e) => {
     e.preventDefault()
 
+    //Clear ability objects that doesn't have ability name
+    const abilitiesEmptyValuesCleared = abilities.filter((abi) =>
+      Object.values(abi)[1] === '' ? null : abi
+    )
+
+    console.log(
+      'array of empty values cleared(?): ' +
+        JSON.stringify(abilitiesEmptyValuesCleared)
+    )
+
     const data = {
       id: id,
       content: {
-        characteristics: characteristics,
+        abilities: abilitiesEmptyValuesCleared,
       },
     }
 
-    console.log('data to send: ' + JSON.stringify(data))
+    //console.log('data to send: ' + JSON.stringify(data))
     dispatch(editCharacter(data))
 
     //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    setCharacteristics([])
+    setAbilites([])
     // -> to rerender
   }
 
-  if (!characteristics) return null
+  if (!abilities) return null
 
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
-      <Typography variant="label">Characteristics</Typography>
+      <Typography variant="label">Abilities</Typography>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell> </TableCell>
-            <TableCell> </TableCell>
-            <TableCell width={250}>DESCRIPTION</TableCell>
-            <TableCell align="center">SCORE</TableCell>
+            <TableCell>Exp</TableCell>
+            <TableCell>ABILITY</TableCell>
+            <TableCell>SPECIALTY</TableCell>
+            <TableCell>SCORE</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {characteristics.map((chr, index) => (
-            <TableRow key={chr + index} sx={{ border: 'none', m: 0 }}>
+          {abilities.map((abi, index) => (
+            <TableRow key={abi + index} sx={{ border: 'none', m: 0 }}>
               <TableCell sx={{ border: 'none', p: 1 }}>
-                <Typography sx={{ fontSize: '17px' }}>
-                  {chr.characteristic}:
-                </Typography>
+                [
+                <Input
+                  sx={{ ...plainInputSx, width: '90%' }}
+                  defaultValue={abi.experience}
+                  onChange={() => setFieldIndex(index)}
+                  onBlur={(event) => prepareValues(event, 'Exp')}
+                />
+                ]
               </TableCell>
-
               <TableCell align="right" sx={{ border: 'none', p: 1 }}>
-                <Typography sx={{ fontSize: '14px' }}>
-                  {chr.characteristic.substring(0, 3)}
-                </Typography>
+                <Input
+                  sx={{ fontSize: '14px' }}
+                  defaultValue={abi.ability}
+                  onChange={() => setFieldIndex(index)}
+                  onBlur={(event) => prepareValues(event, 'Ability')}
+                />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 (
                 <Input
-                  sx={{ ...plainInputSx, width: '95%' }}
-                  defaultValue={chr.description}
+                  sx={{ ...plainInputSx, width: '90%' }}
+                  defaultValue={abi.specialty}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'String')}
+                  onBlur={(event) => prepareValues(event, 'Specialty')}
                 />
                 )
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx, width: '75%' }}
-                  defaultValue={chr.score}
+                  sx={{ ...plainInputSx }}
+                  defaultValue={abi.score}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'Number')}
+                  onBlur={(event) => prepareValues(event, 'Score')}
                 />
               </TableCell>
             </TableRow>
@@ -123,46 +140,6 @@ const Characteristics = ({ id }) => {
       <button onClick={(e) => submitUpdate(e)}>ok</button>
     </TableContainer>
   )
-  /*
-  return (
-    <Box component="form" sx={commonBoxSx}>
-      <table>
-        <tr>
-          <th>miksi</TableCell>
-          <th>näin</TableCell>
-          <th>Description</TableCell>
-          <th>Score</TableCell>
-        </tr>
-        {characteristics.map((chr, index) => (
-          <tr>
-            <Typography variant="labelSm">
-              <td>{chr.characteristic}:</TableCell>
-              <td>{chr.characteristic.substring(0, 3)}</TableCell>
-            </Typography>
-            <td>
-              (
-              <Input
-                sx={{ ...plainInputSx, width: '90%' }}
-                defaultValue={chr.description}
-                onChange={() => setFieldIndex(index)}
-                onBlur={(event) => prepareEffects(event)}
-              />
-              )
-            </TableCell>
-            <td>
-              <Input
-                sx={{ ...plainInputSx, width: '30%' }}
-                defaultValue={chr.score}
-                onChange={() => setFieldIndex(index)}
-                onBlur={(event) => prepareEffects(event)}
-              />
-            </TableCell>
-          </tr>
-        ))}
-      </table>
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
-    </Box>
-  )*/
 }
 
-export default Characteristics
+export default Abilities

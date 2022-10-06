@@ -6,6 +6,7 @@ import Warping from './Warping'
 import BasicAttributes from './BasicAttributes'
 import DescriptiveAttributes from './DescriptiveAttributes'
 import Characteristics from './Characteristics'
+import Abilities from './Abilities'
 
 const CharacterSheet = ({ id }) => {
   if (!id) return null
@@ -20,6 +21,7 @@ const CharacterSheet = ({ id }) => {
         </Stack>
         <DescriptiveAttributes id={id} />
         <Characteristics id={id} />
+        <Abilities id={id} />
       </ThemeProvider>
     </div>
   )

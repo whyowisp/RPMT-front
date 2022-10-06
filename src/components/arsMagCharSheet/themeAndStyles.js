@@ -16,7 +16,7 @@ const smallBoxSx = {
 
 const commonBoxSx = {
   p: 2,
-  maxWidth: 580,
+  width: 570,
   border: '1px solid',
   margin: 1,
 }

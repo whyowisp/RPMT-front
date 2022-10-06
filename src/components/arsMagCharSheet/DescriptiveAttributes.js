@@ -16,7 +16,7 @@ const DescriptiveStats = ({ id }) => {
     setDescriptiveAttributes(character.descriptiveAttributes)
   }, [character])
 
-  const prepareEffects = (e) => {
+  const prepareAttributes = (e) => {
     e.preventDefault()
 
     const newValue = e.target.value
@@ -62,7 +62,7 @@ const DescriptiveStats = ({ id }) => {
             sx={{ ...plainInputSx, width: '100%' }}
             defaultValue={dAttribute.description}
             onChange={() => setFieldIndex(index)}
-            onBlur={(event) => prepareEffects(event)}
+            onBlur={(event) => prepareAttributes(event)}
           />
         </Stack>
       ))}

@@ -29,8 +29,8 @@ const Warping = ({ id }) => {
 
   const submitUpdate = (e) => {
     e.preventDefault()
-    const withoutEmptyFields = effectsOfWarping.filter((effect) =>
-      effect === '' ? null : effect
+    const withoutEmptyFields = effectsOfWarping.filter(
+      (effect) => effect !== ''
     )
     const data = {
       id: id,
@@ -40,7 +40,7 @@ const Warping = ({ id }) => {
         },
       },
     }
-
+    //console.log(JSON.stringify(withoutEmptyFields))
     dispatch(editCharacter(data))
 
     setinputField('')

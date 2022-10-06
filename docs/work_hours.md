@@ -13,6 +13,6 @@
 | 30.9 | 4h | Character form logiikkaa + reduxin configurointia |
 | 3.10 | 7h | Reduxin jälkeistä state-sotkun selvittämistä |
 | 4.10 | 6h | Breaktrough statemanagementin kanssa + pientä laittoa sieltä täältä |
-| 5.10 | 3h | Character reducerin toiminnan parantelua. char sheetin ekan sivun valmiiksisaattamista |
+| 5.10 | 3h | Character reducerin toiminnan parantelua. Char sheetin ekan sivun valmiiksi saattamista |
 | väli | 43h |  |
-| 6.10 |h | |
+| 6.10 | 6h | Char sheetin ekan sivun valmiiksi saattamista |
