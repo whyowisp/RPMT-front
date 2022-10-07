@@ -45,25 +45,28 @@ const Characteristics = ({ id }) => {
 
   const submitUpdate = (e) => {
     e.preventDefault()
-
     const data = {
       id: id,
       content: {
         characteristics: characteristics,
       },
     }
-
     console.log('data to send: ' + JSON.stringify(data))
-    dispatch(editCharacter(data))
+    //Find a bug where all the data could be lost
+    if (characteristics.length < 8) {
+      console.log(
+        'error with CHARACTERISTICS. Data after submit: ' +
+          JSON.stringify(characteristics)
+      )
+    } else {
+      dispatch(editCharacter(data))
+    }
 
-    //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    setCharacteristics([])
     // -> to rerender
   }
 
   if (!characteristics) return null
-
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Characteristics</Typography>

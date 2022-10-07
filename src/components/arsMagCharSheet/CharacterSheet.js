@@ -1,4 +1,4 @@
-import { createTheme, Stack, ThemeProvider, CssBaseline } from '@mui/material'
+import { Stack, ThemeProvider, CssBaseline } from '@mui/material'
 
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'

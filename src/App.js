@@ -20,7 +20,6 @@ const App = () => {
   console.log(characters)
   return (
     <div>
-      <CssBaseline />
       <CharacterSheet id={characters[0]._id} />
     </div>
   )

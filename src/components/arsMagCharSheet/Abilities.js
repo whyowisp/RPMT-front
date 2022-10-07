@@ -8,10 +8,11 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Button,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
 const Abilities = ({ id }) => {
   const dispatch = useDispatch()
@@ -137,7 +138,9 @@ const Abilities = ({ id }) => {
           ))}
         </TableBody>
       </Table>
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </TableContainer>
   )
 }

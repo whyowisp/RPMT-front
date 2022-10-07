@@ -41,9 +41,7 @@ const DescriptiveStats = ({ id }) => {
     }
     dispatch(editCharacter(data))
 
-    //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    setDescriptiveAttributes([])
     // -> to rerender
   }
 

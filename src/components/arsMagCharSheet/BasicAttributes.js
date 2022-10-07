@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Stack } from '@mui/material'
+import { Box, Input, Typography, Stack, Button } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
 
 const BasicData = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
+  useEffect(() => {})
   const [characterName, setCharacterName] = useState(character.character)
   const [player, setPlayer] = useState(character.player)
   const [saga, setSaga] = useState(character.saga)
@@ -20,7 +21,8 @@ const BasicData = ({ id }) => {
   const [size, setSize] = useState(character.size)
   const [confidence, setConfidence] = useState(character.confidence)
 
-  const submitUpdate = () => {
+  const submitUpdate = (e) => {
+    e.preventDefault()
     const data = {
       id: id,
       content: {
@@ -39,7 +41,7 @@ const BasicData = ({ id }) => {
     dispatch(editCharacter(data))
   }
 
-  //Don't touch my spaghetti (unless you have better ideas to keep)
+  //Don't touch my spaghetti (it is purposefully as it is, sorry)
   return (
     <Box sx={{ ...commonBoxSx, border: 'none' }}>
       <Stack direction="row" spacing={2}>
@@ -118,7 +120,9 @@ const BasicData = ({ id }) => {
           onChange={({ target }) => setConfidence(target.value)}
         />
       </Stack>
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </Box>
   )
 }

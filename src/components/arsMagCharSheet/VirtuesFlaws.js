@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Divider } from '@mui/material'
+import { Box, Input, Typography, Divider, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import { editCharacter } from '../../reducers/characterReducer'
 
-import { plainInputSx, commonBoxSx } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
 
 const Virtues = ({ id }) => {
   const dispatch = useDispatch()
@@ -48,12 +48,42 @@ const Virtues = ({ id }) => {
           onBlur={() => prepareValues(index)}
         />
       ))}
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </div>
   )
 }
-const Flaws = () => {
-  /*return (
+
+const Flaws = ({ id }) => {
+  const dispatch = useDispatch()
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
+  const [flaws, setFlaws] = useState([])
+  const [flaw, setFlaw] = useState('')
+
+  useEffect(() => {
+    setFlaws(character.flaws.concat(['']))
+  }, [character])
+
+  const prepareValues = (virtueIndex) => {
+    setFlaws(flaws.map((oldFlaw, i) => (i === virtueIndex ? flaw : oldFlaw)))
+  }
+
+  const submitUpdate = () => {
+    const withoutEmptyFields = flaws.filter((v) => v !== '')
+    const data = {
+      id: id,
+      content: {
+        flaws: withoutEmptyFields,
+      },
+    }
+    dispatch(editCharacter(data))
+    setFlaws([])
+  }
+
+  return (
     <div>
       <Typography variant="label">Flaws:</Typography>
       {flaws.map((flaw, index) => (
@@ -61,15 +91,15 @@ const Flaws = () => {
           sx={{ ...plainInputSx }}
           key={flaw + index}
           defaultValue={flaw}
-          onBlur={({ target }) =>
-            setFlaws(
-              flaws.map((flaw, i) => (i === index ? target.value : flaw))
-            )
-          }
+          onChange={({ target }) => setFlaw(target.value)}
+          onBlur={() => prepareValues(index)}
         />
       ))}
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </div>
-  )*/
+  )
 }
 
 const VirtuesFlaws = ({ id }) => {
