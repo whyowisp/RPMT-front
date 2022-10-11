@@ -1,26 +1,22 @@
 import { createTheme } from '@mui/material'
 
 const plainInputSx = {
-  '& input': { backgroundColor: 'white', padding: 0.7 },
-  '& input:hover': { backgroundColor: 'whitesmoke' },
-  '& input:focus': { backgroundColor: '#cad9ec', borderBottom: '1px dotted' },
+  '& input': { backgroundColor: 'rgb(0, 0, 0, 0)', padding: 0.7 },
+  '& input:hover': { backgroundColor: 'primary.main' },
+  '& input:focus': { backgroundColor: '#cad9ec' },
   width: '100%',
 }
 
 const smallBoxSx = {
   p: 2,
-  width: 278,
   border: '2px solid',
-  margin: 1,
+
   backgroundColor: 'primary.main',
 }
 
 const commonBoxSx = {
   p: 2,
-  width: 570,
   border: '2px solid',
-  margin: 1,
-  backgroundColor: 'primary.main',
 }
 
 const okButton = {
@@ -60,23 +56,26 @@ const sheetThemeAM = createTheme({
 
 const testTheme = createTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
     primary: {
-      main: '#ff8f00',
+      main: '#781d22',
+      contrastText: '#dae097',
     },
     secondary: {
-      main: '#f50057',
-    },
-    background: {
-      default: '#310000',
-      paper: '#731010',
+      main: '#9dada4',
+      contrastText: '#dae097',
     },
   },
   typography: {
     fontFamily: 'Do Hyeon',
   },
-  shape: {
-    borderRadius: 16,
+  overrides: {
+    MuiAppBar: {
+      colorInherit: {
+        backgroundColor: '#689f38',
+        color: '#fff',
+      },
+    },
   },
 })
 

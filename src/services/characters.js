@@ -7,7 +7,7 @@ const getAll = async () => {
 }
 
 const initNewChar = async (playerId) => {
-  const res = await axios.post(baseUrl, playerId)
+  const res = await axios.post(baseUrl + '/new', playerId)
   return res.data
 }
 

@@ -12,10 +12,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "http-proxy-middleware": "^2.0.6",
+    "mui-image": "^1.0.7",
     "node": "^18.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
@@ -26,7 +28,8 @@
     "server": "json-server --port 3001 --watch db.json --routes routes.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-plugin-react": "^7.31.10"
   }
 }

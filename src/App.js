@@ -1,27 +1,24 @@
-import { useEffect } from 'react'
-import { CssBaseline } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
+import { Routes, Route } from 'react-router-dom'
+import { Container } from '@mui/system'
+import { CssBaseline, Grid, ThemeProvider } from '@mui/material'
 
-import { initCharactersReducer } from './reducers/characterReducer'
-
-import { sheetThemeAM } from './components/arsMagCharSheet/themeAndStyles'
+import { testTheme } from './components/arsMagCharSheet/themeAndStyles'
+import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 
 const App = () => {
-  const characters = useSelector((state) => state.characters)
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initCharactersReducer())
-  }, [dispatch])
-
-  if (!characters) return null
-  console.log(characters)
   return (
-    <div>
-      <CharacterSheet id={characters[0]._id} />
-    </div>
+    <Container maxWidth="lg">
+      <ThemeProvider theme={testTheme}>
+        <CssBaseline />
+        <Grid container spacing={1} sx={{ mt: 3 }}>
+          <Routes>
+            <Route path="/" element={<CharacterList />} />
+            <Route path="/characters/:id" element={<CharacterSheet />} />
+          </Routes>
+        </Grid>
+      </ThemeProvider>
+    </Container>
   )
 }
 export default App

@@ -41,11 +41,11 @@ const Abilities = ({ id }) => {
       abilities.map((abi, i) =>
         i === indexOfNewValue
           ? {
-              experience: type === 'Exp' ? newValue : abi.experience,
-              ability: type === 'Ability' ? newValue : abi.ability,
-              specialty: type === 'Specialty' ? newValue : abi.specialty,
-              score: type === 'Score' ? newValue : abi.score,
-            }
+            experience: type === 'Exp' ? newValue : abi.experience,
+            ability: type === 'Ability' ? newValue : abi.ability,
+            specialty: type === 'Specialty' ? newValue : abi.specialty,
+            score: type === 'Score' ? newValue : abi.score,
+          }
           : abi
       )
     )
@@ -88,10 +88,10 @@ const Abilities = ({ id }) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Exp</TableCell>
-            <TableCell>ABILITY</TableCell>
-            <TableCell>SPECIALTY</TableCell>
-            <TableCell>SCORE</TableCell>
+            <TableCell width="20%">Exp</TableCell>
+            <TableCell width="35%">ABILITY</TableCell>
+            <TableCell width="35%">SPECIALTY</TableCell>
+            <TableCell width="10%">SCORE</TableCell>
           </TableRow>
         </TableHead>
 
@@ -99,14 +99,12 @@ const Abilities = ({ id }) => {
           {abilities.map((abi, index) => (
             <TableRow key={abi + index} sx={{ border: 'none', m: 0 }}>
               <TableCell sx={{ border: 'none', p: 1 }}>
-                [
                 <Input
-                  sx={{ ...plainInputSx, width: '90%' }}
+                  sx={{ ...plainInputSx }}
                   defaultValue={abi.experience}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Exp')}
                 />
-                ]
               </TableCell>
               <TableCell align="right" sx={{ border: 'none', p: 1 }}>
                 <Input
@@ -117,14 +115,12 @@ const Abilities = ({ id }) => {
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
-                (
                 <Input
-                  sx={{ ...plainInputSx, width: '90%' }}
+                  sx={{ ...plainInputSx }}
                   defaultValue={abi.specialty}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Specialty')}
                 />
-                )
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input

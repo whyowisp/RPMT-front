@@ -13,6 +13,9 @@ export const characterSlice = createSlice({
     charactersInitialization(state, action) {
       return action.payload
     },
+    characterCreation(state, action) {
+      state.push(action.payload)
+    },
     characterEdition(state, action) {
       console.log(action)
       const id = action.payload.id
@@ -27,7 +30,7 @@ export const characterSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { charactersInitialization, characterEdition } =
+export const { charactersInitialization, characterEdition, characterCreation } =
   characterSlice.actions
 
 // *** START OF THUNK FUNCTIONS ***
@@ -39,6 +42,12 @@ export const initCharactersReducer = () => {
   }
 }
 
+export const initializeNew = (userId) => {
+  return async (dispatch) => {
+    const newCharacter = await charService.initNewChar(userId)
+    dispatch(characterCreation(newCharacter))
+  }
+}
 /*
 Pass data to this function:
 Use format:

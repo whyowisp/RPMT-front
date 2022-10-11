@@ -1,4 +1,6 @@
-import { Stack, ThemeProvider, CssBaseline } from '@mui/material'
+import { useParams } from 'react-router-dom'
+import { ThemeProvider, CssBaseline, Grid, Box, Paper } from '@mui/material'
+//import Image from 'mui-image' might want to uninstall this
 
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'
@@ -9,24 +11,61 @@ import Characteristics from './Characteristics'
 import Abilities from './Abilities'
 import VirtuesFlaws from './VirtuesFlaws'
 
-const CharacterSheet = ({ id }) => {
-  if (!id) return null
+import AMbackground from '../../images/AMbackground.jpg'
 
+const CharacterSheet = () => {
+  const id = useParams().id
+  console.log(id)
+  //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
+  //and half width(6) over md(900px). Think breakpoints as 'bigger than...'
+  /*
+xs, extra-small: 0px
+sm, small: 600px
+md, medium: 900px
+lg, large: 1200px
+xl, extra-large: 1536px
+*/
+  if (!id) return null
   return (
-    <div>
-      <ThemeProvider theme={sheetThemeAM}>
-        <CssBaseline />
-        <BasicAttributes id={id} />
-        <Stack direction={'row'}>
+    <ThemeProvider theme={sheetThemeAM}>
+      <CssBaseline />
+      <Paper
+        sx={{
+          position: 'relative',
+          color: 'black',
+          mb: 4,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'left',
+          backgroundImage: `url(${AMbackground})`,
+        }}
+      >
+        <Grid item xs={12} md={6}>
+          <BasicAttributes id={id} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box></Box>
+        </Grid>
+        <Grid item xs={6} md={3}>
           <Decrepitude id={id} />
+        </Grid>
+        <Grid item xs={6} md={3}>
           <Warping id={id} />
-        </Stack>
-        <DescriptiveAttributes id={id} />
-        <Characteristics id={id} />
-        <Abilities id={id} />
-        <VirtuesFlaws id={id} />
-      </ThemeProvider>
-    </div>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <DescriptiveAttributes id={id} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Characteristics id={id} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Abilities id={id} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <VirtuesFlaws id={id} />
+        </Grid>
+      </Paper>
+    </ThemeProvider>
   )
 }
 

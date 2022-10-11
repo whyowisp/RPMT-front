@@ -5,7 +5,7 @@ import { Box, Input, Typography, Stack, Button } from '@mui/material'
 import { editCharacter } from '../../reducers/characterReducer'
 import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
 
-const BasicData = ({ id }) => {
+const BasicAttributes = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
@@ -43,7 +43,13 @@ const BasicData = ({ id }) => {
 
   //Don't touch my spaghetti (it is purposefully as it is, sorry)
   return (
-    <Box sx={{ ...commonBoxSx, border: 'none' }}>
+    <Box
+      sx={{
+        ...commonBoxSx,
+        border: 'none',
+        background: 'rgba(0, 0, 0, 0.0)',
+      }}
+    >
       <Stack direction="row" spacing={2}>
         <Typography variant="label">Character: </Typography>
         <Input
@@ -127,4 +133,4 @@ const BasicData = ({ id }) => {
   )
 }
 
-export default BasicData
+export default BasicAttributes

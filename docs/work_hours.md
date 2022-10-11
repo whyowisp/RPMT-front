@@ -16,4 +16,5 @@
 | 5.10 | 3h | Character reducerin toiminnan parantelua. Char sheetin ekan sivun valmiiksi saattamista |
 | väli | 43h |  |
 | 6.10 | 7h | Char sheetin ekan sivun valmiiksi saattamista + seikkailu css-maassa |
-| 7.10 | 4h | Ekan sivun valmistuminen |
+| 7.10 | 4h | Ekan sivun valmistuminen, bugien metsästystä |
+| 11.10 | 5h | Mui docs tutkimista, react routerin implementointia |

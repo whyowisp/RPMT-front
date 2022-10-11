@@ -34,10 +34,10 @@ const Characteristics = ({ id }) => {
       characteristics.map((chr, i) =>
         i === indexOfNewValue
           ? {
-              characteristic: chr.characteristic,
-              description: type === 'String' ? newValue : chr.description,
-              score: type === 'Number' ? newValue : chr.score,
-            }
+            characteristic: chr.characteristic,
+            description: type === 'String' ? newValue : chr.description,
+            score: type === 'Number' ? newValue : chr.score,
+          }
           : chr
       )
     )
@@ -95,18 +95,16 @@ const Characteristics = ({ id }) => {
                 </Typography>
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
-                (
                 <Input
-                  sx={{ ...plainInputSx, width: '95%' }}
+                  sx={{ ...plainInputSx, width: '91%' }}
                   defaultValue={chr.description}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'String')}
                 />
-                )
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx, width: '75%' }}
+                  sx={{ ...plainInputSx, width: '100%' }}
                   defaultValue={chr.score}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Number')}
