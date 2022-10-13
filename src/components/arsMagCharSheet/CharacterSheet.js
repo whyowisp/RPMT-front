@@ -9,6 +9,8 @@ import DescriptiveAttributes from './DescriptiveAttributes'
 import Characteristics from './Characteristics'
 import Abilities from './Abilities'
 import VirtuesFlaws from './VirtuesFlaws'
+import PersonalityTraits from './PersonalityTraits'
+import Reputations from './Reputations'
 
 import AMbackground from '../../images/AMbackground.jpg'
 
@@ -37,29 +39,37 @@ xl, extra-large: 1536px
           backgroundImage: `url(${AMbackground})`,
         }}
       >
-        <Grid item xs={12} md={6}>
-          <BasicAttributes id={id} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Box></Box>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Decrepitude id={id} />
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Warping id={id} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <DescriptiveAttributes id={id} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Characteristics id={id} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Abilities id={id} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <VirtuesFlaws id={id} />
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <BasicAttributes id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box></Box>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Decrepitude id={id} />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Warping id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <DescriptiveAttributes id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Characteristics id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Abilities id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <VirtuesFlaws id={id} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <PersonalityTraits id={id} />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Reputations id={id} />
+          </Grid>
         </Grid>
       </Paper>
     </ThemeProvider>

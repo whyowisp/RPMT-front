@@ -10,13 +10,13 @@ const plainInputSx = {
 const smallBoxSx = {
   p: 2,
   border: '2px solid',
-
-  backgroundColor: 'primary.main',
+  backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
 
 const commonBoxSx = {
   p: 2,
   border: '2px solid',
+  backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
 
 const okButton = {

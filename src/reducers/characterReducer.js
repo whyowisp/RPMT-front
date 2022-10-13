@@ -26,12 +26,20 @@ export const characterSlice = createSlice({
 
       state.map((character) => (character._id !== id ? character : editedChar))
     },
+    characterRemoval(state, action) {
+      const id = action.payload
+      return state.filter((character) => character._id !== id)
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { charactersInitialization, characterEdition, characterCreation } =
-  characterSlice.actions
+export const {
+  charactersInitialization,
+  characterEdition,
+  characterCreation,
+  characterRemoval,
+} = characterSlice.actions
 
 // *** START OF THUNK FUNCTIONS ***
 
@@ -58,12 +66,17 @@ Use format:
 }
 */
 export const editCharacter = (data) => {
-  console.log('edit character thunk called')
-  //console.log(data)
   return async (dispatch) => {
     dispatch(characterEdition(data))
     await charService.updateChar(data.content, data.id)
     //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
+  }
+}
+
+export const deleteOne = (id) => {
+  return async (dispatch) => {
+    dispatch(characterRemoval(id))
+    await charService.deleteChar(id)
   }
 }
 

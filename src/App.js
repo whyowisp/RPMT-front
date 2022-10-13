@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Container } from '@mui/system'
-import { Button, CssBaseline, Grid, ThemeProvider } from '@mui/material'
+import { Button, CssBaseline, ThemeProvider } from '@mui/material'
 
 import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
 import Home from './components/Home'
@@ -30,20 +30,13 @@ const App = () => {
     <Container maxWidth="lg">
       <ThemeProvider theme={mainTheme}>
         <CssBaseline />
-        <Grid container spacing={1} sx={{ mt: 3 }}>
-          <Button variant="contained" a href="" onClick={toPage('home')}>
-            home
-          </Button>
-          <Button
-            variant="contained"
-            a
-            href=""
-            onClick={toPage('characterList')}
-          >
-            characters
-          </Button>
-          <main>{content()}</main>
-        </Grid>
+        <Button variant="contained" onClick={toPage('home')}>
+          home
+        </Button>
+        <Button variant="contained" onClick={toPage('characterList')}>
+          characters
+        </Button>
+        <main>{content()}</main>
       </ThemeProvider>
     </Container>
   )
