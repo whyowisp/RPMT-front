@@ -1,54 +1,120 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableRow,
+  Input,
+  Typography,
+  Button,
+  TableContainer,
+} from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-
-import { plainInputSx, commonBoxSx } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
 
 const PersonalityTraits = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-  const [virtues, setVirtues] = useState([])
-  const [virtue, setVirtue] = useState('')
+  const [personalityTraits, setPersonalityTraits] = useState([])
+  const [fieldIndex, setFieldIndex] = useState(-1)
 
   useEffect(() => {
-    setVirtues(character.virtues.concat(['']))
+    setPersonalityTraits(character.personalityTraits.concat(['']))
   }, [character])
 
-  const prepareValues = (virtueIndex) => {
-    setVirtues(
-      virtues.map((oldVirtue, i) => (i === virtueIndex ? virtue : oldVirtue))
+  // { experience: Number, ability: String, specialty: String, score: Number }
+  const prepareValues = (e, type) => {
+    e.preventDefault()
+    const newValue = e.target.value
+    const indexOfNewValue = fieldIndex
+
+    console.log(
+      'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
+    )
+
+    setPersonalityTraits(
+      personalityTraits.map((trait, i) =>
+        i === indexOfNewValue
+          ? {
+            description:
+                type === 'Description' ? newValue : trait.description,
+            score: type === 'Score' ? newValue : trait.score,
+          }
+          : trait
+      )
     )
   }
 
-  const submitUpdate = () => {
-    const withoutEmptyFields = virtues.filter((v) => v !== '')
+  const submitUpdate = (e) => {
+    e.preventDefault()
+
+    //Clear personalityTrait objects that doesn't have name
+    const traitsEmptyValuesCleared = personalityTraits.filter((trait) =>
+      Object.values(trait)[0] === '' ? null : trait
+    )
+
+    console.log(
+      'array of empty values cleared(?): ' +
+        JSON.stringify(traitsEmptyValuesCleared)
+    )
+
     const data = {
       id: id,
       content: {
-        virtues: withoutEmptyFields,
+        personalityTraits: traitsEmptyValuesCleared,
       },
     }
+
+    //console.log('data to send: ' + JSON.stringify(data))
     dispatch(editCharacter(data))
-    setVirtues([])
+
+    //Re-render will clear these anyway, but keep them to avoid bugs
+    setFieldIndex(-1)
+    setPersonalityTraits([])
+    // -> to rerender
   }
   return (
-    <Box sx={commonBoxSx}>
-      <Typography variant="label">Personality Traits:</Typography>
-      {virtues.map((virtue, index) => (
-        <Input
-          sx={{ ...plainInputSx }}
-          key={virtue + index}
-          defaultValue={virtue}
-          onChange={({ target }) => setVirtue(target.value)}
-          onBlur={() => prepareValues(index)}
-        />
-      ))}
-      <Button onClick={(e) => submitUpdate(e)}>ok</Button>
-    </Box>
+    <TableContainer sx={commonBoxSx}>
+      <Typography variant="label">Personality Traits</Typography>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell width="80%"></TableCell>
+            <TableCell width="20%">SCORE</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {personalityTraits.map((trait, index) => (
+            <TableRow key={trait + index}>
+              <TableCell>
+                <Input
+                  sx={{ ...plainInputSx }}
+                  defaultValue={trait.description}
+                  onChange={() => setFieldIndex(index)}
+                  onBlur={(event) => prepareValues(event, 'Description')}
+                />
+              </TableCell>
+              <TableCell>
+                <Input
+                  sx={{ ...plainInputSx }}
+                  defaultValue={trait.score}
+                  onChange={() => setFieldIndex(index)}
+                  onBlur={(event) => prepareValues(event, 'Score')}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
+    </TableContainer>
   )
 }
 
