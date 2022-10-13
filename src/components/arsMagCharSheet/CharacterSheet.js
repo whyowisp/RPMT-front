@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom'
 import { ThemeProvider, CssBaseline, Grid, Box, Paper } from '@mui/material'
 //import Image from 'mui-image' might want to uninstall this
 
@@ -13,9 +12,7 @@ import VirtuesFlaws from './VirtuesFlaws'
 
 import AMbackground from '../../images/AMbackground.jpg'
 
-const CharacterSheet = () => {
-  const id = useParams().id
-  console.log(id)
+const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
   //and half width(6) over md(900px). Think breakpoints as 'bigger than...'
   /*

@@ -54,7 +54,7 @@ const sheetThemeAM = createTheme({
   },
 })
 
-const testTheme = createTheme({
+const mainTheme = createTheme({
   palette: {
     type: 'light',
     primary: {
@@ -84,6 +84,6 @@ export {
   smallBoxSx,
   commonBoxSx,
   sheetThemeAM,
-  testTheme,
+  mainTheme,
   okButton,
 }

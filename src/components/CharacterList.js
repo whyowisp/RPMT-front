@@ -17,7 +17,7 @@ import {
   Link,
 } from '@mui/material'
 
-const CharacterList = () => {
+const CharacterList = ({ toPage }) => {
   const characters = useSelector((state) => state.characters)
 
   const dispatch = useDispatch()
@@ -50,7 +50,9 @@ const CharacterList = () => {
               <TableRow key={chr._id}>
                 <TableCell>{chr.character}</TableCell>
                 <TableCell>
-                  <Link href={`/characters/${chr._id}`}>{chr._id}</Link>
+                  <Button a href="" onClick={toPage('characterSheet', chr._id)}>
+                    play
+                  </Button>
 
                   <Button
                     disabled

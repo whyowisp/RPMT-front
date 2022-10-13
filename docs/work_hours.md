@@ -18,3 +18,4 @@
 | 6.10 | 7h | Char sheetin ekan sivun valmiiksi saattamista + seikkailu css-maassa |
 | 7.10 | 4h | Ekan sivun valmistuminen, bugien metsästystä |
 | 11.10 | 5h | Mui docs tutkimista, react routerin implementointia |
+| 13.10 | 5h | React routerin dumppaus. Sivunvaihdon toteutus if-elseillä. Leiskan tekoa |
