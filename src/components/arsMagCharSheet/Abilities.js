@@ -20,11 +20,11 @@ const Abilities = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
 
-  const [abilities, setAbilites] = useState()
+  const [abilities, setAbilities] = useState()
   const [fieldIndex, setFieldIndex] = useState(-1)
 
   useEffect(() => {
-    setAbilites(character.abilities.concat(['']))
+    setAbilities(character.abilities.concat(['']))
   }, [character])
 
   // { experience: Number, ability: String, specialty: String, score: Number }
@@ -37,7 +37,7 @@ const Abilities = ({ id }) => {
       'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
     )
 
-    setAbilites(
+    setAbilities(
       abilities.map((abi, i) =>
         i === indexOfNewValue
           ? {
@@ -76,7 +76,7 @@ const Abilities = ({ id }) => {
 
     //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    setAbilites([])
+    setAbilities([])
     // -> to rerender
   }
 

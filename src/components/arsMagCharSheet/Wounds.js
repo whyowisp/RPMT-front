@@ -30,10 +30,10 @@ const Wounds = ({ id }) => {
         <TableHead>
           <TableRow>
             <TableCell width="20%" />
-            <TableCell width="10%" />
-            <TableCell width="30%" />
-            <TableCell width="10%" />
-            <TableCell width="20%" />
+            <TableCell width="10%">RANGE</TableCell>
+            <TableCell width="30%">NUMBER</TableCell>
+            <TableCell width="10%">PENALTY</TableCell>
+            <TableCell width="20%">NOTES</TableCell>
           </TableRow>
         </TableHead>
 
@@ -41,14 +41,18 @@ const Wounds = ({ id }) => {
           {character.wounds.map((wnd) => (
             <TableRow key={wnd.level}>
               <TableCell>{wnd.level}</TableCell>
-              <TableCell defaultValue={wnd.range}>{wnd.range}</TableCell>
+              <TableCell>
+                <Input defaultValue={wnd.range}></Input>
+              </TableCell>
               <TableCell>
                 {[0, 0, 0, 0, 0].map((n) => (
                   <CheckBox key={n} />
                 ))}
               </TableCell>
               <TableCell>{wnd.penalty}</TableCell>
-              <TableCell>{wnd.notes}</TableCell>
+              <TableCell>
+                <Input defaultValue={wnd.notes}></Input>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

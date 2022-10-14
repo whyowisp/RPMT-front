@@ -64,7 +64,7 @@ const CharacterList = ({ toPage }) => {
   if (!characters) return null
 
   return (
-    <>
+    <div>
       <Grid item xs={12} md={8}>
         <TableContainer component="form">
           <Table>
@@ -117,7 +117,7 @@ const CharacterList = ({ toPage }) => {
           <Button onClick={() => handleDelete()}>Remove</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   )
 }
 

@@ -29,15 +29,15 @@ const okButton = {
 
 const sheetThemeAM = createTheme({
   palette: {
-    background: {
-      default: '#eaebec',
-      input: '#ff8f00',
-    },
     primary: {
       main: '#fff',
     },
     secondary: {
       main: '#4caf50',
+    },
+    background: {
+      default: '#dcf1e5',
+      paper: '#b51a1a',
     },
   },
   typography: {
@@ -64,6 +64,10 @@ const mainTheme = createTheme({
     secondary: {
       main: '#9dada4',
       contrastText: '#dae097',
+    },
+    background: {
+      default: '#dcf1e5',
+      paper: '#b51a1a',
     },
   },
   typography: {
