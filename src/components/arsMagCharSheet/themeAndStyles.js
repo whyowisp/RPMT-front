@@ -2,8 +2,8 @@ import { createTheme } from '@mui/material'
 
 const plainInputSx = {
   '& input': { backgroundColor: 'rgb(0, 0, 0, 0)', padding: 0.7 },
-  '& input:hover': { backgroundColor: 'primary.main' },
-  '& input:focus': { backgroundColor: '#cad9ec' },
+  '& input:hover': { backgroundColor: '#cad9ec' },
+  '& input:focus': { backgroundColor: 'rgb(0, 0, 0, 0.1)' },
   width: '100%',
 }
 

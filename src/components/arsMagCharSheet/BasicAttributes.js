@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Input, Typography, Stack, Button } from '@mui/material'
 
@@ -10,7 +10,7 @@ const BasicAttributes = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-  useEffect(() => {})
+
   const [characterName, setCharacterName] = useState(character.character)
   const [player, setPlayer] = useState(character.player)
   const [saga, setSaga] = useState(character.saga)
@@ -37,11 +37,10 @@ const BasicAttributes = ({ id }) => {
         confidence: confidence,
       },
     }
-    console.log('basicData called with content: ' + JSON.stringify(data))
+
     dispatch(editCharacter(data))
   }
 
-  //Don't touch my spaghetti (it is purposefully as it is, sorry)
   return (
     <Box
       sx={{

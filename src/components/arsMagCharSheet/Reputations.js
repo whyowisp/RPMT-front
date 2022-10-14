@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
@@ -41,10 +40,10 @@ const Reputations = ({ id }) => {
       reputations.map((rep, i) =>
         i === indexOfNewValue
           ? {
-              description: type === 'Description' ? newValue : rep.description,
-              type: type === 'Type' ? newValue : rep.type,
-              score: type === 'Score' ? newValue : rep.score,
-            }
+            description: type === 'Description' ? newValue : rep.description,
+            type: type === 'Type' ? newValue : rep.type,
+            score: type === 'Score' ? newValue : rep.score,
+          }
           : rep
       )
     )
@@ -55,7 +54,7 @@ const Reputations = ({ id }) => {
 
     //Clear replity objects that doesn't have replity name
     const reputationsEmptyValuesCleared = reputations.filter((rep) =>
-      Object.values(rep)[1] === '' ? null : rep
+      Object.values(rep)[0] === '' ? null : rep
     )
 
     console.log(

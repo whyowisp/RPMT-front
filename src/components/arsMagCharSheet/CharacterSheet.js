@@ -11,6 +11,9 @@ import Abilities from './Abilities'
 import VirtuesFlaws from './VirtuesFlaws'
 import PersonalityTraits from './PersonalityTraits'
 import Reputations from './Reputations'
+import Combat from './Combat'
+
+import Equipment from './Equipment'
 
 import AMbackground from '../../images/AMbackground.jpg'
 
@@ -69,6 +72,13 @@ xl, extra-large: 1536px
           </Grid>
           <Grid item xs={12} md={8}>
             <Reputations id={id} />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Combat id={id} />
+          </Grid>
+
+          <Grid item xs={12} md={12}>
+            <Equipment id={id} />
           </Grid>
         </Grid>
       </Paper>
