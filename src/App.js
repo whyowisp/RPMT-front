@@ -30,7 +30,7 @@ const App = () => {
     <Container maxWidth="lg">
       <ThemeProvider theme={mainTheme}>
         <CssBaseline />
-        <Button variant="contained" onClick={toPage('home')}>
+        <Button sx={{ m: 1 }} variant="contained" onClick={toPage('home')}>
           home
         </Button>
         <Button variant="contained" onClick={toPage('characterList')}>

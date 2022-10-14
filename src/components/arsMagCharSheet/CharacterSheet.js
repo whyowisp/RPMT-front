@@ -12,6 +12,9 @@ import VirtuesFlaws from './VirtuesFlaws'
 import PersonalityTraits from './PersonalityTraits'
 import Reputations from './Reputations'
 import Combat from './Combat'
+import Fatigue from './Fatigue'
+import Wounds from './Wounds'
+import Weapons from './Weapons'
 
 import Equipment from './Equipment'
 
@@ -76,7 +79,15 @@ xl, extra-large: 1536px
           <Grid item xs={12} md={12}>
             <Combat id={id} />
           </Grid>
-
+          <Grid item xs={12} md={4}>
+            <Fatigue id={id} />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Wounds id={id} />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Weapons id={id} />
+          </Grid>
           <Grid item xs={12} md={12}>
             <Equipment id={id} />
           </Grid>
