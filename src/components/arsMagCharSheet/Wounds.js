@@ -39,8 +39,8 @@ const Wounds = ({ id }) => {
         </TableHead>
 
         <TableBody>
-          {character.wounds.map((wnd) => (
-            <TableRow key={wnd.level}>
+          {character.wounds.map((wnd, index) => (
+            <TableRow key={wnd.level + index}>
               <TableCell>{wnd.level}</TableCell>
               <TableCell>
                 <Input defaultValue={wnd.range}></Input>

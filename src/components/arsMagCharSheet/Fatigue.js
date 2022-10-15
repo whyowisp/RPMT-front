@@ -22,36 +22,46 @@ const Fatigue = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
-  const [checkeds, setCheckeds] = useState([])
+  const [fatigue, setFatigue] = useState([])
 
   useEffect(() => {
-    setCheckeds(character.fatigue.map((ftg) => ftg.checked))
+    setFatigue(character.fatigue)
   }, [dispatch])
 
-  const handleChecked = (index) => {
-    setCheckeds(
-      checkeds.map((checked, i) => (i === index ? !checked : checked))
-    )
-
+  //Wrap fatigue to data object and dispatch
+  useEffect(() => {
     const data = {
-      id: character._id,
-      content: { checked: checkeds },
+      id: id,
+      content: {
+        fatigue: fatigue,
+      },
     }
+    console.log('data to dispatch: ' + JSON.stringify(data))
     dispatch(editCharacter(data))
+  }, [fatigue])
+
+  const handleChecked = (index) => {
+    setFatigue(
+      fatigue.map((ftg, i) => {
+        if (i !== index) return ftg
+        return { ...ftg, checked: !ftg.checked }
+      })
+    )
   }
 
-  if (!character) return null
+  console.log('fatigue: ' + JSON.stringify(fatigue))
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Fatigue</Typography>
       <Table size="small">
         <TableBody>
-          {character.fatigue.map((ftg, index) => (
-            <TableRow key={ftg.level}>
+          {fatigue.map((ftg, index) => (
+            <TableRow key={ftg.level + index}>
               <TableCell>
                 <input
                   type="checkbox"
-                  checked={index === 0 ? true : checkeds[index]}
+                  disabled={index === 0 ? true : false}
+                  checked={ftg.checked}
                   onChange={() => handleChecked(index)}
                 />
               </TableCell>
@@ -67,9 +77,3 @@ const Fatigue = ({ id }) => {
 }
 
 export default Fatigue
-
-/*<input
-                  type="checkbox"
-                  checked={index === 0 ? true : checkeds[index]}
-                  onChange={() => handleChecked(index)}
-                />*/
