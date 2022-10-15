@@ -21,3 +21,4 @@
 | 13.10 | 7h | React routerin dumppaus -> Sivunvaihdon toteutus if-elseillä. Remove button toiminto |
 | 14.10 | 5h | CharSheetin tokan sivun tekoa |
 | väli | 66h |  |
+| 15.10 | 1h | CharSheetin tokan sivun tekoa |

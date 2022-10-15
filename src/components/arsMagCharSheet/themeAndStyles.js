@@ -37,7 +37,6 @@ const sheetThemeAM = createTheme({
     },
     background: {
       default: '#dcf1e5',
-      paper: '#b51a1a',
     },
   },
   typography: {
@@ -67,7 +66,6 @@ const mainTheme = createTheme({
     },
     background: {
       default: '#dcf1e5',
-      paper: '#b51a1a',
     },
   },
   typography: {

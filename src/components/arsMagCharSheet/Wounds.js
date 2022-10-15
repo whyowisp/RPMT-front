@@ -23,6 +23,7 @@ const Wounds = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
 
+  if (!character) return null
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Wounds</Typography>

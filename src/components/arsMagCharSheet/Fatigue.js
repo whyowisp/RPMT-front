@@ -23,26 +23,41 @@ const Fatigue = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
   const [checkeds, setCheckeds] = useState([])
-  const [isChecked, setIsChecked] = useState(true)
 
   useEffect(() => {
-    setCheckeds(character.fatigue.map((fat) => fat.checked))
+    setCheckeds(character.fatigue.map((ftg) => ftg.checked))
   }, [dispatch])
 
-  console.log('checkeds: ' + checkeds)
+  const handleChecked = (index) => {
+    setCheckeds(
+      checkeds.map((checked, i) => (i === index ? !checked : checked))
+    )
+
+    const data = {
+      id: character._id,
+      content: { checked: checkeds },
+    }
+    dispatch(editCharacter(data))
+  }
+
+  if (!character) return null
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Fatigue</Typography>
       <Table size="small">
         <TableBody>
-          {character.fatigue.map((fat, index) => (
-            <TableRow key={fat.level}>
+          {character.fatigue.map((ftg, index) => (
+            <TableRow key={ftg.level}>
               <TableCell>
-                <CheckBox />
+                <input
+                  type="checkbox"
+                  checked={index === 0 ? true : checkeds[index]}
+                  onChange={() => handleChecked(index)}
+                />
               </TableCell>
-              <TableCell>{fat.penalty}</TableCell>
-              <TableCell>{fat.recovery}</TableCell>
-              <TableCell>{fat.level}</TableCell>
+              <TableCell>{ftg.penalty}</TableCell>
+              <TableCell>{ftg.recovery}</TableCell>
+              <TableCell>{ftg.level}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -52,3 +67,9 @@ const Fatigue = ({ id }) => {
 }
 
 export default Fatigue
+
+/*<input
+                  type="checkbox"
+                  checked={index === 0 ? true : checkeds[index]}
+                  onChange={() => handleChecked(index)}
+                />*/
