@@ -37,14 +37,20 @@ const Wounds = ({ id }) => {
       },
     }
     console.log('data to dispatch: ' + JSON.stringify(data))
-    dispatch(editCharacter(data))
+    //dispatch(editCharacter(data))
   }, [wounds])
 
-  const handleChecked = (index) => {
+  const handleChecked = (yIndex, xIndex) => {
     setWounds(
-      wounds.map((ftg, i) => {
-        if (i !== index) return ftg
-        return { ...ftg, checked: !ftg.checked }
+      wounds.map((wnd, y) => {
+        //If new value doesn't concern this row, leave row as it is
+        if (y !== yIndex) return wnd
+        const checkedRow = wnd.checked.map((isChecked, x) => {
+          //If new value doesn't concern this check(box), leave value as it is
+          if (x !== xIndex) return isChecked
+          return !isChecked
+        })
+        return { ...wnd, checked: checkedRow }
       })
     )
   }
@@ -56,24 +62,28 @@ const Wounds = ({ id }) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell width="20%" />
+            <TableCell width="15%" />
             <TableCell width="10%">RANGE</TableCell>
-            <TableCell width="30%">NUMBER</TableCell>
-            <TableCell width="10%">PENALTY</TableCell>
+            <TableCell width="40%">NUMBER</TableCell>
+            <TableCell width="5%">PENALTY</TableCell>
             <TableCell width="20%">NOTES</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {wounds.map((wnd, index) => (
-            <TableRow key={wnd.level + index}>
+          {wounds.map((wnd, yIndex) => (
+            <TableRow key={wnd.level + yIndex}>
               <TableCell>{wnd.level}</TableCell>
               <TableCell>
                 <Input defaultValue={wnd.range}></Input>
               </TableCell>
               <TableCell>
-                {[0, 0, 0, 0, 0].map((n) => (
-                  <CheckBox key={n} />
+                {wnd.checked.map((isChecked, xIndex) => (
+                  <Checkbox
+                    checked={isChecked}
+                    onChange={() => handleChecked(yIndex, xIndex)}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
                 ))}
               </TableCell>
               <TableCell>{wnd.penalty}</TableCell>
