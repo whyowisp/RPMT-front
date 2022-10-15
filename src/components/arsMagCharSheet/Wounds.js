@@ -22,6 +22,32 @@ const Wounds = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
+  const [wounds, setWounds] = useState([])
+
+  useEffect(() => {
+    setWounds(character.wounds)
+  }, [dispatch])
+
+  //Wrap wounds to data object and dispatch
+  useEffect(() => {
+    const data = {
+      id: id,
+      content: {
+        wounds: wounds,
+      },
+    }
+    console.log('data to dispatch: ' + JSON.stringify(data))
+    dispatch(editCharacter(data))
+  }, [wounds])
+
+  const handleChecked = (index) => {
+    setWounds(
+      wounds.map((ftg, i) => {
+        if (i !== index) return ftg
+        return { ...ftg, checked: !ftg.checked }
+      })
+    )
+  }
 
   if (!character) return null
   return (
@@ -39,7 +65,7 @@ const Wounds = ({ id }) => {
         </TableHead>
 
         <TableBody>
-          {character.wounds.map((wnd, index) => (
+          {wounds.map((wnd, index) => (
             <TableRow key={wnd.level + index}>
               <TableCell>{wnd.level}</TableCell>
               <TableCell>

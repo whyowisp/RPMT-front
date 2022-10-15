@@ -58,11 +58,11 @@ const Fatigue = ({ id }) => {
           {fatigue.map((ftg, index) => (
             <TableRow key={ftg.level + index}>
               <TableCell>
-                <input
-                  type="checkbox"
+                <Checkbox
                   disabled={index === 0 ? true : false}
                   checked={ftg.checked}
                   onChange={() => handleChecked(index)}
+                  inputProps={{ 'aria-label': 'controlled' }}
                 />
               </TableCell>
               <TableCell>{ftg.penalty}</TableCell>
