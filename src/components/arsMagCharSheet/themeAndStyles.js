@@ -8,13 +8,13 @@ const plainInputSx = {
 }
 
 const smallBoxSx = {
-  p: 2,
+  p: 1.5,
   border: '2px solid',
   backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
 
 const commonBoxSx = {
-  p: 2,
+  p: 1.5,
   border: '2px solid',
   backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
@@ -44,11 +44,11 @@ const sheetThemeAM = createTheme({
     fontFamily: 'serif',
     label: {
       fontFamily: 'MedievalSharp',
-      fontSize: '1.5rem',
+      fontSize: '1.4rem',
       textAlign: 'center',
     },
     labelSm: {
-      fontSize: '1.1rem',
+      fontSize: '1.0rem',
       fontFamily: 'serif',
     },
   },

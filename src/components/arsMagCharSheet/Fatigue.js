@@ -49,7 +49,6 @@ const Fatigue = ({ id }) => {
     )
   }
 
-  console.log('fatigue: ' + JSON.stringify(fatigue))
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Fatigue</Typography>
@@ -59,8 +58,9 @@ const Fatigue = ({ id }) => {
             <TableRow key={ftg.level + index}>
               <TableCell>
                 <Checkbox
+                  sx={{ p: '0.4rem' }}
                   disabled={index === 0 ? true : false}
-                  checked={ftg.checked}
+                  checked={index === 0 ? true : ftg.checked}
                   onChange={() => handleChecked(index)}
                   inputProps={{ 'aria-label': 'controlled' }}
                 />

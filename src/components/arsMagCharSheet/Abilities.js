@@ -37,18 +37,20 @@ const Abilities = ({ id }) => {
       'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
     )
 
+    /* eslint-disable */
     setAbilities(
       abilities.map((abi, i) =>
         i === indexOfNewValue
           ? {
-            experience: type === 'Exp' ? newValue : abi.experience,
-            ability: type === 'Ability' ? newValue : abi.ability,
-            specialty: type === 'Specialty' ? newValue : abi.specialty,
-            score: type === 'Score' ? newValue : abi.score,
-          }
+              experience: type === 'Exp' ? newValue : abi.experience,
+              ability: type === 'Ability' ? newValue : abi.ability,
+              specialty: type === 'Specialty' ? newValue : abi.specialty,
+              score: type === 'Score' ? newValue : abi.score,
+            }
           : abi
       )
     )
+    /* eslint-enable */
   }
 
   const submitUpdate = (e) => {
@@ -85,11 +87,13 @@ const Abilities = ({ id }) => {
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Abilities</Typography>
-      <Table size="small">
+      <Table size="small" padding="none">
         <TableHead>
           <TableRow>
-            <TableCell width="20%">Exp</TableCell>
-            <TableCell width="35%">ABILITY</TableCell>
+            <TableCell width="10%">Exp</TableCell>
+            <TableCell align="justify" width="35%">
+              ABILITY
+            </TableCell>
             <TableCell width="35%">SPECIALTY</TableCell>
             <TableCell width="10%">SCORE</TableCell>
           </TableRow>
@@ -100,7 +104,7 @@ const Abilities = ({ id }) => {
             <TableRow key={abi + index} sx={{ border: 'none', m: 0 }}>
               <TableCell sx={{ border: 'none', p: 1 }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, fontSize: '0.9rem' }}
                   defaultValue={abi.experience}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Exp')}
@@ -108,15 +112,15 @@ const Abilities = ({ id }) => {
               </TableCell>
               <TableCell align="right" sx={{ border: 'none', p: 1 }}>
                 <Input
-                  sx={{ fontSize: '14px' }}
+                  sx={{ ...plainInputSx }}
                   defaultValue={abi.ability}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Ability')}
                 />
               </TableCell>
-              <TableCell sx={{ border: 'none' }}>
+              <TableCell sx={{ border: 'none', p: 1 }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, fontSize: '14px' }}
                   defaultValue={abi.specialty}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Specialty')}

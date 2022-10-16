@@ -10,10 +10,9 @@ import {
   TableCell,
   TableRow,
   Button,
-  Grid,
-  Box,
-  Stack,
+  Divider,
 } from '@mui/material'
+import { CreateOutlined } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
@@ -88,19 +87,24 @@ const Weapons = ({ id }) => {
 
   if (!weapons) return null
 
+  /*
+<TableCell align="justify">Qik + Weap - Enc = INIT</TableCell>
+            <TableCell align="justify">Dex + Ability + Weap = ATK</TableCell>
+            <TableCell align="justify">Qik + Ability + Weap = DFN</TableCell>
+            <TableCell align="justify">Str + Weap = DAM</TableCell>*/
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Weapons</Typography>
-      <Table size="small">
+      <Table size="small" padding="normal">
         <TableHead>
           <TableRow>
             <TableCell width={200}></TableCell>
-            <TableCell align="justify">Qik + Weap - Enc = INIT</TableCell>
-            <TableCell align="justify">Dex + Ability + Weap = ATK</TableCell>
-            <TableCell align="justify">Qik + Ability + Weap = DFN</TableCell>
-            <TableCell align="justify">Str + Weap = DAM</TableCell>
+            <TableCell align="justify">INIT</TableCell>
+            <TableCell align="justify">ATK</TableCell>
+            <TableCell align="justify">DFN</TableCell>
+            <TableCell align="justify">DAM</TableCell>
             <TableCell width={50}>Load</TableCell>
-            <TableCell width={50}>Range</TableCell>
+            <TableCell width={50}>Rng</TableCell>
           </TableRow>
         </TableHead>
 
@@ -123,6 +127,7 @@ const Weapons = ({ id }) => {
                   onBlur={(event) => prepareValues(event, 'Init')}
                 />
               </TableCell>
+
               <TableCell sx={{ border: 'none' }}>
                 <Input
                   sx={{ ...plainInputSx }}
@@ -134,7 +139,7 @@ const Weapons = ({ id }) => {
               <TableCell sx={{ border: 'none' }}>
                 <Input
                   sx={{ ...plainInputSx }}
-                  defaultValue={wpn.defensekModifier}
+                  defaultValue={wpn.defenseModifier}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Defense')}
                 />
@@ -167,9 +172,14 @@ const Weapons = ({ id }) => {
           ))}
         </TableBody>
       </Table>
+
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>
+      <Typography sx={{ fontSize: '10px', textAlign: 'center' }}>
+        Qik + Weap - Enc = INIT / Dex + Ability + Weap = ATK / Qik + Ability +
+        Weap = DFN / Str + Weap = DAM
+      </Typography>
     </TableContainer>
   )
 }

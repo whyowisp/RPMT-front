@@ -30,17 +30,19 @@ const Characteristics = ({ id }) => {
     const newValue = e.target.value
     const indexOfNewValue = fieldIndex
 
+    /* eslint-disable */
     setCharacteristics(
       characteristics.map((chr, i) =>
         i === indexOfNewValue
           ? {
-            characteristic: chr.characteristic,
-            description: type === 'String' ? newValue : chr.description,
-            score: type === 'Number' ? newValue : chr.score,
-          }
+              characteristic: chr.characteristic,
+              description: type === 'String' ? newValue : chr.description,
+              score: type === 'Number' ? newValue : chr.score,
+            }
           : chr
       )
     )
+    /* eslint-enable */
   }
 
   const submitUpdate = (e) => {
@@ -70,7 +72,7 @@ const Characteristics = ({ id }) => {
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Characteristics</Typography>
-      <Table size="small">
+      <Table size="small" padding="none">
         <TableHead>
           <TableRow>
             <TableCell> </TableCell>

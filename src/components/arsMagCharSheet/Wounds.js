@@ -11,6 +11,7 @@ import {
   TableRow,
   Button,
   Checkbox,
+  TextareaAutosize,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
@@ -23,6 +24,7 @@ const Wounds = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
   const [wounds, setWounds] = useState([])
+  const [range, setRange] = useState('')
 
   useEffect(() => {
     setWounds(character.wounds)
@@ -37,21 +39,33 @@ const Wounds = ({ id }) => {
       },
     }
     console.log('data to dispatch: ' + JSON.stringify(data))
-    //dispatch(editCharacter(data))
+    dispatch(editCharacter(data))
   }, [wounds])
 
   const handleChecked = (yIndex, xIndex) => {
     setWounds(
       wounds.map((wnd, y) => {
-        //If new value doesn't concern this row, leave row as it is
-        if (y !== yIndex) return wnd
+        if (y !== yIndex) return wnd //If new value doesn't concern this row, leave row as it is
         const checkedRow = wnd.checked.map((isChecked, x) => {
-          //If new value doesn't concern this check(box), leave value as it is
-          if (x !== xIndex) return isChecked
+          if (x !== xIndex) return isChecked //If new value doesn't concern this check(box), leave value as it is
           return !isChecked
         })
         return { ...wnd, checked: checkedRow }
       })
+    )
+  }
+
+  const prepareValues = (index) => {
+    console.log(range, index)
+    setWounds(
+      wounds.map((wnd, i) =>
+        i === index
+          ? {
+              ...wnd,
+              range: range,
+            }
+          : wnd
+      )
     )
   }
 
@@ -62,11 +76,10 @@ const Wounds = ({ id }) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell width="15%" />
-            <TableCell width="10%">RANGE</TableCell>
-            <TableCell width="40%">NUMBER</TableCell>
-            <TableCell width="5%">PENALTY</TableCell>
-            <TableCell width="20%">NOTES</TableCell>
+            <TableCell />
+            <TableCell width="1%">RANGE</TableCell>
+            <TableCell>NUMBER</TableCell>
+            <TableCell>PENALTY</TableCell>
           </TableRow>
         </TableHead>
 
@@ -75,25 +88,38 @@ const Wounds = ({ id }) => {
             <TableRow key={wnd.level + yIndex}>
               <TableCell>{wnd.level}</TableCell>
               <TableCell>
-                <Input defaultValue={wnd.range}></Input>
+                <Input
+                  defaultValue={wnd.range}
+                  onChange={({ target }) => setRange(target.value)}
+                  onBlur={() => prepareValues(yIndex)}
+                ></Input>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ p: 0 }}>
                 {wnd.checked.map((isChecked, xIndex) => (
                   <Checkbox
+                    sx={{ p: '0.3rem' }}
                     checked={isChecked}
                     onChange={() => handleChecked(yIndex, xIndex)}
                     inputProps={{ 'aria-label': 'controlled' }}
                   />
                 ))}
               </TableCell>
-              <TableCell>{wnd.penalty}</TableCell>
-              <TableCell>
-                <Input defaultValue={wnd.notes}></Input>
+              <TableCell align="center" sx={{ p: 0 }}>
+                {wnd.penalty}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <TextareaAutosize
+        sx={{ ...plainInputSx }}
+        minRows={5}
+        style={{ width: '100%' }}
+        placeholder="Example: Cannot use right hand"
+      />
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </TableContainer>
   )
 }
