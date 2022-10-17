@@ -16,6 +16,7 @@ import Fatigue from './Fatigue'
 import Wounds from './Wounds'
 import Weapons from './Weapons'
 import MagiAttributes from './MagiAttributes'
+import MagicalArts from './MagicalArts'
 
 import Equipment from './Equipment'
 
@@ -95,6 +96,9 @@ xl, extra-large: 1536px
 
           <Grid item xs={12} md={12}>
             <MagiAttributes id={id} />
+          </Grid>
+          <Grid item xs={12}>
+            <MagicalArts id={id} />
           </Grid>
         </Grid>
       </Paper>

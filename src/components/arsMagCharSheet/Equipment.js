@@ -91,7 +91,7 @@ const Equipment = ({ id }) => {
           <Grid item xs={6} key={eqp + index}>
             <Stack direction="row" spacing={1} sx={{ pr: 1 }}>
               <Input
-                sx={{ ...plainInputSx, minWidth: '80%' }}
+                sx={{ ...plainInputSx, minWidth: '75%' }}
                 placeholder="Item name"
                 defaultValue={eqp.item}
                 onChange={() => setFieldIndex(index)}

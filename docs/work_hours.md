@@ -22,4 +22,5 @@
 | 14.10 | 5h | CharSheetin tokan sivun tekoa |
 | väli | 66h |  |
 | 15.10 | 3h | CharSheetin tokan sivun tekoa |
-| 16.10 | 3h | CharSheetin tokan sivun tekoa |
+| 16.10 | 4h | CharSheetin tokan sivun tekoa |
+| 17.10 | 2h | CharSheetin tokan sivun tekoa |
