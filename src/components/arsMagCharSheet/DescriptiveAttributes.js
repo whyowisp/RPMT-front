@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx } from './themeAndStyles'
 
-const DescriptiveStats = ({ id }) => {
+const DescriptiveAttributes = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
@@ -69,4 +69,4 @@ const DescriptiveStats = ({ id }) => {
   )
 }
 
-export default DescriptiveStats
+export default DescriptiveAttributes

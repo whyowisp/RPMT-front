@@ -30,6 +30,7 @@ import Equipment from './Equipment'
 import Lab from './Lab'
 import Longevity from './Longevity'
 import RawVis from './RawVis'
+import Familiar from './Familiar'
 
 const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
@@ -126,6 +127,9 @@ xl, extra-large: 1536px
           </Grid>
           <Grid item xs={12} md={6}>
             <RawVis id={id} />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Familiar id={id} />
           </Grid>
         </Grid>
       </Paper>

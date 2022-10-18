@@ -55,7 +55,6 @@ const Equipment = ({ id }) => {
   const submitUpdate = (e) => {
     e.preventDefault()
 
-    //Clear eqplity objects that doesn't have eqplity name
     const equipmentEmptyValuesCleared = equipment.filter((eqp) =>
       Object.values(eqp)[0] === '' ? null : eqp
     )
