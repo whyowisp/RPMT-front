@@ -28,6 +28,8 @@ import MagicalArts from './MagicalArts'
 import CastingTotals from './CastingTotals'
 import Equipment from './Equipment'
 import Lab from './Lab'
+import Longevity from './Longevity'
+import RawVis from './RawVis'
 
 const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
@@ -118,6 +120,12 @@ xl, extra-large: 1536px
           </Grid>
           <Grid item xs={12} md={6}>
             <Lab id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Longevity id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <RawVis id={id} />
           </Grid>
         </Grid>
       </Paper>

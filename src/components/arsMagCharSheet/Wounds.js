@@ -117,7 +117,7 @@ const Wounds = ({ id }) => {
         sx={{ ...plainInputSx }}
         minRows={5}
         style={{ width: '100%' }}
-        placeholder="Example: Cannot use right hand"
+        placeholder="Example: Cannot use right hand (note, this field cannot be saved yet"
       />
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok

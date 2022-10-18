@@ -93,7 +93,9 @@ const Characteristics = ({ id }) => {
 
               <TableCell align="right" sx={{ border: 'none', p: 1 }}>
                 <Typography sx={{ fontSize: '14px' }}>
-                  {chr.characteristic.substring(0, 3)}
+                  {chr.characteristic === 'Quickness'
+                    ? 'Qik'
+                    : chr.characteristic.substring(0, 3)}
                 </Typography>
               </TableCell>
               <TableCell sx={{ border: 'none' }}>

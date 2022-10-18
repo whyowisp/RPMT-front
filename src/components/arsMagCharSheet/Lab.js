@@ -13,8 +13,11 @@ import {
 
 import { editCharacter } from '../../reducers/characterReducer'
 import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+
 const Lab = ({ id }) => {
-  const character = useSelector((state) => state._id === id)
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
   if (!character) return null
 
   const intelligence = parseInt(
@@ -27,14 +30,19 @@ const Lab = ({ id }) => {
   )
 
   return (
-    <ListItem>
-      <ListItemText
-        primary={'Basic Lab Total'}
-        secondary={'(+ Technique + Form)'}
-      />
-      <ListItemText secondary={'Int + Theory + Form ='} />
-      <ListItemText primary={theory + intelligence} />
-    </ListItem>
+    <Box sx={commonBoxSx}>
+      <Typography variant="label">Lab</Typography>
+      <List>
+        <ListItem>
+          <ListItemText
+            primary={'Basic Lab Total'}
+            secondary={'(+ Technique + Form)'}
+          />
+          <ListItemText secondary={'Int + Theory + Form ='} />
+          <ListItemText primary={(theory + intelligence).toString()} />
+        </ListItem>
+      </List>
+    </Box>
   )
 }
 

@@ -62,44 +62,47 @@ const CastingTotals = ({ id }) => {
       primary: 'Fast Casting Speed',
       secondary: '(+ stress die)',
       add: 'Qik + Finesse =',
-      total: quickness + finesse,
+      total: (quickness + finesse).toString(),
     },
     {
       primary: 'Determining Effect',
       secondary: '(+ die, vs 15-magnitude)',
       add: 'Per + Awareness =',
-      total: perception + awareness,
+      total: (perception + awareness).toString(),
     },
     {
       primary: 'Base Targeting',
       secondary: '(+ die)',
       add: 'Per + Finesse =',
-      total: perception + finesse,
+      total: (perception + finesse).toString(),
     },
     {
       primary: 'Concentration',
       secondary: '(+ die)',
       add: 'Sta + Concentration =',
-      total: stamina + concentration,
+      total: (stamina + concentration).toString(),
     },
     {
       primary: 'Magic Resistance',
       secondary: '(+ Form)',
       add: 'Parma magica x5 =',
-      total: parmaMagica * 5,
+      total: (parmaMagica * 5).toString(),
     },
     {
       primary: 'Multiple Casting',
       secondary: '(+ stress die - no. of spells, vs 9)',
       add: 'Int + Finesse =',
-      total: intelligence + finesse,
+      total: (intelligence + finesse).toString(),
     },
   ]
 
   return (
     <Box sx={commonBoxSx}>
+      <Typography variant="label">Base Casting Totals</Typography>
       {castingNotes.map((note) => (
-        <Typography sx={{ fontSize: '14px', color: '#424242', ml: 2, mb: 0.3 }}>
+        <Typography
+          sx={{ fontSize: '14px', color: '#424242', ml: 2, mr: 2, mb: 0.3 }}
+        >
           {note}
         </Typography>
       ))}
