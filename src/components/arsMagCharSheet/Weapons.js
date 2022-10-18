@@ -95,10 +95,10 @@ const Weapons = ({ id }) => {
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Weapons</Typography>
-      <Table size="small" padding="normal">
+      <Table size="small" padding="none">
         <TableHead>
           <TableRow>
-            <TableCell width={200}></TableCell>
+            <TableCell></TableCell>
             <TableCell align="justify">INIT</TableCell>
             <TableCell align="justify">ATK</TableCell>
             <TableCell align="justify">DFN</TableCell>
@@ -110,18 +110,19 @@ const Weapons = ({ id }) => {
 
         <TableBody>
           {weapons.map((wpn, index) => (
-            <TableRow sx={{ border: 'none' }}>
-              <TableCell sx={{ border: 'none' }}>
+            <TableRow sx={{ border: 'none' }} key={wpn.weapon + index}>
+              <TableCell sx={{ border: 'none', width: '30%' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '95%' }}
                   defaultValue={wpn.weapon}
+                  placeholder="Weapon"
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Weapon')}
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.initModifier}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Init')}
@@ -130,7 +131,7 @@ const Weapons = ({ id }) => {
 
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.attackModifier}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Attack')}
@@ -138,7 +139,7 @@ const Weapons = ({ id }) => {
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.defenseModifier}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Defense')}
@@ -146,7 +147,7 @@ const Weapons = ({ id }) => {
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.damageModifier}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Damage')}
@@ -154,7 +155,7 @@ const Weapons = ({ id }) => {
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.load}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Load')}
@@ -162,7 +163,7 @@ const Weapons = ({ id }) => {
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx }}
+                  sx={{ ...plainInputSx, width: '90%' }}
                   defaultValue={wpn.range}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Range')}

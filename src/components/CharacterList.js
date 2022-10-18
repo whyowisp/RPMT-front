@@ -60,7 +60,7 @@ const CharacterList = ({ toPage }) => {
   const createNew = () => {
     dispatch(initializeNew('someUserId'))
   }
-  console.log(characters)
+
   if (!characters) return null
 
   return (

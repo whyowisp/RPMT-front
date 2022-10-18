@@ -30,13 +30,13 @@ const Fatigue = ({ id }) => {
 
   //Wrap fatigue to data object and dispatch
   useEffect(() => {
+    if (fatigue.length === 0) return
     const data = {
       id: id,
       content: {
         fatigue: fatigue,
       },
     }
-    console.log('data to dispatch: ' + JSON.stringify(data))
     dispatch(editCharacter(data))
   }, [fatigue])
 

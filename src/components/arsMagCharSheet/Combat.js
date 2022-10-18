@@ -49,7 +49,7 @@ const Combat = ({ id }) => {
     console.log('basicData called with content: ' + JSON.stringify(data))
     dispatch(editCharacter(data))
   }
-  console.log(armor)
+
   if (!character) return null
   return (
     <Box sx={commonBoxSx}>

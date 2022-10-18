@@ -1,5 +1,13 @@
-import { ThemeProvider, CssBaseline, Grid, Box, Paper } from '@mui/material'
+import {
+  ThemeProvider,
+  CssBaseline,
+  Grid,
+  Box,
+  Paper,
+  Divider,
+} from '@mui/material'
 //import Image from 'mui-image' might want to uninstall this
+import AMbackground from '../../images/AMbackground.jpg'
 
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'
@@ -17,10 +25,9 @@ import Wounds from './Wounds'
 import Weapons from './Weapons'
 import MagiAttributes from './MagiAttributes'
 import MagicalArts from './MagicalArts'
-
+import CastingTotals from './CastingTotals'
 import Equipment from './Equipment'
-
-import AMbackground from '../../images/AMbackground.jpg'
+import Lab from './Lab'
 
 const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
@@ -69,6 +76,10 @@ xl, extra-large: 1536px
           <Grid item xs={12} md={6}>
             <Abilities id={id} />
           </Grid>
+          <Grid item xs={12}>
+            <Divider>1</Divider>
+          </Grid>
+
           <Grid item xs={12} md={6}>
             <VirtuesFlaws id={id} />
           </Grid>
@@ -93,12 +104,20 @@ xl, extra-large: 1536px
           <Grid item xs={12} md={12}>
             <Equipment id={id} />
           </Grid>
-
+          <Grid item xs={12}>
+            <Divider>2</Divider>
+          </Grid>
           <Grid item xs={12} md={12}>
             <MagiAttributes id={id} />
           </Grid>
           <Grid item xs={12}>
             <MagicalArts id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <CastingTotals id={id} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Lab id={id} />
           </Grid>
         </Grid>
       </Paper>

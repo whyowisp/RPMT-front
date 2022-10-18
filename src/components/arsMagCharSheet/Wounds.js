@@ -32,13 +32,15 @@ const Wounds = ({ id }) => {
 
   //Wrap wounds to data object and dispatch
   useEffect(() => {
+    //useEffect is eager to launch in first render, before any data has initialized.
+    if (wounds.length === 0) return
     const data = {
       id: id,
       content: {
         wounds: wounds,
       },
     }
-    console.log('data to dispatch: ' + JSON.stringify(data))
+
     dispatch(editCharacter(data))
   }, [wounds])
 

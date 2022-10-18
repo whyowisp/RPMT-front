@@ -23,35 +23,37 @@ const ArtTable = ({
   index,
 }) => {
   return (
-    <TableBody>
-      <TableRow key={mArt + index} sx={{ border: 'none', m: 0 }}>
-        <TableCell align="right" sx={{ border: 'none', p: 1 }}>
-          <Typography variant="labelSm">{mArt.art}</Typography>
-        </TableCell>
-        <TableCell align="center" sx={{ border: 'none' }}>
-          <Input
-            sx={{ ...plainInputSx, width: '80%' }}
-            defaultValue={mArt.score}
-            onFocus={() =>
-              setCellIdentifier({ rowName: mArt.art, colIndex: 0 })
-            }
-            onChange={({ target }) => setFieldValue(target.value)}
-            onBlur={(event) => prepareValues(event)}
-          />
-        </TableCell>
-        <TableCell sx={{ border: 'none' }}>
-          <Input
-            sx={{ ...plainInputSx }}
-            defaultValue={mArt.exp}
-            onFocus={() =>
-              setCellIdentifier({ rowName: mArt.art, colIndex: 1 })
-            }
-            onChange={({ target }) => setFieldValue(target.value)}
-            onBlur={(event) => prepareValues(event)}
-          />
-        </TableCell>
-      </TableRow>
-    </TableBody>
+    <Table size="small" padding="none" key={mArt.art + index}>
+      <TableBody>
+        <TableRow key={mArt + index} sx={{ border: 'none', m: 0 }}>
+          <TableCell align="right" sx={{ border: 'none', p: 1 }}>
+            <Typography variant="labelSm">{mArt.art}</Typography>
+          </TableCell>
+          <TableCell align="center" sx={{ border: 'none' }}>
+            <Input
+              sx={{ ...plainInputSx, width: '80%' }}
+              defaultValue={mArt.score}
+              onFocus={() =>
+                setCellIdentifier({ rowName: mArt.art, colIndex: 0 })
+              }
+              onChange={({ target }) => setFieldValue(target.value)}
+              onBlur={(event) => prepareValues(event)}
+            />
+          </TableCell>
+          <TableCell sx={{ border: 'none' }}>
+            <Input
+              sx={{ ...plainInputSx }}
+              defaultValue={mArt.exp}
+              onFocus={() =>
+                setCellIdentifier({ rowName: mArt.art, colIndex: 1 })
+              }
+              onChange={({ target }) => setFieldValue(target.value)}
+              onBlur={(event) => prepareValues(event)}
+            />
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   )
 }
 
@@ -107,66 +109,62 @@ const MagicalArts = ({ id }) => {
     // -> to rerender
   }
 
-  console.log('cellIdentifier ' + JSON.stringify(cellIdentifier))
-  console.log('fieldValue ' + fieldValue)
-  console.log('magical arts: ' + JSON.stringify(magicalArts))
-
   const arts = magicalArts?.slice(0, 5)
   const firstForms = magicalArts?.slice(5, 10)
   const lastForms = magicalArts?.slice(10)
 
-  if (!magicalArts) return null
+  if (!character) return null
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Magical Arts</Typography>
-      <Table size="small" padding="none">
-        <Grid container columns={{ xs: 1, sm: 3 }}>
-          <Grid item xs={3} sm={1}>
-            <TableRow>
-              <TableCell align="right" width="40%">
-                TECHNIQUE
-              </TableCell>
-              <TableCell align="center">SCORE</TableCell>
-              <TableCell align="center">Exp</TableCell>
-            </TableRow>
-            {arts.map((mArt, index) => (
-              <ArtTable mArt={mArt} index={index} />
-            ))}
-          </Grid>
-          <Grid item xs={3} sm={1}>
-            <TableRow>
-              <TableCell align="right" width="40%">
-                FORM
-              </TableCell>
-              <TableCell align="center">SCORE</TableCell>
-              <TableCell align="center">Exp</TableCell>
-            </TableRow>
-            {firstForms.map((mArt, index) => (
-              <ArtTable mArt={mArt} index={index} />
-            ))}
-          </Grid>
-          <Grid item xs={3} sm={1}>
-            <TableRow>
-              <TableCell align="right" width="40%">
-                FORM
-              </TableCell>
-              <TableCell align="center">SCORE</TableCell>
-              <TableCell align="center" sx={{ fontSize: '12px' }}>
-                Exp
-              </TableCell>
-            </TableRow>
-            {lastForms.map((mArt, index) => (
-              <ArtTable
-                setCellIdentifier={setCellIdentifier}
-                setFieldValue={setFieldValue}
-                prepareValues={prepareValues}
-                mArt={mArt}
-                index={index}
-              />
-            ))}
-          </Grid>
+
+      <Grid container columns={{ xs: 1, sm: 3 }}>
+        <Grid item xs={3} sm={1}>
+          <TableRow>
+            <TableCell align="right" width="40%">
+              TECHNIQUE
+            </TableCell>
+            <TableCell align="center">SCORE</TableCell>
+            <TableCell align="center">Exp</TableCell>
+          </TableRow>
+          {arts.map((mArt, index) => (
+            <ArtTable mArt={mArt} index={index} />
+          ))}
         </Grid>
-      </Table>
+        <Grid item xs={3} sm={1}>
+          <TableRow>
+            <TableCell align="right" width="40%">
+              FORM
+            </TableCell>
+            <TableCell align="center">SCORE</TableCell>
+            <TableCell align="center">Exp</TableCell>
+          </TableRow>
+          {firstForms.map((mArt, index) => (
+            <ArtTable mArt={mArt} index={index} />
+          ))}
+        </Grid>
+        <Grid item xs={3} sm={1}>
+          <TableRow>
+            <TableCell align="right" width="40%">
+              FORM
+            </TableCell>
+            <TableCell align="center">SCORE</TableCell>
+            <TableCell align="center" sx={{ fontSize: '12px' }}>
+              Exp
+            </TableCell>
+          </TableRow>
+          {lastForms.map((mArt, index) => (
+            <ArtTable
+              setCellIdentifier={setCellIdentifier}
+              setFieldValue={setFieldValue}
+              prepareValues={prepareValues}
+              mArt={mArt}
+              index={index}
+            />
+          ))}
+        </Grid>
+      </Grid>
+
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>
