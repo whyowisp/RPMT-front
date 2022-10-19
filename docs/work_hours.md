@@ -24,4 +24,5 @@
 | 15.10 | 3h | CharSheetin tokan sivun tekoa |
 | 16.10 | 4h | CharSheetin tokan sivun tekoa |
 | 17.10 | 5h | CharSheetin kolmannen sivun tekoa |
-| 18.10 | 2h | -"-|
+| 18.10 | 4h | Kolmas sivu valmis, neljännen aloitus|
+| 19.10 | 3h | Neljännen työstö|
