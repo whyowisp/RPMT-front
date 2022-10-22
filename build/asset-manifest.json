@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/static/js/main.fadd51ab.js",
+    "main.js": "/static/js/main.d96b284d.js",
     "static/media/AMbackground.jpg": "/static/media/AMbackground.69600c8761e638426382.jpg",
     "index.html": "/index.html",
-    "main.fadd51ab.js.map": "/static/js/main.fadd51ab.js.map"
+    "main.d96b284d.js.map": "/static/js/main.d96b284d.js.map"
   },
   "entrypoints": [
-    "static/js/main.fadd51ab.js"
+    "static/js/main.d96b284d.js"
   ]
 }
