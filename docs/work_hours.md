@@ -26,3 +26,4 @@
 | 17.10 | 5h | CharSheetin kolmannen sivun tekoa |
 | 18.10 | 4h | Kolmas sivu valmis, neljännen aloitus|
 | 19.10 | 3h | Neljännen työstö|
+| 22.10 | 3h | 4. sivun viimeisen formin työstöä |

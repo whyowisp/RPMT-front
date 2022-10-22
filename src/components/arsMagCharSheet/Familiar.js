@@ -1,5 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Stack, Grid, Button } from '@mui/material'
+import {
+  Box,
+  Input,
+  Typography,
+  Stack,
+  Grid,
+  Button,
+  Divider,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
@@ -77,23 +85,19 @@ const DescriptiveStats = ({ id }) => {
     // -> to rerender
   }
 
-  /*
-  familiar: {
-      characteristics: [],
-      stats: [],
-      cords: [{ bronze: Number, silver: Number, gold: Number }],
-      bondQandA: [String],
-    },*/
-
   if (!character) return null
-  console.log('bonds: ' + bonds)
+
   return (
     <Box component="form" sx={commonBoxSx}>
       <Typography variant="label">Familiar</Typography>
-      <Grid container>
+      <Grid container padding={1}>
         <Grid item xs={6} sm={3}>
           {characteristics.map((chr, index) => (
-            <Stack direction="row" key={chr.characteristic + index}>
+            <Stack
+              direction="row"
+              sx={{ width: '70%' }}
+              key={chr.characteristic + index}
+            >
               <Typography sx={{ ...plainInputSx }} variant="labelSm">
                 {chr.characteristic}
               </Typography>
@@ -108,7 +112,11 @@ const DescriptiveStats = ({ id }) => {
         </Grid>
         <Grid item xs={6} sm={3}>
           {stats.map((stat, index) => (
-            <Stack direction="row" key={stat.stat + index}>
+            <Stack
+              sx={{ width: '70%' }}
+              direction="row"
+              key={stat.stat + index}
+            >
               <Typography sx={{ ...plainInputSx }} variant="labelSm">
                 {stat.stat}
               </Typography>
@@ -120,7 +128,7 @@ const DescriptiveStats = ({ id }) => {
             </Stack>
           ))}
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} sx={{ mt: 3 }}>
           <Stack direction="row">
             <Typography sx={{ ...plainInputSx }}>Bronze Cord:</Typography>
             <Input
@@ -144,7 +152,7 @@ const DescriptiveStats = ({ id }) => {
               onBlur={(event) => prepareCords(event)}
             />
           </Stack>
-          <Box sx={{ ...commonBoxSx, border: '1px solid' }}>
+          <Box sx={{ ...commonBoxSx, border: '1px solid', mt: 3 }}>
             <Typography>BOND QUALITIES & ABILITIES</Typography>
             {bonds.map((bnd, index) => (
               <Stack direction="row" spacing={1} sx={{ pr: 1 }}>

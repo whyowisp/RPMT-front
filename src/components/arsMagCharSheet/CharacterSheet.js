@@ -5,6 +5,7 @@ import {
   Box,
   Paper,
   Divider,
+  Typography,
 } from '@mui/material'
 //import Image from 'mui-image' might want to uninstall this
 import AMbackground from '../../images/AMbackground.jpg'
@@ -31,6 +32,7 @@ import Lab from './Lab'
 import Longevity from './Longevity'
 import RawVis from './RawVis'
 import Familiar from './Familiar'
+import Spells from './Spells'
 
 const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
@@ -58,6 +60,14 @@ xl, extra-large: 1536px
         }}
       >
         <Grid container>
+          <Grid item xs={12}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 1
+              </Typography>
+            </Divider>
+          </Grid>
+
           <Grid item xs={12} md={6}>
             <BasicAttributes id={id} />
           </Grid>
@@ -80,9 +90,12 @@ xl, extra-large: 1536px
             <Abilities id={id} />
           </Grid>
           <Grid item xs={12}>
-            <Divider>1</Divider>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 2
+              </Typography>
+            </Divider>
           </Grid>
-
           <Grid item xs={12} md={6}>
             <VirtuesFlaws id={id} />
           </Grid>
@@ -108,7 +121,11 @@ xl, extra-large: 1536px
             <Equipment id={id} />
           </Grid>
           <Grid item xs={12}>
-            <Divider>2</Divider>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 3
+              </Typography>
+            </Divider>
           </Grid>
           <Grid item xs={12} md={12}>
             <MagiAttributes id={id} />
@@ -130,6 +147,16 @@ xl, extra-large: 1536px
           </Grid>
           <Grid item xs={12} md={12}>
             <Familiar id={id} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 4
+              </Typography>
+            </Divider>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Spells id={id} />
           </Grid>
         </Grid>
       </Paper>

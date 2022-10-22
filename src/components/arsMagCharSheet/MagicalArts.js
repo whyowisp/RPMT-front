@@ -128,7 +128,7 @@ const MagicalArts = ({ id }) => {
             <TableCell align="center">Exp</TableCell>
           </TableRow>
           {arts.map((mArt, index) => (
-            <ArtTable mArt={mArt} index={index} />
+            <ArtTable key={mArt.art} mArt={mArt} index={index} />
           ))}
         </Grid>
         <Grid item xs={3} sm={1}>
@@ -140,7 +140,7 @@ const MagicalArts = ({ id }) => {
             <TableCell align="center">Exp</TableCell>
           </TableRow>
           {firstForms.map((mArt, index) => (
-            <ArtTable mArt={mArt} index={index} />
+            <ArtTable key={mArt.art} mArt={mArt} index={index} />
           ))}
         </Grid>
         <Grid item xs={3} sm={1}>
@@ -155,6 +155,7 @@ const MagicalArts = ({ id }) => {
           </TableRow>
           {lastForms.map((mArt, index) => (
             <ArtTable
+              key={mArt.art}
               setCellIdentifier={setCellIdentifier}
               setFieldValue={setFieldValue}
               prepareValues={prepareValues}

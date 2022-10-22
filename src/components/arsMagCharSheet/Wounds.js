@@ -99,6 +99,7 @@ const Wounds = ({ id }) => {
               <TableCell sx={{ p: 0 }}>
                 {wnd.checked.map((isChecked, xIndex) => (
                   <Checkbox
+                    key={xIndex}
                     sx={{ p: '0.3rem' }}
                     checked={isChecked}
                     onChange={() => handleChecked(yIndex, xIndex)}
