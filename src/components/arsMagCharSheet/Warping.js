@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Stack } from '@mui/material'
+import { Box, Input, Typography, Stack, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import { editCharacter } from '../../reducers/characterReducer'
 
-import { plainInputSx, smallBoxSx } from './themeAndStyles'
+import { plainInputSx, smallBoxSx, okButton } from './themeAndStyles'
 
 const Warping = ({ id }) => {
   const dispatch = useDispatch()
@@ -68,7 +68,9 @@ const Warping = ({ id }) => {
           onBlur={() => prepareEffects()}
         />
       ))}
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </Box>
   )
 }

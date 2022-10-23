@@ -101,8 +101,6 @@ const BasicAttributes = ({ id }) => {
           defaultValue={character.house}
           onChange={({ target }) => setHouse(target.value)}
         />
-      </Stack>
-      <Stack direction="row" spacing={2}>
         <Typography variant="label">Age: </Typography>
         <Input
           sx={plainInputSx}
@@ -110,6 +108,8 @@ const BasicAttributes = ({ id }) => {
           defaultValue={character.age}
           onChange={({ target }) => setAge(target.value)}
         />
+      </Stack>
+      <Stack direction="row" spacing={2}>
         <Typography variant="label">Size: </Typography>
         <Input
           sx={plainInputSx}

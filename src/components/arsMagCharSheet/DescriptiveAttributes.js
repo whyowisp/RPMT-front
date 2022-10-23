@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Stack } from '@mui/material'
+import { Box, Input, Typography, Stack, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
 const DescriptiveAttributes = ({ id }) => {
   const dispatch = useDispatch()
@@ -51,20 +51,22 @@ const DescriptiveAttributes = ({ id }) => {
       {descriptiveAttributes.map((dAttribute, index) => (
         <Stack direction="row" key={dAttribute.attribute}>
           <Typography
-            sx={{ width: dAttribute.attribute.length * 12 }}
+            sx={{ width: dAttribute.attribute.length * 12, fontSize: 14 }}
             variant="labelSm"
           >
             {dAttribute.attribute}:
           </Typography>
           <Input
-            sx={{ ...plainInputSx, width: '100%' }}
+            sx={{ ...plainInputSx, width: '100%', fontSize: 14 }}
             defaultValue={dAttribute.description}
             onChange={() => setFieldIndex(index)}
             onBlur={(event) => prepareAttributes(event)}
           />
         </Stack>
       ))}
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </Box>
   )
 }

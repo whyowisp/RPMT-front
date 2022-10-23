@@ -16,7 +16,6 @@ import {
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
-import { CheckBox } from '@mui/icons-material'
 
 const Wounds = ({ id }) => {
   const dispatch = useDispatch()
@@ -70,17 +69,17 @@ const Wounds = ({ id }) => {
       )
     )
   }
-
+  const submitUpdate = () => {}
   if (!character) return null
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Wounds</Typography>
-      <Table size="small">
+      <Table size="small" padding="none">
         <TableHead>
           <TableRow>
             <TableCell />
             <TableCell width="1%">RANGE</TableCell>
-            <TableCell>NUMBER</TableCell>
+            <TableCell align="center">NUMBER</TableCell>
             <TableCell>PENALTY</TableCell>
           </TableRow>
         </TableHead>
@@ -88,7 +87,7 @@ const Wounds = ({ id }) => {
         <TableBody>
           {wounds.map((wnd, yIndex) => (
             <TableRow key={wnd.level + yIndex}>
-              <TableCell>{wnd.level}</TableCell>
+              <TableCell sx={{ pb: 1, pt: 2 }}>{wnd.level}</TableCell>
               <TableCell>
                 <Input
                   defaultValue={wnd.range}
@@ -96,11 +95,11 @@ const Wounds = ({ id }) => {
                   onBlur={() => prepareValues(yIndex)}
                 ></Input>
               </TableCell>
-              <TableCell sx={{ p: 0 }}>
+              <TableCell>
                 {wnd.checked.map((isChecked, xIndex) => (
                   <Checkbox
                     key={xIndex}
-                    sx={{ p: '0.3rem' }}
+                    sx={{ p: '0.1rem' }}
                     checked={isChecked}
                     onChange={() => handleChecked(yIndex, xIndex)}
                     inputProps={{ 'aria-label': 'controlled' }}

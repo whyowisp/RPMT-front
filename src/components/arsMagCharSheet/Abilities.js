@@ -90,7 +90,9 @@ const Abilities = ({ id }) => {
       <Table size="small" padding="none">
         <TableHead>
           <TableRow>
-            <TableCell width="10%">Exp</TableCell>
+            <TableCell align="justify" width="15%">
+              Exp
+            </TableCell>
             <TableCell align="justify" width="35%">
               ABILITY
             </TableCell>

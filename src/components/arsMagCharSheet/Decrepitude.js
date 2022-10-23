@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Input, Typography, Stack } from '@mui/material'
+import { Box, Input, Typography, Stack, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { smallBoxSx, plainInputSx } from './themeAndStyles'
+import { smallBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
 const Decrepitude = ({ id }) => {
   const dispatch = useDispatch()
@@ -73,7 +73,9 @@ const Decrepitude = ({ id }) => {
           onBlur={() => prepareEffects()}
         />
       ))}
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </Box>
   )
 }

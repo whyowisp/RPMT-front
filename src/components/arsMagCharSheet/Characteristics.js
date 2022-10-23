@@ -8,10 +8,11 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Button,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
 const Characteristics = ({ id }) => {
   const dispatch = useDispatch()
@@ -86,13 +87,11 @@ const Characteristics = ({ id }) => {
           {characteristics.map((chr, index) => (
             <TableRow key={chr + index} sx={{ border: 'none', m: 0 }}>
               <TableCell sx={{ border: 'none', p: 1 }}>
-                <Typography sx={{ fontSize: '17px' }}>
-                  {chr.characteristic}:
-                </Typography>
+                <Typography>{chr.characteristic}:</Typography>
               </TableCell>
 
               <TableCell align="right" sx={{ border: 'none', p: 1 }}>
-                <Typography sx={{ fontSize: '14px' }}>
+                <Typography sx={{ fontSize: '12px' }}>
                   {chr.characteristic === 'Quickness'
                     ? 'Qik'
                     : chr.characteristic.substring(0, 3)}
@@ -100,7 +99,7 @@ const Characteristics = ({ id }) => {
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx, width: '91%' }}
+                  sx={{ ...plainInputSx, width: '91%', fontSize: 14 }}
                   defaultValue={chr.description}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'String')}
@@ -108,7 +107,7 @@ const Characteristics = ({ id }) => {
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input
-                  sx={{ ...plainInputSx, width: '100%' }}
+                  sx={{ ...plainInputSx, width: '100%', fontSize: 16 }}
                   defaultValue={chr.score}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'Number')}
@@ -118,7 +117,9 @@ const Characteristics = ({ id }) => {
           ))}
         </TableBody>
       </Table>
-      <button onClick={(e) => submitUpdate(e)}>ok</button>
+      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+        ok
+      </Button>
     </TableContainer>
   )
 }
