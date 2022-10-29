@@ -54,8 +54,8 @@ xl, extra-large: 1536px
           position: 'relative',
           color: 'black',
           mb: 4,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'space',
           backgroundPosition: 'left',
           backgroundImage: `url(${AMbackground})`,
         }}

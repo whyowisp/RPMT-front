@@ -102,7 +102,8 @@ const CastingTotals = ({ id }) => {
       {castingNotes.map((note) => (
         <Typography
           key={note}
-          sx={{ fontSize: '14px', color: '#424242', ml: 2, mr: 2, mb: 0.3 }}
+          color="info.main"
+          sx={{ fontSize: '14px', ml: 2, mr: 2, mb: 0.3 }}
         >
           {note}
         </Typography>

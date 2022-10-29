@@ -87,11 +87,6 @@ const Weapons = ({ id }) => {
 
   if (!weapons) return null
 
-  /*
-<TableCell align="justify">Qik + Weap - Enc = INIT</TableCell>
-            <TableCell align="justify">Dex + Ability + Weap = ATK</TableCell>
-            <TableCell align="justify">Qik + Ability + Weap = DFN</TableCell>
-            <TableCell align="justify">Str + Weap = DAM</TableCell>*/
   return (
     <TableContainer component="form" sx={{ ...commonBoxSx }}>
       <Typography variant="label">Weapons</Typography>
@@ -101,8 +96,12 @@ const Weapons = ({ id }) => {
             <TableCell></TableCell>
             <TableCell align="justify">INIT</TableCell>
             <TableCell align="justify">ATK</TableCell>
-            <TableCell align="justify">DFN</TableCell>
-            <TableCell align="justify">DAM</TableCell>
+            <TableCell sx={{ color: 'blue' }} align="justify">
+              DFN
+            </TableCell>
+            <TableCell sx={{ color: 'red' }} align="justify">
+              DAM
+            </TableCell>
             <TableCell width={50}>Load</TableCell>
             <TableCell width={50}>Rng</TableCell>
           </TableRow>
@@ -177,7 +176,14 @@ const Weapons = ({ id }) => {
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>
-      <Typography sx={{ fontSize: '10px', textAlign: 'center' }}>
+      <Typography
+        color="info.main"
+        sx={{
+          mt: 2,
+          fontSize: '10px',
+          textAlign: 'center',
+        }}
+      >
         Qik + Weap - Enc = INIT / Dex + Ability + Weap = ATK / Qik + Ability +
         Weap = DFN / Str + Weap = DAM
       </Typography>

@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material'
 
 const plainInputSx = {
   '& input': { backgroundColor: 'rgb(255, 255, 255, 0.1)', padding: 0.7 },
-  '& input:hover': { backgroundColor: '#cad9ec' },
+  '& input:hover': { backgroundColor: 'rgb(202, 217, 236, 0.2)' },
   '& input:focus': { backgroundColor: 'rgb(0, 0, 0, 0.1)' },
   width: '100%',
 }
@@ -24,7 +24,7 @@ const okButton = {
   padding: 0,
   fontSize: 20,
   color: 'secondary.main',
-  backgroundColor: '#fff',
+  backgroundColor: 'rgb(255,255,255,0.0)',
 }
 
 const sheetThemeAM = createTheme({
@@ -34,10 +34,13 @@ const sheetThemeAM = createTheme({
       contrastText: '#dae097',
     },
     secondary: {
-      main: '#4caf50',
+      main: '#7FCF76',
+    },
+    info: {
+      main: '#5C5C5C',
     },
     background: {
-      default: '#dcf1e5',
+      default: '#A9BAB0',
     },
   },
   typography: {

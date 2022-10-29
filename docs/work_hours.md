@@ -28,3 +28,4 @@
 | 19.10 | 3h | Neljännen työstö|
 | 22.10 | 5h | 4. sivun viimeisen formin työstöä. Charsheet valmis! |
 | väli | 90h | |
+| 29.10 | 2h | char sheet siistimistä, muotoiluja ym. |
