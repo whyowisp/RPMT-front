@@ -24,6 +24,7 @@ import Combat from './Combat'
 import Fatigue from './Fatigue'
 import Wounds from './Wounds'
 import Weapons from './Weapons'
+import Depiction from './Depiction'
 import MagiAttributes from './MagiAttributes'
 import MagicalArts from './MagicalArts'
 import CastingTotals from './CastingTotals'
@@ -128,6 +129,16 @@ xl, extra-large: 1536px
             </Divider>
           </Grid>
           <Grid item xs={12} md={12}>
+            <Depiction id={id} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 4
+              </Typography>
+            </Divider>
+          </Grid>
+          <Grid item xs={12} md={12}>
             <MagiAttributes id={id} />
           </Grid>
           <Grid item xs={12}>
@@ -151,7 +162,7 @@ xl, extra-large: 1536px
           <Grid item xs={12}>
             <Divider variant="middle">
               <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 4
+                page 5
               </Typography>
             </Divider>
           </Grid>

@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
-const DescriptiveStats = ({ id }) => {
+const Familiar = ({ id }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
@@ -155,7 +155,7 @@ const DescriptiveStats = ({ id }) => {
           <Box sx={{ ...commonBoxSx, border: '1px solid', mt: 3 }}>
             <Typography>BOND QUALITIES & ABILITIES</Typography>
             {bonds.map((bnd, index) => (
-              <Stack direction="row" spacing={1} sx={{ pr: 1 }}>
+              <Stack direction="row" spacing={1} sx={{ pr: 1 }} key={bnd}>
                 <Input
                   sx={{ ...plainInputSx, minWidth: '70%' }}
                   placeholder="Bond"
@@ -176,4 +176,4 @@ const DescriptiveStats = ({ id }) => {
   )
 }
 
-export default DescriptiveStats
+export default Familiar

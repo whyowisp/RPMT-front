@@ -24,6 +24,7 @@ const Wounds = ({ id }) => {
   )
   const [wounds, setWounds] = useState([])
   const [range, setRange] = useState('')
+  const [notes, setNotes] = useState('')
 
   useEffect(() => {
     setWounds(character.wounds)
@@ -57,13 +58,18 @@ const Wounds = ({ id }) => {
   }
 
   const prepareValues = (index) => {
-    console.log(range, index)
+    const ranges = range.split('-')
+    const checkedsByRange = Array.from(Array(1 + (ranges[1] - ranges[0]))).map(
+      (x, i) => false
+    )
+
     setWounds(
       wounds.map((wnd, i) =>
         i === index
           ? {
               ...wnd,
               range: range,
+              checked: checkedsByRange,
             }
           : wnd
       )
@@ -90,6 +96,7 @@ const Wounds = ({ id }) => {
               <TableCell sx={{ pb: 1, pt: 2 }}>{wnd.level}</TableCell>
               <TableCell>
                 <Input
+                  placeholder="int-int"
                   defaultValue={wnd.range}
                   onChange={({ target }) => setRange(target.value)}
                   onBlur={() => prepareValues(yIndex)}
@@ -117,9 +124,9 @@ const Wounds = ({ id }) => {
         sx={{ ...plainInputSx }}
         minRows={5}
         style={{ width: '100%' }}
-        placeholder="Example: Cannot use right hand (note, this field cannot be saved yet"
+        placeholder="Example: Cannot use right hand (currently this field cannot be saved)"
       />
-      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
+      <Button disabled sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>
     </TableContainer>

@@ -1,15 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   Box,
   Input,
   Typography,
   Stack,
   Button,
-  List,
-  ListItem,
-  ListItemText,
-  TextField,
   TextareaAutosize,
 } from '@mui/material'
 
@@ -39,7 +35,7 @@ const Longevity = ({ id }) => {
         },
       },
     }
-    console.log('dada: ' + JSON.stringify(data))
+
     dispatch(editCharacter(data))
   }
 

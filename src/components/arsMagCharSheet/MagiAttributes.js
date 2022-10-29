@@ -49,7 +49,7 @@ const MagiAttributes = ({ id }) => {
       }}
     >
       <Grid container>
-        <Grid item xs={6} spacing={1}>
+        <Grid item xs={6}>
           <Stack direction="row">
             <Typography variant="labelSm">House: </Typography>
             <Input

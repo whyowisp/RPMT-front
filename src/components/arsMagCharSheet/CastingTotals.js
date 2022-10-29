@@ -101,6 +101,7 @@ const CastingTotals = ({ id }) => {
       <Typography variant="label">Base Casting Totals</Typography>
       {castingNotes.map((note) => (
         <Typography
+          key={note}
           sx={{ fontSize: '14px', color: '#424242', ml: 2, mr: 2, mb: 0.3 }}
         >
           {note}
@@ -108,7 +109,7 @@ const CastingTotals = ({ id }) => {
       ))}
       <List>
         {castingTotals.map((total) => (
-          <ListItem>
+          <ListItem key={total.primary}>
             <ListItemText primary={total.primary} secondary={total.secondary} />
             <ListItemText secondary={total.add} />
             <ListItemText primary={total.total} />
