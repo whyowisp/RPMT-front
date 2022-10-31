@@ -13,13 +13,6 @@ import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
 
 const Spell = ({ charId, spellId }) => {
-  //SPELL
-
-  //Huolehtii yksittäisen spellin tulostuksesta ja sen updatesta. Huolehtii myös ettei tyhjää titleä tallenneta.
-
-  //tulostuksessa jaa kenttiin spellin valuet
-  //jos valueita muuttuu, updatee ne
-  //submit lähettää muuttuneet valuet suoraan dispatchillä
   const dispatch = useDispatch()
   console.log(' char ID: ' + charId + ' spell ID: ' + spellId)
 
