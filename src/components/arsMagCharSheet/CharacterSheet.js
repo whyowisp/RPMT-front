@@ -6,9 +6,12 @@ import {
   Paper,
   Divider,
   Typography,
+  Container,
 } from '@mui/material'
+import Image from 'mui-image'
 //import Image from 'mui-image' might want to uninstall this
 import AMbackground from '../../images/AMbackground.jpg'
+import AMLogo from '../../images/arm5-logo.png'
 
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'
@@ -52,28 +55,28 @@ xl, extra-large: 1536px
       <Paper
         sx={{
           position: 'relative',
-          color: 'black',
-          mb: 4,
+          mb: 10,
           backgroundSize: 'contain',
           backgroundRepeat: 'space',
           backgroundPosition: 'left',
           backgroundImage: `url(${AMbackground})`,
         }}
       >
-        <Grid container>
-          <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={12} order={{ xs: -3, md: -3 }}>
             <Divider variant="middle">
               <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
                 page 1
               </Typography>
             </Divider>
           </Grid>
-
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} order={{ xs: -1, md: -2 }}>
             <BasicAttributes id={id} />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Box></Box>
+          <Grid item xs={12} md={6} order={{ xs: -2, md: -1 }}>
+            <Container sx={{ mt: 6 }}>
+              <Image src={AMLogo} fit="contain" />
+            </Container>
           </Grid>
           <Grid item xs={6} md={3}>
             <Decrepitude id={id} />
@@ -85,8 +88,14 @@ xl, extra-large: 1536px
             <DescriptiveAttributes id={id} />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Characteristics id={id} />
+            <Grid item xs={12} marginBottom={1}>
+              <Characteristics id={id} />
+            </Grid>
+            <Grid item xs={12}>
+              <VirtuesFlaws id={id} />
+            </Grid>
           </Grid>
+
           <Grid item xs={12} md={6}>
             <Abilities id={id} />
           </Grid>
@@ -96,9 +105,6 @@ xl, extra-large: 1536px
                 page 2
               </Typography>
             </Divider>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <VirtuesFlaws id={id} />
           </Grid>
           <Grid item xs={12} md={4}>
             <PersonalityTraits id={id} />
@@ -148,13 +154,15 @@ xl, extra-large: 1536px
             <CastingTotals id={id} />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Lab id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Longevity id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <RawVis id={id} />
+            <Grid item xs={12} marginBottom={1}>
+              <Lab id={id} />
+            </Grid>
+            <Grid item xs={12} marginBottom={1}>
+              <Longevity id={id} />
+            </Grid>
+            <Grid item xs={12} marginBottom={1}>
+              <RawVis id={id} />
+            </Grid>
           </Grid>
           <Grid item xs={12} md={12}>
             <Familiar id={id} />

@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
   Typography,
-  TableContainer,
   Table,
   TableHead,
   TableBody,
@@ -10,6 +9,7 @@ import {
   TableRow,
   Grid,
   Button,
+  Box,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
@@ -23,37 +23,37 @@ const ArtTable = ({
   index,
 }) => {
   return (
-    <Table size="small" padding="none" key={mArt.art + index}>
-      <TableBody>
-        <TableRow key={mArt + index} sx={{ border: 'none', m: 0 }}>
-          <TableCell align="right" sx={{ border: 'none', p: 1 }}>
-            <Typography variant="labelSm">{mArt.art}</Typography>
-          </TableCell>
-          <TableCell align="center" sx={{ border: 'none' }}>
-            <Input
-              sx={{ ...plainInputSx, width: '80%' }}
-              defaultValue={mArt.score}
-              onFocus={() =>
-                setCellIdentifier({ rowName: mArt.art, colIndex: 0 })
-              }
-              onChange={({ target }) => setFieldValue(target.value)}
-              onBlur={(event) => prepareValues(event)}
-            />
-          </TableCell>
-          <TableCell sx={{ border: 'none' }}>
-            <Input
-              sx={{ ...plainInputSx }}
-              defaultValue={mArt.exp}
-              onFocus={() =>
-                setCellIdentifier({ rowName: mArt.art, colIndex: 1 })
-              }
-              onChange={({ target }) => setFieldValue(target.value)}
-              onBlur={(event) => prepareValues(event)}
-            />
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <TableBody>
+      <TableRow key={mArt + index}>
+        <TableCell align="right" sx={{ border: 'none' }}>
+          <Typography variant="labelSm" fontFamily="medievalSharp">
+            {mArt.art}
+          </Typography>
+        </TableCell>
+        <TableCell sx={{ border: 'none' }}>
+          <Input
+            sx={{ ...plainInputSx }}
+            defaultValue={mArt.score}
+            onFocus={() =>
+              setCellIdentifier({ rowName: mArt.art, colIndex: 0 })
+            }
+            onChange={({ target }) => setFieldValue(target.value)}
+            onBlur={(event) => prepareValues(event)}
+          />
+        </TableCell>
+        <TableCell sx={{ border: 'none' }}>
+          <Input
+            sx={{ ...plainInputSx, fontSize: '0.9rem' }}
+            defaultValue={mArt.exp}
+            onFocus={() =>
+              setCellIdentifier({ rowName: mArt.art, colIndex: 1 })
+            }
+            onChange={({ target }) => setFieldValue(target.value)}
+            onBlur={(event) => prepareValues(event)}
+          />
+        </TableCell>
+      </TableRow>
+    </TableBody>
   )
 }
 
@@ -115,61 +115,93 @@ const MagicalArts = ({ id }) => {
 
   if (!character) return null
   return (
-    <TableContainer component="form" sx={{ ...commonBoxSx }}>
+    <Box sx={commonBoxSx}>
       <Typography variant="label">Magical Arts</Typography>
 
       <Grid container columns={{ xs: 1, sm: 3 }}>
         <Grid item xs={3} sm={1}>
-          <TableRow>
-            <TableCell align="right" width="40%">
-              TECHNIQUE
-            </TableCell>
-            <TableCell align="center">SCORE</TableCell>
-            <TableCell align="center">Exp</TableCell>
-          </TableRow>
-          {arts.map((mArt, index) => (
-            <ArtTable key={mArt.art} mArt={mArt} index={index} />
-          ))}
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">TECHNIQUE</TableCell>
+                <TableCell width="100">SCORE</TableCell>
+                <TableCell width="100">
+                  <Typography variant="body2" color="info.main">
+                    Exp
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {arts.map((mArt, index) => (
+              <ArtTable
+                key={mArt.art}
+                mArt={mArt}
+                index={index}
+                setCellIdentifier={setCellIdentifier}
+                prepareValues={prepareValues}
+                setFieldValue={setFieldValue}
+              />
+            ))}
+          </Table>
         </Grid>
+
         <Grid item xs={3} sm={1}>
-          <TableRow>
-            <TableCell align="right" width="40%">
-              FORM
-            </TableCell>
-            <TableCell align="center">SCORE</TableCell>
-            <TableCell align="center">Exp</TableCell>
-          </TableRow>
-          {firstForms.map((mArt, index) => (
-            <ArtTable key={mArt.art} mArt={mArt} index={index} />
-          ))}
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">FORM</TableCell>
+                <TableCell width="100">SCORE</TableCell>
+                <TableCell width="100">
+                  <Typography variant="body2" color="info.main">
+                    Exp
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {firstForms.map((mArt, index) => (
+              <ArtTable
+                key={mArt.art}
+                mArt={mArt}
+                index={index}
+                setCellIdentifier={setCellIdentifier}
+                prepareValues={prepareValues}
+                setFieldValue={setFieldValue}
+              />
+            ))}
+          </Table>
         </Grid>
+
         <Grid item xs={3} sm={1}>
-          <TableRow>
-            <TableCell align="right" width="40%">
-              FORM
-            </TableCell>
-            <TableCell align="center">SCORE</TableCell>
-            <TableCell align="center" sx={{ fontSize: '12px' }}>
-              Exp
-            </TableCell>
-          </TableRow>
-          {lastForms.map((mArt, index) => (
-            <ArtTable
-              key={mArt.art}
-              setCellIdentifier={setCellIdentifier}
-              setFieldValue={setFieldValue}
-              prepareValues={prepareValues}
-              mArt={mArt}
-              index={index}
-            />
-          ))}
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">FORM</TableCell>
+                <TableCell width="100">SCORE</TableCell>
+                <TableCell width="100">
+                  <Typography variant="body2" color="info.main">
+                    Exp
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {lastForms.map((mArt, index) => (
+              <ArtTable
+                key={mArt.art}
+                mArt={mArt}
+                index={index}
+                setCellIdentifier={setCellIdentifier}
+                prepareValues={prepareValues}
+                setFieldValue={setFieldValue}
+              />
+            ))}
+          </Table>
         </Grid>
       </Grid>
 
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>
-    </TableContainer>
+    </Box>
   )
 }
 

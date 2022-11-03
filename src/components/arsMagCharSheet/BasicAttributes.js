@@ -52,7 +52,7 @@ const BasicAttributes = ({ id }) => {
       <Stack direction="row" spacing={2}>
         <Typography variant="label">Character: </Typography>
         <Input
-          sx={{ ...plainInputSx }}
+          sx={{ ...plainInputSx, fontSize: '1.2rem' }}
           disableUnderline
           defaultValue={character.character}
           onChange={({ target }) => setCharacterName(target.value)}
@@ -87,7 +87,7 @@ const BasicAttributes = ({ id }) => {
         />
         <Typography variant="labelSm">Current Year: </Typography>
         <Input
-          sx={plainInputSx}
+          sx={{ ...plainInputSx, width: '50%' }}
           disableUnderline
           defaultValue={character.currentYear}
           onChange={({ target }) => setYear(target.value)}
@@ -103,7 +103,7 @@ const BasicAttributes = ({ id }) => {
         />
         <Typography variant="label">Age: </Typography>
         <Input
-          sx={plainInputSx}
+          sx={{ ...plainInputSx, width: '50%' }}
           disableUnderline
           defaultValue={character.age}
           onChange={({ target }) => setAge(target.value)}
@@ -119,7 +119,7 @@ const BasicAttributes = ({ id }) => {
         />
         <Typography variant="label">Confidence: </Typography>
         <Input
-          sx={plainInputSx}
+          sx={{ ...plainInputSx, width: '50%' }}
           disableUnderline
           defaultValue={character.confidence}
           onChange={({ target }) => setConfidence(target.value)}

@@ -1,5 +1,5 @@
 const Home = () => {
-  return <div>Nothing to see here, yet</div>
+  return <div>Welcome to Ars Magica Campaign Management Tool</div>
 }
 
 export default Home

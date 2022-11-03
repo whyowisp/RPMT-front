@@ -29,3 +29,5 @@
 | 22.10 | 5h | 4. sivun viimeisen formin työstöä. Charsheet valmis! |
 | väli | 90h | |
 | 29.10 | 2h | char sheet siistimistä, muotoiluja ym. |
+| 31.10 | 4h | Dice -komponentin tekoa |
+| 03.11 | 4h | Char sheet muotoilujen viimeistelyä |

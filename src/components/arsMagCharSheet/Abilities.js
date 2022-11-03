@@ -85,13 +85,18 @@ const Abilities = ({ id }) => {
   if (!abilities) return null
 
   return (
-    <TableContainer component="form" sx={{ ...commonBoxSx }}>
+    <TableContainer
+      component="form"
+      sx={{ ...commonBoxSx, alignContent: 'center' }}
+    >
       <Typography variant="label">Abilities</Typography>
       <Table size="small" padding="none">
         <TableHead>
           <TableRow>
-            <TableCell align="justify" width="15%">
-              Exp
+            <TableCell align="center" width="10%">
+              <Typography variant="body2" color="info.main">
+                Exp
+              </Typography>
             </TableCell>
             <TableCell align="justify" width="35%">
               ABILITY
