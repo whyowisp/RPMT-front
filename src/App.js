@@ -7,7 +7,7 @@ import Home from './components/Home'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Dice from './components/Dice'
-
+//MUOTS
 const App = () => {
   const [page, setPage] = useState('home')
   const [id, setId] = useState()
@@ -38,7 +38,6 @@ const App = () => {
           characters
         </Button>
         <main>{content()}</main>
-        <Dice />
       </ThemeProvider>
     </Container>
   )

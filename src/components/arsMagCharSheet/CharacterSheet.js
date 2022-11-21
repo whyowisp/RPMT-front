@@ -11,7 +11,7 @@ import {
 import Image from 'mui-image'
 //import Image from 'mui-image' might want to uninstall this
 import AMbackground from '../../images/AMbackground.jpg'
-import AMLogo from '../../images/arm5-logo.png'
+import AMLogo from '../../images/arm5-logo-grey.png'
 
 import { sheetThemeAM } from './themeAndStyles'
 import Decrepitude from './Decrepitude'
@@ -37,6 +37,7 @@ import Longevity from './Longevity'
 import RawVis from './RawVis'
 import Familiar from './Familiar'
 import Spells from './Spells'
+import Dice from '../Dice'
 
 const CharacterSheet = ({ id }) => {
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
@@ -178,6 +179,7 @@ xl, extra-large: 1536px
             <Spells id={id} />
           </Grid>
         </Grid>
+        <Dice />
       </Paper>
     </ThemeProvider>
   )

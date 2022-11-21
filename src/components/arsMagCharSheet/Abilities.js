@@ -102,14 +102,14 @@ const Abilities = ({ id }) => {
               ABILITY
             </TableCell>
             <TableCell width="35%">SPECIALTY</TableCell>
-            <TableCell width="10%">SCORE</TableCell>
+            <TableCell width="8%">SCR</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
           {abilities.map((abi, index) => (
             <TableRow key={abi + index} sx={{ border: 'none', m: 0 }}>
-              <TableCell sx={{ border: 'none', p: 1 }}>
+              <TableCell sx={{ border: 'none', p: 0.5 }}>
                 <Input
                   sx={{ ...plainInputSx, fontSize: '0.9rem' }}
                   defaultValue={abi.experience}
@@ -117,7 +117,7 @@ const Abilities = ({ id }) => {
                   onBlur={(event) => prepareValues(event, 'Exp')}
                 />
               </TableCell>
-              <TableCell align="right" sx={{ border: 'none', p: 1 }}>
+              <TableCell align="right" sx={{ border: 'none', p: 0 }}>
                 <Input
                   sx={{ ...plainInputSx }}
                   defaultValue={abi.ability}

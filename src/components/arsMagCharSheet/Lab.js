@@ -26,7 +26,7 @@ const Lab = ({ id }) => {
     )?.score
   )
   const theory = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Hermetic theory')?.score
+    character.abilities.find((abi) => abi.ability === 'Magic Theory')?.score
   )
 
   return (

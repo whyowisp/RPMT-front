@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/static/js/main.24ba13b6.js",
+    "main.js": "/static/js/main.887173e3.js",
     "static/media/arm-snakes.png": "/static/media/arm-snakes.9392fc078b95ef5ff294.png",
-    "static/media/arm5-logo.png": "/static/media/arm5-logo.38d41a857fc287ea6d3b.png",
     "static/media/AMbackground.jpg": "/static/media/AMbackground.69600c8761e638426382.jpg",
+    "static/media/arm5-logo-grey.png": "/static/media/arm5-logo-grey.bfccbdc621fa44a25327.png",
     "index.html": "/index.html",
-    "main.24ba13b6.js.map": "/static/js/main.24ba13b6.js.map"
+    "main.887173e3.js.map": "/static/js/main.887173e3.js.map"
   },
   "entrypoints": [
-    "static/js/main.24ba13b6.js"
+    "static/js/main.887173e3.js"
   ]
 }

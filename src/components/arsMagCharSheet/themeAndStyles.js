@@ -71,7 +71,7 @@ const mainTheme = createTheme({
       contrastText: '#dae097',
     },
     background: {
-      default: '#dcf1e5',
+      default: '#A9BAB0',
     },
   },
   typography: {

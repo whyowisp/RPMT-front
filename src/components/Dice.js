@@ -34,10 +34,8 @@ const Dice = () => {
     const result = Math.floor(Math.random() * 10) //0..9
     setTimeout(() => {
       setDiceText(result)
-    }, 200)
-    setTimeout(() => {
       setPrevious(previous.concat(result))
-    }, 1700)
+    }, 200)
     setTimeout(() => {
       setDiceText('D10')
     }, 2200)

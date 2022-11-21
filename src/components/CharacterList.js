@@ -66,7 +66,7 @@ const CharacterList = ({ toPage }) => {
   return (
     <div>
       <Grid item xs={12} md={8}>
-        <TableContainer component="form">
+        <TableContainer component="form" sx={{ paddingBottom: 10 }}>
           <Table>
             <TableBody>
               {characters.map((chr) => (
