@@ -30,21 +30,21 @@ const Spells = ({ id }) => {
       spells.map((spell, i) =>
         i === spellIndex
           ? {
-              spell: propertyName === 'spell' ? editedProperty : spell.spell,
-              technique:
+            spell: propertyName === 'spell' ? editedProperty : spell.spell,
+            technique:
                 propertyName === 'technique' ? editedProperty : spell.technique,
-              form: propertyName === 'form' ? editedProperty : spell.form,
-              level: propertyName === 'level' ? editedProperty : spell.level,
-              bonus: propertyName === 'bonus' ? editedProperty : spell.bonus,
-              range: propertyName === 'range' ? editedProperty : spell.range,
-              duration:
+            form: propertyName === 'form' ? editedProperty : spell.form,
+            level: propertyName === 'level' ? editedProperty : spell.level,
+            bonus: propertyName === 'bonus' ? editedProperty : spell.bonus,
+            range: propertyName === 'range' ? editedProperty : spell.range,
+            duration:
                 propertyName === 'duration' ? editedProperty : spell.duration,
-              target: propertyName === 'target' ? editedProperty : spell.target,
-              exp: propertyName === 'exp' ? editedProperty : spell.exp,
-              mastery:
+            target: propertyName === 'target' ? editedProperty : spell.target,
+            exp: propertyName === 'exp' ? editedProperty : spell.exp,
+            mastery:
                 propertyName === 'mastery' ? editedProperty : spell.mastery,
-              notes: propertyName === 'notes' ? editedProperty : spell.notes,
-            }
+            notes: propertyName === 'notes' ? editedProperty : spell.notes,
+          }
           : spell
       )
     )

@@ -28,7 +28,8 @@
     "server": "json-server --port 3001 --watch db.json --routes routes.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix"
   },
   "browserslist": {
     "production": [
@@ -41,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-plugin-react": "^7.31.11"
   }
 }

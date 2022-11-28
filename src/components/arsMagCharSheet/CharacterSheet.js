@@ -2,7 +2,6 @@ import {
   ThemeProvider,
   CssBaseline,
   Grid,
-  Box,
   Paper,
   Divider,
   Typography,

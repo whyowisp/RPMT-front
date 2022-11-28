@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   Box,
   AppBar,
@@ -66,11 +66,12 @@ const Dice = () => {
 
         {[...previous].reverse().map((p, index) =>
           index === 0 ? (
-            <Typography sx={{ flexGrow: 1 }} variant="h4">
+            <Typography key={p + index} sx={{ flexGrow: 1 }} variant="h4">
               ~ {p} ~
             </Typography>
           ) : (
             <Typography
+              key={p + index}
               sx={{ flexGrow: 1 }}
               fontSize={(previous.length - index) * 5}
             >

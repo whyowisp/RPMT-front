@@ -80,10 +80,10 @@ const MagicalArts = ({ id }) => {
       magicalArts.map((mArt) =>
         mArt.art === cellIdentifier.rowName
           ? {
-              ...mArt,
-              score: cellIdentifier.colIndex === 0 ? fieldValue : mArt.score,
-              exp: cellIdentifier.colIndex === 1 ? fieldValue : mArt.exp,
-            }
+            ...mArt,
+            score: cellIdentifier.colIndex === 0 ? fieldValue : mArt.score,
+            exp: cellIdentifier.colIndex === 1 ? fieldValue : mArt.exp,
+          }
           : mArt
       )
     )

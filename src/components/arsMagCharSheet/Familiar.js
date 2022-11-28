@@ -1,13 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Box,
-  Input,
-  Typography,
-  Stack,
-  Grid,
-  Button,
-  Divider,
-} from '@mui/material'
+import { Box, Input, Typography, Stack, Grid, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
@@ -23,7 +15,7 @@ const Familiar = ({ id }) => {
   const [cords, setCords] = useState({})
   const [bonds, setBonds] = useState([])
 
-  const [newBond, setNewBond] = useState('')
+  //const [newBond, setNewBond] = useState('')
 
   const [cordName, setCordName] = useState('')
   const [fieldIndex, setFieldIndex] = useState(-1)

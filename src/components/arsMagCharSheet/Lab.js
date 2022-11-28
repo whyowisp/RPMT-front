@@ -1,18 +1,7 @@
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import {
-  Box,
-  Input,
-  Typography,
-  Stack,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material'
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material'
 
-import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { commonBoxSx } from './themeAndStyles'
 
 const Lab = ({ id }) => {
   const character = useSelector((state) =>

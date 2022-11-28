@@ -1,13 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import {
-  Box,
-  Input,
-  Typography,
-  Stack,
-  Button,
-  TextareaAutosize,
-} from '@mui/material'
+import { Box, Typography, Button, TextareaAutosize } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
 import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'

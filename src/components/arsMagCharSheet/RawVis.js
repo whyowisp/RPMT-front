@@ -40,10 +40,10 @@ const RawVis = ({ id }) => {
       rawVises.map((vis, i) =>
         i === indexOfNewValue
           ? {
-              art: type === 'Art' ? newValue : vis.art,
-              pawns: type === 'Pawns' ? newValue : vis.pawns,
-              physicalForm: type === 'Form' ? newValue : vis.form,
-            }
+            art: type === 'Art' ? newValue : vis.art,
+            pawns: type === 'Pawns' ? newValue : vis.pawns,
+            physicalForm: type === 'Form' ? newValue : vis.form,
+          }
           : vis
       )
     )

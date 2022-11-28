@@ -106,12 +106,12 @@ const MagiAttributes = ({ id }) => {
               sx={plainInputSx}
               disableUnderline
               defaultValue={character.parens}
-              onChange={({ target }) => setHouse(target.value)}
+              onChange={({ target }) => setParens(target.value)}
             />
           </Stack>
         </Grid>
         <Stack direction="row">
-          <Typography variant="labelSm">Wizard's Sigil: </Typography>
+          <Typography variant="labelSm">Wizard`&apos`s Sigil: </Typography>
           <Input
             sx={plainInputSx}
             disableUnderline

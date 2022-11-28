@@ -1,18 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  Box,
-  Input,
-  Typography,
-  Stack,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material'
 
-import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { commonBoxSx } from './themeAndStyles'
 
 const CastingTotals = ({ id }) => {
   const character = useSelector((state) =>
