@@ -1,5 +1,5 @@
 const Home = () => {
-  return <>KAKAKAA</>
+  return <>Create new campaign etc.</>
 }
 
 export default Home

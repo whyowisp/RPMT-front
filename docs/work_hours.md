@@ -31,3 +31,5 @@
 | 29.10 | 2h | char sheet siistimistä, muotoiluja ym. |
 | 31.10 | 4h | Dice -komponentin tekoa |
 | 03.11 | 4h | Char sheet muotoilujen viimeistelyä |
+| 28.11 | 5h | Login/logout toiminto ja leiska |
+| 29.11 | 2h | Valikkojen (appbar ym.) tekoa |
