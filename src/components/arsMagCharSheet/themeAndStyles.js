@@ -72,6 +72,7 @@ const mainTheme = createTheme({
     },
     background: {
       default: '#A9BAB0',
+      paper: '#A9BAB0',
     },
   },
   typography: {
