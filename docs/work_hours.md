@@ -33,3 +33,4 @@
 | 03.11 | 4h | Char sheet muotoilujen viimeistelyä |
 | 28.11 | 5h | Login/logout toiminto ja leiska |
 | 29.11 | 2h | Valikkojen (appbar ym.) tekoa |
+| 30.11 | 7h | CharacterList valikkojen dynaamisia muotoiluja |

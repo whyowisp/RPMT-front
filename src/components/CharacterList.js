@@ -6,9 +6,11 @@ import {
   initCharactersReducer,
   initializeNew,
   deleteOne,
+  editCharacter,
 } from '../reducers/characterReducer'
 import {
   Grid,
+  Container,
   TableContainer,
   Table,
   TableRow,
@@ -21,12 +23,19 @@ import {
   TextField,
   DialogActions,
   DialogContentText,
+  Typography,
+  Collapse,
+  IconButton,
+  TableHead,
+  Paper,
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 const CharacterList = ({ toPage }) => {
   const dispatch = useDispatch()
-
+  const player = useSelector((state) => state.player)
   const characters = useSelector((state) => state.characters)
   const [inputName, setInputName] = useState(undefined)
   const [referenceName, setReferenceName] = useState(undefined)
@@ -58,43 +67,39 @@ const CharacterList = ({ toPage }) => {
   }
 
   const createNew = () => {
-    dispatch(initializeNew('someUserId'))
+    dispatch(initializeNew(player.id))
   }
 
   if (!characters) return null
 
   return (
-    <div>
-      <Grid item xs={12} md={8}>
-        <TableContainer component="form" sx={{ paddingBottom: 10 }}>
-          <Table>
-            <TableBody>
-              {characters.map((chr) => (
-                <TableRow key={chr._id}>
-                  <TableCell>{chr.character}</TableCell>
-                  <TableCell>
-                    <Button onClick={toPage('characterSheet', chr._id)}>
-                      Enter
-                    </Button>
+    <Container>
+      <TableContainer component={Paper} sx={{ paddingBottom: 10 }}>
+        <Table>
+          <TableHead>
+            <TableCell width="5%"></TableCell>
+            <TableCell width="50%">Character</TableCell>
+            <TableCell></TableCell>
+            <TableCell align="center">Visibility</TableCell>
+          </TableHead>
+          <TableBody>
+            {characters.map((chr) => (
+              <CharacterRow
+                chr={chr}
+                toPage={toPage}
+                handleClickOpen={handleClickOpen}
+              />
+            ))}
 
-                    <Button
-                      onClick={() => handleClickOpen(chr._id, chr.character)}
-                    >
-                      <DeleteForeverTwoToneIcon />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+            <TableRow>
+              <TableCell colspan={5} align="center">
+                <Button onClick={() => createNew()}>create new</Button>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-              <TableRow>
-                <TableCell>
-                  <Button onClick={() => createNew()}>create new</Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Think it over</DialogTitle>
         <DialogContent>
@@ -117,7 +122,110 @@ const CharacterList = ({ toPage }) => {
           <Button onClick={() => handleDelete()}>Remove</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Container>
+  )
+}
+
+const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
+  const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
+
+  const player = useSelector((state) => state.player)
+  const visibilityStates = ['visible', 'disabled', 'hidden']
+
+  const setVisibility = () => {
+    const data = {
+      id: chr._id,
+      content: {
+        visibility: solveNextState(),
+      },
+    }
+    console.log(data)
+    dispatch(editCharacter(data))
+  }
+
+  const solveNextState = () => {
+    const stateIndex = visibilityStates.indexOf(chr.visibility)
+    return visibilityStates[stateIndex + 1 > 2 ? 0 : stateIndex + 1]
+  }
+
+  const solveRowVisibility = () => {
+    if (chr.owner === player.id) return 'table-row'
+    if (chr.visibility === 'hidden') return 'none'
+  }
+
+  return (
+    <>
+      <TableRow
+        key={chr._id}
+        sx={{
+          display: solveRowVisibility(),
+          backgroundColor: chr.visibility === 'hidden' ? '#92A198' : 'inherit',
+        }}
+      >
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell
+          sx={{ color: chr.visibility === 'disabled' ? 'gray' : 'black' }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{ color: chr.visibility === 'disabled' ? 'gray' : 'black' }}
+          >
+            {chr.character}
+          </Typography>
+        </TableCell>
+        <TableCell align="right">
+          <Button
+            onClick={toPage('characterSheet', chr._id)}
+            disabled={chr.visibility === 'disabled' ? true : false}
+          >
+            Enter
+          </Button>
+          <Button
+            onClick={() => handleClickOpen(chr._id, chr.character)}
+            disabled={player.id === chr.owner ? false : true}
+          >
+            <DeleteForeverTwoToneIcon />
+          </Button>
+        </TableCell>
+        <TableCell align="center">
+          <Button
+            onClick={() => setVisibility()}
+            disabled={player.id === chr.owner ? false : true}
+          >
+            {chr.visibility}
+          </Button>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Table size="small">
+              <TableHead>
+                <TableCell>Player</TableCell>
+                <TableCell>Depiction</TableCell>
+              </TableHead>
+              <TableRow>
+                <TableCell>{chr.player}</TableCell>
+                <TableCell>
+                  {chr.depiction?.depiction
+                    ? chr.depiction.depiction
+                    : 'No character depiction yet'}
+                </TableCell>
+              </TableRow>
+            </Table>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
   )
 }
 

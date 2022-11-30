@@ -39,7 +39,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `0px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -78,12 +78,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const App = () => {
   const theme = useTheme()
+  const dispatch = useDispatch()
+
+  const player = useSelector((state) => state.player)
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState('home')
   const [id, setId] = useState()
-  const player = useSelector((state) => state.player)
-
-  const dispatch = useDispatch()
 
   const toPage = (page, id) => (event) => {
     event.preventDefault()
@@ -129,8 +129,8 @@ const App = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap component="div">
-                Persistent drawer
+              <Typography noWrap component="div">
+                Roleplaying Game Campaign Management Tool
               </Typography>
             </Toolbar>
           </AppBar>
@@ -143,7 +143,7 @@ const App = () => {
                 boxSizing: 'border-box',
               },
             }}
-            variant="persistent"
+            variant="temporary"
             anchor="left"
             open={open}
           >
@@ -174,6 +174,11 @@ const App = () => {
                   />
                 </ListItemButton>
               </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemText primary="Covenants" onClick={toPage('home')} />
+                </ListItemButton>
+              </ListItem>
             </List>
             <Divider />
             <List>
@@ -188,12 +193,12 @@ const App = () => {
             </List>
           </Drawer>
           <Main open={open}>
-            <DrawerHeader />
-            <Container maxWidth="lg">
-              <CssBaseline />
-
-              <main>{content()}</main>
-            </Container>
+            <main>
+              <DrawerHeader />
+              <Container maxWidth="md" sx={{ p: 0 }}>
+                {content()}
+              </Container>
+            </main>
           </Main>
         </Box>
       ) : (
@@ -202,35 +207,5 @@ const App = () => {
     </ThemeProvider>
   )
 }
-
-/*return (
-    <Container maxWidth="lg">
-      <ThemeProvider theme={mainTheme}>
-        <CssBaseline />
-        {!player ? (
-          <WelcomePage display />
-        ) : (
-          <main>
-            <menu>
-              <Button variant="contained" onClick={toPage('welcome')}>
-                home
-              </Button>
-              <Button variant="contained" onClick={toPage('characterList')}>
-                characters
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={() => dispatch(clearPlayer())}
-              >
-                Logout
-              </Button>
-              <MainApp />
-            </menu>
-            {content()}
-          </main>
-        )}
-      </ThemeProvider>
-    </Container>
-  )*/
 
 export default App
