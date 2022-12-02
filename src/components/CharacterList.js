@@ -78,9 +78,16 @@ const CharacterList = ({ toPage }) => {
         <Table>
           <TableHead>
             <TableCell width="5%"></TableCell>
-            <TableCell width="50%">Character</TableCell>
+            <TableCell width="30%">Character</TableCell>
             <TableCell></TableCell>
-            <TableCell align="center">Visibility</TableCell>
+            <TableCell
+              align="center"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+              }}
+            >
+              Visibility
+            </TableCell>
           </TableHead>
           <TableBody>
             {characters.map((chr) => (
@@ -196,7 +203,12 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
             <DeleteForeverTwoToneIcon />
           </Button>
         </TableCell>
-        <TableCell align="center">
+        <TableCell
+          align="center"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+          }}
+        >
           <Button
             onClick={() => setVisibility()}
             disabled={player.id === chr.owner ? false : true}

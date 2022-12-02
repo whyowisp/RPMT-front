@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import characterReducer from './reducers/characterReducer'
-import playerReducer from './reducers/playerReducer'
+import loggedPlayerReducer from './reducers/loggedPlayerReducer'
 
 export const store = configureStore({
   reducer: {
     characters: characterReducer,
-    player: playerReducer,
+    player: loggedPlayerReducer,
   },
 })

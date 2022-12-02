@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container } from '@mui/system'
-import { styled, useTheme } from '@mui/material/styles'
 import {
   CssBaseline,
   ThemeProvider,
@@ -15,11 +13,13 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
+  AppBar,
+  Container,
 } from '@mui/material'
-import MuiAppBar from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import LogoutIcon from '@mui/icons-material/Logout'
+
+import { clearPlayer } from './reducers/loggedPlayerReducer'
 
 import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
 import WelcomePage from './components/WelcomePage'
@@ -27,76 +27,25 @@ import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
 
-import { clearPlayer } from './reducers/playerReducer'
+const drawerWidth = 200
 
-const drawerWidth = 240
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `0px`,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-)
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}))
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}))
-
-const App = () => {
-  const theme = useTheme()
+const App = (props) => {
+  const { window } = props
   const dispatch = useDispatch()
-
   const player = useSelector((state) => state.player)
-  const [open, setOpen] = useState(false)
+
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [page, setPage] = useState('home')
   const [id, setId] = useState()
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
 
   const toPage = (page, id) => (event) => {
     event.preventDefault()
     setPage(page)
     setId(id)
-  }
-
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
   }
 
   const content = () => {
@@ -112,94 +61,140 @@ const App = () => {
   }
 
   console.log('player: ' + JSON.stringify(player))
+  const drawer = (
+    <div>
+      <Toolbar sx={{ backgroundColor: 'black' }}>
+        <Typography variant="h4" sx={{ ml: 7, color: 'white' }}>
+          RPMT
+        </Typography>
+      </Toolbar>
+      <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              align="right"
+              primary="Home"
+              onClick={() => setPage('home')}
+            />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              align="right"
+              primary="Characters"
+              onClick={toPage('characterList')}
+            />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              align="right"
+              primary="Covenants"
+              onClick={toPage('home')}
+            />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              align="right"
+              primary="Logout"
+              onClick={() => dispatch(clearPlayer())}
+            />
+            <LogoutIcon sx={{ m: 1 }} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </div>
+  )
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined
 
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       {player ? (
         <Box sx={{ display: 'flex' }}>
-          <AppBar position="fixed" open={open}>
+          <AppBar
+            position="fixed"
+            sx={{
+              width: { md: `calc(100% - ${drawerWidth}px)` },
+              ml: { md: `${drawerWidth}px` },
+            }}
+          >
             <Toolbar>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={handleDrawerOpen}
                 edge="start"
-                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
               >
                 <MenuIcon />
               </IconButton>
-              <Typography noWrap component="div">
+              <Typography variant="h6" noWrap component="div">
                 Roleplaying Game Campaign Management Tool
               </Typography>
             </Toolbar>
           </AppBar>
-          <Drawer
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-              },
-            }}
-            variant="temporary"
-            anchor="left"
-            open={open}
+          <Box
+            component="nav"
+            sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
           >
-            <DrawerHeader>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary="Home"
-                    onClick={() => setPage('home')}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary="Characters"
-                    onClick={toPage('characterList')}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText primary="Covenants" onClick={toPage('home')} />
-                </ListItemButton>
-              </ListItem>
-            </List>
-            <Divider />
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary="Logout"
-                    onClick={() => dispatch(clearPlayer())}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Drawer>
-          <Main open={open}>
-            <main>
-              <DrawerHeader />
-              <Container maxWidth="md" sx={{ p: 0 }}>
-                {content()}
-              </Container>
-            </main>
-          </Main>
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none', md: 'none' },
+                '& .MuiDrawer-paper': {
+                  boxSizing: 'border-box',
+                  width: drawerWidth,
+                },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', sm: 'none', md: 'block' },
+                '& .MuiDrawer-paper': {
+                  boxSizing: 'border-box',
+                  width: drawerWidth,
+                },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Box>
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              p: 3,
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+            }}
+          >
+            <Toolbar />
+            <Container maxWidth="md" sx={{ p: 0 }}>
+              {content()}
+            </Container>
+          </Box>
         </Box>
       ) : (
         <WelcomePage />
@@ -207,5 +202,4 @@ const App = () => {
     </ThemeProvider>
   )
 }
-
 export default App
