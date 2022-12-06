@@ -213,7 +213,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
             onClick={() => setVisibility()}
             disabled={player.id === chr.owner ? false : true}
           >
-            {chr.visibility}
+            {chr.visibility ? chr.visibility : 'visible'}
           </Button>
         </TableCell>
       </TableRow>

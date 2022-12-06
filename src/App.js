@@ -22,7 +22,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { clearPlayer } from './reducers/loggedPlayerReducer'
 
 import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
-import WelcomePage from './components/WelcomePage'
+import LoginPage from './components/LoginPage'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
@@ -197,7 +197,7 @@ const App = (props) => {
           </Box>
         </Box>
       ) : (
-        <WelcomePage />
+        <LoginPage />
       )}
     </ThemeProvider>
   )

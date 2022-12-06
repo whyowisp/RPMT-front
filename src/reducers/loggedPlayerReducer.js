@@ -22,8 +22,13 @@ export const { setPlayer, clearPlayer } = playerSlice.actions
 
 export const login = (credentials) => {
   return async (dispatch) => {
-    const player = await loginService.login(credentials)
-    dispatch(setPlayer(player))
+    try {
+      const player = await loginService.login(credentials)
+      dispatch(setPlayer(player))
+    } catch (exception) {
+      console.log(exception)
+      alert(exception)
+    }
   }
 }
 
