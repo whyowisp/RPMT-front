@@ -20,6 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 import { clearPlayer } from './reducers/loggedPlayerReducer'
+import { initializePlayers } from './reducers/playersReducer'
 
 import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
 import LoginPage from './components/LoginPage'
@@ -31,8 +32,11 @@ const drawerWidth = 200
 
 const App = (props) => {
   const { window } = props
-  const dispatch = useDispatch()
+  //This player
   const player = useSelector((state) => state.player)
+  //All players (to store)
+  const dispatch = useDispatch()
+  dispatch(initializePlayers())
 
   const [mobileOpen, setMobileOpen] = useState(false)
   const [page, setPage] = useState('home')

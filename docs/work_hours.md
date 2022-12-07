@@ -36,3 +36,4 @@
 | 30.11 | 7h | CharacterList valikkojen dynaamisia muotoiluja |
 | 01.12 | 2h | Create new user toiminto |
 | 06.12 | 1h | Create account error viestien kirjoittelua |
+| väli | 117h | |

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Container,
   Typography,
@@ -55,17 +55,56 @@ const Login = ({ toPage }) => {
   )
 }
 
+//This component must be rewritten at some point.
 const CreateAccount = ({ toPage, setPage }) => {
+  const players = useSelector((state) => state.players)
+
   const [username, setUsername] = useState('')
   const [alias, setAlias] = useState('')
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
+  const [usernameError, setUsernameError] = useState(false)
   const [aliasError, setAliasError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
   const [confirmationError, setConfirmationError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
+  const handleUsername = (event) => {
+    event.preventDefault()
+    const name = event.target.value
+    if (name.length < 5) {
+      setUsernameError(true)
+    } else {
+      setUsernameError(false)
+      setUsername(name)
+    }
+  }
+
+  const handlePassword = (event) => {
+    event.preventDefault()
+    const password = event.target.value
+    if (password.length < 7) {
+      setPasswordError(true)
+      setErrorMessage('Password must be more than 7 characters')
+    } else {
+      setPasswordError(false)
+      setErrorMessage('')
+      setPassword(password)
+    }
+  }
+
   const createPlayer = (event) => {
     event.preventDefault()
+
+    if (password.length < 7) {
+      setPasswordError(true)
+      setErrorMessage('Password must be more than 7 characters')
+      setTimeout(() => {
+        setPasswordError(false)
+        setErrorMessage('')
+      }, 4000)
+      return
+    }
 
     const credentials = {
       username,
@@ -102,35 +141,39 @@ const CreateAccount = ({ toPage, setPage }) => {
     setPassword('')
     setConfirmation('')
   }
-
+  console.log('allplayers: ' + players)
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5">Create New Account</Typography>
       <form onSubmit={createPlayer}>
         <TextField
+          error={usernameError}
+          helperText={usernameError ? 'Too short' : ''}
           sx={{ mt: 1 }}
           label="Username"
-          onChange={({ target }) => setUsername(target.value)}
+          onChange={(event) => handleUsername(event)}
         />
         <TextField
           sx={{ mt: 1 }}
           error={aliasError}
           label="Alias"
-          size="small"
-          helperText={aliasError ? errorMessage : 'must be unique'}
+          helperText={aliasError ? 'Must be unique' : ''}
           onChange={({ target }) => setAlias(target.value)}
         />
         <TextField
+          error={passwordError}
+          helperText={passwordError ? errorMessage : ''}
           type="password"
           sx={{ mt: 1 }}
           label="Password"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={(event) => handlePassword(event)}
         />
         <TextField
           type="password"
           error={confirmationError}
           sx={{ mt: 1 }}
-          label={confirmationError ? errorMessage : 'Confirm password'}
+          label="Confirm password"
+          helperText={confirmationError ? errorMessage : 'Confirm password'}
           onChange={({ target }) => setConfirmation(target.value)}
         />
         <Button type="submit">Create</Button>
