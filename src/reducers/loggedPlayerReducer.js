@@ -27,7 +27,6 @@ export const login = (credentials) => {
       dispatch(setPlayer(player))
     } catch (exception) {
       console.log(exception)
-      alert(exception)
     }
   }
 }

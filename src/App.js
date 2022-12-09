@@ -120,6 +120,7 @@ const App = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined
 
+  //If player in store exists (is logged in) show content, else show login page
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />

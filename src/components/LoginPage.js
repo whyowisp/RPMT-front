@@ -1,3 +1,7 @@
+/*
+Components responsible for both login and creating new account
+*/
+
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -14,12 +18,16 @@ import { login } from '../reducers/loggedPlayerReducer'
 import { addPlayer } from '../reducers/playersReducer'
 
 const Login = ({ toPage }) => {
+  const players = useSelector((state) => state.players)
+  const player = useSelector((state) => state.player)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [usernameError, setUsernameError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
 
   const dispatch = useDispatch()
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
 
     const credentials = {
@@ -27,7 +35,27 @@ const Login = ({ toPage }) => {
       password,
     }
 
-    dispatch(login(credentials))
+    const playerExists = players.find((player) => player.username === username)
+    //If player exists all good
+    if (!playerExists) {
+      setUsernameError(`Player ${username} does not exist`)
+      setTimeout(() => {
+        setUsernameError('')
+      }, 5000)
+      return
+    } else {
+      //Try to log in
+      await dispatch(login(credentials))
+    }
+    //Await dispatch before moving to this block to avoid little visual false error message
+    //If player exists but login failed, the problem must be the password
+    if (playerExists && !player) {
+      setPasswordError('Check password')
+      setTimeout(() => {
+        setPasswordError('')
+      }, 5000)
+      return
+    }
   }
 
   return (
@@ -35,12 +63,16 @@ const Login = ({ toPage }) => {
       <Typography variant="h5">Login</Typography>
       <form onSubmit={handleLogin}>
         <TextField
+          error={usernameError ? true : false}
+          helperText={usernameError ? usernameError : ''}
           sx={{ mt: 1 }}
           label="Username"
           onChange={({ target }) => setUsername(target.value)}
         />
         <TextField
           sx={{ mt: 1 }}
+          error={passwordError ? true : false}
+          helperText={passwordError ? passwordError : ''}
           label="Password"
           type="password"
           onChange={({ target }) => setPassword(target.value)}

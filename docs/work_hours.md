@@ -37,4 +37,4 @@
 | 01.12 | 2h | Create new user toiminto |
 | 06.12 | 1h | Create account error viestien kirjoittelua |
 | väli | 117h | 
-| 09.12 | 2h | Create account validation/errors refaktorointi |
+| 09.12 | 3h | Create account validation/errors refaktorointi. Logininlle samaa hommaa |
