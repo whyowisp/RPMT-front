@@ -9,13 +9,13 @@ import {
   editCharacter,
 } from '../reducers/characterReducer'
 import {
-  Grid,
   Container,
   TableContainer,
   Table,
   TableRow,
   TableBody,
   TableCell,
+  TableCellClasses,
   Button,
   Dialog,
   DialogTitle,
@@ -27,7 +27,7 @@ import {
   Collapse,
   IconButton,
   TableHead,
-  Paper,
+  Box,
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
@@ -74,8 +74,9 @@ const CharacterList = ({ toPage }) => {
 
   return (
     <Container>
-      <TableContainer component={Paper} sx={{ paddingBottom: 10 }}>
-        <Table>
+      <Typography variant="h5">Characters</Typography>
+      <TableContainer component={Box} sx={{ paddingBottom: 10 }}>
+        <Table size="small">
           <TableHead>
             <TableCell width="5%"></TableCell>
             <TableCell width="30%">Character</TableCell>
@@ -99,7 +100,11 @@ const CharacterList = ({ toPage }) => {
             ))}
 
             <TableRow>
-              <TableCell colspan={5} align="center">
+              <TableCell
+                colspan={5}
+                align="center"
+                style={{ borderBottom: 'none' }}
+              >
                 <Button onClick={() => createNew()}>create new</Button>
               </TableCell>
             </TableRow>
@@ -170,7 +175,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
           backgroundColor: chr.visibility === 'hidden' ? '#92A198' : 'inherit',
         }}
       >
-        <TableCell>
+        <TableCell style={{ borderBottom: 'none' }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -180,6 +185,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
           </IconButton>
         </TableCell>
         <TableCell
+          style={{ borderBottom: 'none' }}
           sx={{ color: chr.visibility === 'disabled' ? 'gray' : 'black' }}
         >
           <Typography
@@ -189,7 +195,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
             {chr.character}
           </Typography>
         </TableCell>
-        <TableCell align="right">
+        <TableCell style={{ borderBottom: 'none' }} align="right">
           <Button
             onClick={toPage('characterSheet', chr._id)}
             disabled={chr.visibility === 'disabled' ? true : false}
@@ -204,6 +210,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
           </Button>
         </TableCell>
         <TableCell
+          style={{ borderBottom: 'none' }}
           align="center"
           sx={{
             display: { xs: 'none', sm: 'block' },
@@ -218,7 +225,10 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
+        <TableCell
+          style={{ paddingBottom: 0, paddingTop: 0, borderBottom: 'none' }}
+          colSpan={12}
+        >
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Table size="small">
               <TableHead>

@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 
 import { login } from '../reducers/loggedPlayerReducer'
-import { addPlayer } from '../reducers/playersReducer'
+import { initializePlayers, addPlayer } from '../reducers/playersReducer'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)
@@ -47,7 +47,7 @@ const Login = ({ toPage }) => {
       //Try to log in
       await dispatch(login(credentials))
     }
-    //Await dispatch before moving to this block to avoid little visual false error message
+    //Await dispatch before moving to this block to avoid false error message while app switches to logged in mode
     //If player exists but login failed, the problem must be the password
     if (playerExists && !player) {
       setPasswordError('Check password')
@@ -178,12 +178,17 @@ const CreateAccount = ({ toPage, setPage }) => {
 }
 
 const WelcomePage = () => {
+  //All players (to store). Getting all players is tightly intertwined with login/create account error handling.
+  const dispatch = useDispatch()
+  dispatch(initializePlayers()) //Possible cause lag in startup.
+
   const [page, setPage] = useState('login')
 
   const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
   }
+
   const content = () => {
     if (page === 'login') return <Login toPage={toPage} />
     if (page === 'createAccount')
