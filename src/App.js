@@ -64,7 +64,6 @@ const App = (props) => {
     }
   }
 
-  console.log('player: ' + JSON.stringify(player))
   const drawer = (
     <div>
       <Toolbar sx={{ backgroundColor: 'black' }}>
@@ -139,7 +138,7 @@ const App = (props) => {
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { sm: 'none' } }}
+                sx={{ mr: 2, display: { md: 'none' } }}
               >
                 <MenuIcon />
               </IconButton>
@@ -163,7 +162,7 @@ const App = (props) => {
                 keepMounted: true, // Better open performance on mobile.
               }}
               sx={{
-                display: { xs: 'block', sm: 'none', md: 'none' },
+                display: { xs: 'block', md: 'none' },
                 '& .MuiDrawer-paper': {
                   boxSizing: 'border-box',
                   width: drawerWidth,
@@ -175,7 +174,7 @@ const App = (props) => {
             <Drawer
               variant="permanent"
               sx={{
-                display: { xs: 'none', sm: 'none', md: 'block' },
+                display: { xs: 'none', md: 'block' },
                 '& .MuiDrawer-paper': {
                   boxSizing: 'border-box',
                   width: drawerWidth,

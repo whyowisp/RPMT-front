@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 
 import { login } from '../reducers/loggedPlayerReducer'
-import playerService from '../services/players'
+import { addPlayer } from '../reducers/playersReducer'
 
 const Login = ({ toPage }) => {
   const [username, setUsername] = useState('')
@@ -55,7 +55,6 @@ const Login = ({ toPage }) => {
   )
 }
 
-//This component must be rewritten at some point.
 const CreateAccount = ({ toPage, setPage }) => {
   const players = useSelector((state) => state.players)
 
@@ -63,48 +62,23 @@ const CreateAccount = ({ toPage, setPage }) => {
   const [alias, setAlias] = useState('')
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
-  const [usernameError, setUsernameError] = useState(false)
-  const [aliasError, setAliasError] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)
-  const [confirmationError, setConfirmationError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [aliasError, setAliasError] = useState('')
 
-  const handleUsername = (event) => {
+  const dispatch = useDispatch()
+
+  const handleAlias = (event) => {
     event.preventDefault()
-    const name = event.target.value
-    if (name.length < 5) {
-      setUsernameError(true)
-    } else {
-      setUsernameError(false)
-      setUsername(name)
-    }
+    setAlias(event.target.value)
+    const existingAlias = players.find(
+      (player) => player.alias === event.target.value
+    )
+    if (event.target.value.length < 5) setAliasError('Alias too short')
+    else if (existingAlias) setAliasError('Player alias must be unique')
+    else setAliasError('')
   }
 
-  const handlePassword = (event) => {
+  const createPlayer = async (event) => {
     event.preventDefault()
-    const password = event.target.value
-    if (password.length < 7) {
-      setPasswordError(true)
-      setErrorMessage('Password must be more than 7 characters')
-    } else {
-      setPasswordError(false)
-      setErrorMessage('')
-      setPassword(password)
-    }
-  }
-
-  const createPlayer = (event) => {
-    event.preventDefault()
-
-    if (password.length < 7) {
-      setPasswordError(true)
-      setErrorMessage('Password must be more than 7 characters')
-      setTimeout(() => {
-        setPasswordError(false)
-        setErrorMessage('')
-      }, 4000)
-      return
-    }
 
     const credentials = {
       username,
@@ -112,68 +86,53 @@ const CreateAccount = ({ toPage, setPage }) => {
       password,
     }
 
-    if (credentials.password !== confirmation) {
-      setConfirmationError(true)
-      setErrorMessage('Passwords not matching')
-      setTimeout(() => {
-        setConfirmationError(false)
-        setErrorMessage('')
-      }, 4000)
-      return
+    //Final checks before dispatch
+    if (
+      credentials.username.length > 4 &&
+      credentials.alias.length > 4 &&
+      credentials.password.length > 7 &&
+      credentials.password === confirmation
+    ) {
+      dispatch(addPlayer(credentials))
+      setPage('login')
+    } else {
+      alert('Something went wrong')
     }
-
-    //Note. I´m bypassing store, since there is no sense to write reducers for this single action.
-    playerService
-      .createPlayer(credentials)
-      .then(() => setPage('login'))
-      .catch((error) => {
-        setAliasError(true)
-        setErrorMessage(error.response.data.error)
-
-        setTimeout(() => {
-          setAliasError(false)
-          setErrorMessage('')
-        }, 4000)
-      })
-
-    setUsername('')
-    setAlias('')
-    setPassword('')
-    setConfirmation('')
   }
-  console.log('allplayers: ' + players)
+
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5">Create New Account</Typography>
       <form onSubmit={createPlayer}>
         <TextField
-          error={usernameError}
-          helperText={usernameError ? 'Too short' : ''}
+          color={username && username.length < 5 ? 'warning' : 'success'}
+          helperText={username && username.length < 5 ? 'Too short' : ''}
           sx={{ mt: 1 }}
           label="Username"
-          onChange={(event) => handleUsername(event)}
+          onChange={({ target }) => setUsername(target.value)}
         />
         <TextField
           sx={{ mt: 1 }}
-          error={aliasError}
+          color={aliasError ? 'warning' : 'success'}
           label="Alias"
-          helperText={aliasError ? 'Must be unique' : ''}
-          onChange={({ target }) => setAlias(target.value)}
+          helperText={aliasError ? aliasError : ''}
+          onChange={(event) => handleAlias(event)}
         />
         <TextField
-          error={passwordError}
-          helperText={passwordError ? errorMessage : ''}
+          color={password && password.length < 8 ? 'warning' : 'success'}
+          helperText={password && password.length < 8 ? 'Too short' : ''}
           type="password"
           sx={{ mt: 1 }}
           label="Password"
-          onChange={(event) => handlePassword(event)}
+          onChange={({ target }) => setPassword(target.value)}
         />
         <TextField
           type="password"
-          error={confirmationError}
+          color={
+            confirmation && confirmation === password ? 'success' : 'warning'
+          }
           sx={{ mt: 1 }}
           label="Confirm password"
-          helperText={confirmationError ? errorMessage : 'Confirm password'}
           onChange={({ target }) => setConfirmation(target.value)}
         />
         <Button type="submit">Create</Button>
