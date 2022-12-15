@@ -42,16 +42,17 @@ export const {
 
 // *** START OF THUNK FUNCTIONS ***
 
-export const initCampaignsReducer = () => {
+export const initCampaigns = () => {
   return async (dispatch) => {
     const campaignsFromDb = await campaignService.getAll()
     dispatch(campaignsInitialization(campaignsFromDb))
   }
 }
 
-export const initializeNew = (userId) => {
+export const createNewCampaign = (playerId) => {
   return async (dispatch) => {
-    const newCampaign = await campaignService.initNewChar(userId)
+    const newCampaign = await campaignService.createNew(playerId)
+    console.log('new Campaign (hello from reducer): ' + newCampaign)
     dispatch(campaignCreation(newCampaign))
   }
 }

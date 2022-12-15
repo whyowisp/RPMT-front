@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
   List,
@@ -6,8 +8,20 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
+import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
 
 const Home = () => {
+  const campaigns = useSelector((state) => state.campaigns)
+  const player = useSelector((state) => state.player)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(initCampaigns())
+  }, [dispatch])
+
+  if (!campaigns) return null
+
   return (
     <>
       <Typography variant="h5">Campaigns</Typography>
@@ -18,24 +32,28 @@ const Home = () => {
         }}
       >
         <List>
+          {campaigns.map((campaign) => (
+            <ListItem key={campaign.id}>
+              <ListItemButton>
+                <ListItemText
+                  primary={campaign.title}
+                  secondary={
+                    'Game: ' +
+                    campaign?.game +
+                    ' Started: ' +
+                    campaign.started.substring(0, 10) +
+                    ' Owner: ' +
+                    campaign?.owner.alias
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+
           <ListItem>
-            <ListItemButton>
-              <ListItemText
-                primary="Merx Lo Vult"
-                secondary="Ars Magica, Campaign start date 09.12.2022"
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText
-                primary="Ghosts of Cruciferae"
-                secondary="Dungeons & Dragons, Campaign start date 09.12.1997"
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => dispatch(createNewCampaign(player.id))}
+            >
               <ListItemText align="center">
                 <Typography variant="h6">Start New</Typography>
               </ListItemText>

@@ -6,6 +6,12 @@ const getAll = async () => {
   return res.data
 }
 
-const campaignService = { getAll }
+const createNew = async (userId) => {
+  const reqBody = { userId }
+  const res = await axios.post(baseUrl + '/new', reqBody)
+  return res.data
+}
+
+const campaignService = { getAll, createNew }
 
 export default campaignService
