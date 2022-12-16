@@ -35,7 +35,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 const CharacterList = ({ toPage }) => {
   const dispatch = useDispatch()
-  const player = useSelector((state) => state.player)
+  const player = useSelector((state) => state.loggedPlayer)
   const characters = useSelector((state) => state.characters)
   const [inputName, setInputName] = useState(undefined)
   const [referenceName, setReferenceName] = useState(undefined)
@@ -71,7 +71,8 @@ const CharacterList = ({ toPage }) => {
   }
 
   if (!characters) return null
-
+  if (!player) return null
+  console.log(player.id)
   return (
     <Container>
       <Typography variant="h5">Characters</Typography>
@@ -142,7 +143,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
-  const player = useSelector((state) => state.player)
+  const player = useSelector((state) => state.loggedPlayer)
   const visibilityStates = ['visible', 'disabled', 'hidden']
 
   const setVisibility = () => {

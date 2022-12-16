@@ -11,6 +11,11 @@ const createPlayer = async (credentials) => {
   return res.data
 }
 
-const playerService = { getAll, createPlayer }
+const editPlayer = async (playerId, reqData) => {
+  const res = await axios.put(`${baseUrl}/${playerId}`, reqData)
+  return res.data
+}
+
+const playerService = { getAll, createPlayer, editPlayer }
 
 export default playerService

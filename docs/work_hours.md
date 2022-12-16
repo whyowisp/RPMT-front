@@ -39,4 +39,4 @@
 | väli | 117h | 
 | 09.12 | 4h | Create account validation/errors refaktorointi. Logininlle samaa hommaa. Home visuaalista prototyypittelyä |
 | 15.12 | 2h | Home/Campaign service ja reducer kirjoittaminen + itusen bäkkiä |
-| 16.12 | 3h | Home/Campaign fronttia |
+| 16.12 | 6h | Home/Campaign fronttia + Yleistä ohjelmalogiikan säätöä |

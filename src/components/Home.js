@@ -19,10 +19,11 @@ import {
   MenuItem,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
+import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 
 const Home = ({ toPage }) => {
   const campaigns = useSelector((state) => state.campaigns)
-  const player = useSelector((state) => state.player)
+  const player = useSelector((state) => state.loggedPlayer)
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const dispatch = useDispatch()
@@ -35,6 +36,11 @@ const Home = ({ toPage }) => {
     setDialogOpen(true)
   }
 
+  const enterCampaign = () => {
+    const campaignId = 1
+    dispatch(setCurrentCampaign(campaignId, player.id)) //Note! "players"-state will not be updated.
+  }
+  console.log(enterCampaign)
   if (!campaigns) return null
   if (!player) return null
 
@@ -50,7 +56,7 @@ const Home = ({ toPage }) => {
         <List>
           {campaigns.map((campaign) => (
             <ListItem key={campaign.id}>
-              <ListItemButton onClick={toPage('campaign', campaign._id)}>
+              <ListItemButton onClick={toPage('campaign', campaign.id)}>
                 <ListItemText
                   primary={campaign.title}
                   secondary={
@@ -74,7 +80,7 @@ const Home = ({ toPage }) => {
             </ListItemButton>
           </ListItem>
         </List>
-        <CreateDialog
+        <CampaignCreationDialog
           open={dialogOpen}
           setDialogOpen={setDialogOpen}
           player={player}
@@ -84,7 +90,7 @@ const Home = ({ toPage }) => {
   )
 }
 
-const CreateDialog = ({ open, setDialogOpen, player }) => {
+const CampaignCreationDialog = ({ open, setDialogOpen, player }) => {
   const availableGames = [
     'Ars Magica',
     'Dungeons&Dragons (disabled)',

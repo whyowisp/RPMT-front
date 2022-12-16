@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import loginService from '../services/login'
+import playerService from '../services/players'
 
 const initialState = null
 
 export const playerSlice = createSlice({
-  name: 'user',
+  name: 'loggedPlayer',
   initialState,
   reducers: {
     setPlayer(state, action) {
@@ -28,6 +29,16 @@ export const login = (credentials) => {
     } catch (exception) {
       console.log(exception)
     }
+  }
+}
+
+export const setCurrentCampaign = (campaignId, playerId) => {
+  const data = {
+    currentCampaign: campaignId,
+  }
+  return async (dispatch) => {
+    const player = await playerService.editPlayer(playerId, data)
+    dispatch(setPlayer(player))
   }
 }
 

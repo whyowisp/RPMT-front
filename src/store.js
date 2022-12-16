@@ -7,7 +7,7 @@ import campaignReducer from './reducers/campaignReducer'
 export const store = configureStore({
   reducer: {
     characters: characterReducer,
-    player: loggedPlayerReducer,
+    loggedPlayer: loggedPlayerReducer,
     players: playersReducer,
     campaigns: campaignReducer,
   },

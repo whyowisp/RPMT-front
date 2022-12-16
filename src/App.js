@@ -18,6 +18,8 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
+import HomeIcon from '@mui/icons-material/Home'
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew'
 
 import { clearPlayer } from './reducers/loggedPlayerReducer'
 
@@ -26,14 +28,14 @@ import LoginPage from './components/LoginPage'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
-import { Campaign } from '@mui/icons-material'
+import Campaign from './components/Campaign'
 
 const drawerWidth = 200
 
 const App = (props) => {
   const { window } = props
   //This player
-  const player = useSelector((state) => state.player)
+  const player = useSelector((state) => state.loggedPlayer)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [page, setPage] = useState('home')
   const [id, setId] = useState()
@@ -58,7 +60,7 @@ const App = (props) => {
     } else if (page === 'characterSheet') {
       return <CharacterSheet id={id} />
     } else if (page === 'campaign') {
-      return <Campaign campaignId={id} />
+      return <Campaign id={id} />
     }
   }
 
@@ -70,37 +72,53 @@ const App = (props) => {
         </Typography>
       </Toolbar>
       <Divider />
+
+      {player?.currentCampaign ? (
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
+                primary="Characters"
+                onClick={toPage('characterList')}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
+                primary="Covenants"
+                onClick={toPage('home')}
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      ) : null}
+
+      <Divider />
+
       <List>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemText
               align="right"
               primary="Home"
-              onClick={() => setPage('home')}
-            />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText
-              align="right"
-              primary="Characters"
-              onClick={toPage('characterList')}
-            />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText
-              align="right"
-              primary="Covenants"
               onClick={toPage('home')}
             />
+            <HomeIcon sx={{ m: 1 }} />
           </ListItemButton>
         </ListItem>
-      </List>
-      <Divider />
-      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              align="right"
+              primary="Player"
+              onClick={toPage('player')}
+            />
+            <AccessibilityNewIcon sx={{ m: 1 }} />
+          </ListItemButton>
+        </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemText
@@ -146,6 +164,7 @@ const App = (props) => {
               </Typography>
             </Toolbar>
           </AppBar>
+
           <Box
             component="nav"
             sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -184,6 +203,7 @@ const App = (props) => {
               {drawer}
             </Drawer>
           </Box>
+
           <Box
             component="main"
             sx={{
@@ -193,6 +213,9 @@ const App = (props) => {
             }}
           >
             <Toolbar />
+            <Typography align="right">
+              Logged in as <b>{player.alias}</b>
+            </Typography>
             <Container maxWidth="md" sx={{ p: 0 }}>
               {content()}
             </Container>
