@@ -49,10 +49,10 @@ export const initCampaigns = () => {
   }
 }
 
-export const createNewCampaign = (playerId) => {
+export const createNewCampaign = (campaign) => {
   return async (dispatch) => {
-    const newCampaign = await campaignService.createNew(playerId)
-    console.log('new Campaign (hello from reducer): ' + newCampaign)
+    const newCampaign = await campaignService.createNew(campaign)
+    console.log('new Campaign created: ' + JSON.stringify(newCampaign))
     dispatch(campaignCreation(newCampaign))
   }
 }

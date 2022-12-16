@@ -46,13 +46,13 @@ const CharacterList = ({ toPage }) => {
     dispatch(initCharactersReducer())
   }, [dispatch])
 
-  const handleClickOpen = (id, name) => {
+  const handleDialogOpen = (id, name) => {
     setId(id)
     setReferenceName(name)
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleDialogClose = () => {
     setOpen(false)
   }
 
@@ -95,7 +95,7 @@ const CharacterList = ({ toPage }) => {
               <CharacterRow
                 chr={chr}
                 toPage={toPage}
-                handleClickOpen={handleClickOpen}
+                handleDialogOpen={handleDialogOpen}
               />
             ))}
 
@@ -112,7 +112,7 @@ const CharacterList = ({ toPage }) => {
         </Table>
       </TableContainer>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleDialogClose}>
         <DialogTitle>Think it over</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -130,7 +130,7 @@ const CharacterList = ({ toPage }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleDialogClose}>Cancel</Button>
           <Button onClick={() => handleDelete()}>Remove</Button>
         </DialogActions>
       </Dialog>
@@ -138,7 +138,7 @@ const CharacterList = ({ toPage }) => {
   )
 }
 
-const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
+const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
@@ -203,7 +203,7 @@ const CharacterRow = ({ chr, toPage, handleClickOpen }) => {
             Enter
           </Button>
           <Button
-            onClick={() => handleClickOpen(chr._id, chr.character)}
+            onClick={() => handleDialogOpen(chr._id, chr.character)}
             disabled={player.id === chr.owner ? false : true}
           >
             <DeleteForeverTwoToneIcon />

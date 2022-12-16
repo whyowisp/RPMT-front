@@ -26,6 +26,7 @@ import LoginPage from './components/LoginPage'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
+import { Campaign } from '@mui/icons-material'
 
 const drawerWidth = 200
 
@@ -51,13 +52,13 @@ const App = (props) => {
 
   const content = () => {
     if (page === 'home') {
-      return <Home />
-    } else if (page === 'Home') {
-      return <CharacterList toPage={toPage} />
+      return <Home toPage={toPage} />
     } else if (page === 'characterList') {
       return <CharacterList toPage={toPage} />
     } else if (page === 'characterSheet') {
       return <CharacterSheet id={id} />
+    } else if (page === 'campaign') {
+      return <Campaign campaignId={id} />
     }
   }
 

@@ -6,9 +6,8 @@ const getAll = async () => {
   return res.data
 }
 
-const createNew = async (userId) => {
-  const reqBody = { userId }
-  const res = await axios.post(baseUrl + '/new', reqBody)
+const createNew = async (campaign) => {
+  const res = await axios.post(baseUrl + '/new', campaign)
   return res.data
 }
 

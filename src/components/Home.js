@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
@@ -7,12 +7,23 @@ import {
   ListItemButton,
   ListItemText,
   Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+  TextField,
+  Select,
+  InputLabel,
+  MenuItem,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
 
-const Home = () => {
+const Home = ({ toPage }) => {
   const campaigns = useSelector((state) => state.campaigns)
   const player = useSelector((state) => state.player)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -20,7 +31,12 @@ const Home = () => {
     dispatch(initCampaigns())
   }, [dispatch])
 
+  const handleDialogOpen = () => {
+    setDialogOpen(true)
+  }
+
   if (!campaigns) return null
+  if (!player) return null
 
   return (
     <>
@@ -34,7 +50,7 @@ const Home = () => {
         <List>
           {campaigns.map((campaign) => (
             <ListItem key={campaign.id}>
-              <ListItemButton>
+              <ListItemButton onClick={toPage('campaign', campaign._id)}>
                 <ListItemText
                   primary={campaign.title}
                   secondary={
@@ -43,7 +59,7 @@ const Home = () => {
                     ' Started: ' +
                     campaign.started.substring(0, 10) +
                     ' Owner: ' +
-                    campaign?.owner.alias
+                    (campaign.owner.alias ? campaign.owner.alias : player.alias)
                   }
                 />
               </ListItemButton>
@@ -51,17 +67,76 @@ const Home = () => {
           ))}
 
           <ListItem>
-            <ListItemButton
-              onClick={() => dispatch(createNewCampaign(player.id))}
-            >
+            <ListItemButton onClick={() => handleDialogOpen()}>
               <ListItemText align="center">
                 <Typography variant="h6">Start New</Typography>
               </ListItemText>
             </ListItemButton>
           </ListItem>
         </List>
+        <CreateDialog
+          open={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          player={player}
+        />
       </Box>
     </>
+  )
+}
+
+const CreateDialog = ({ open, setDialogOpen, player }) => {
+  const availableGames = [
+    'Ars Magica',
+    'Dungeons&Dragons (disabled)',
+    '2300AD (disabled)',
+  ]
+  const [selectedGame, setSelectedGame] = useState('Ars Magica')
+  const [title, setTitle] = useState('')
+
+  const dispatch = useDispatch()
+
+  const handleCreate = () => {
+    const newCampaign = {
+      title: title,
+      game: selectedGame,
+      playerId: player.id,
+    }
+
+    dispatch(createNewCampaign(newCampaign))
+    setDialogOpen(false)
+  }
+
+  return (
+    <Dialog open={open}>
+      <DialogTitle>Campaign Creation</DialogTitle>
+      <DialogContent>
+        <DialogContentText>New Campaign</DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          label="Title"
+          type="title"
+          fullWidth
+          onChange={({ target }) => setTitle(target.value)}
+        />
+        <InputLabel>Select Game</InputLabel>
+        <Select
+          autoWidth
+          value={selectedGame}
+          onChange={({ target }) => setSelectedGame(target.value)}
+        >
+          {availableGames.map((game) => (
+            <MenuItem key={game} value={game}>
+              {game}
+            </MenuItem>
+          ))}
+        </Select>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+        <Button onClick={() => handleCreate()}>Create</Button>
+      </DialogActions>
+    </Dialog>
   )
 }
 
