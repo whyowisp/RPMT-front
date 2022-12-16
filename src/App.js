@@ -21,7 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import HomeIcon from '@mui/icons-material/Home'
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew'
 
-import { clearPlayer } from './reducers/loggedPlayerReducer'
+import { clearPlayer, setCurrentCampaign } from './reducers/loggedPlayerReducer'
 
 import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
 import LoginPage from './components/LoginPage'
@@ -46,11 +46,17 @@ const App = (props) => {
     setMobileOpen(!mobileOpen)
   }
 
-  const toPage = (page, id) => (event) => {
-    event.preventDefault()
+  const toPage = (page, id) => () => {
     setPage(page)
     setId(id)
+
+    if (page === 'home' || page === 'player' || page === 'logout') {
+      console.log('exiting campaign page')
+      dispatch(setCurrentCampaign(null, player.id))
+    }
   }
+
+  console.log(page)
 
   const content = () => {
     if (page === 'home') {
@@ -79,6 +85,15 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
+                primary="Campaign"
+                onClick={toPage('campaign')}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
                 primary="Characters"
                 onClick={toPage('characterList')}
               />
@@ -88,8 +103,26 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Covenants"
-                onClick={toPage('home')}
+                primary="Factions"
+                onClick={toPage('factions')}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
+                primary="Quests"
+                onClick={toPage('quests')}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
+                primary="Other"
+                onClick={toPage('other')}
               />
             </ListItemButton>
           </ListItem>

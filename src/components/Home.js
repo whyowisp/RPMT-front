@@ -19,7 +19,6 @@ import {
   MenuItem,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
-import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 
 const Home = ({ toPage }) => {
   const campaigns = useSelector((state) => state.campaigns)
@@ -36,11 +35,6 @@ const Home = ({ toPage }) => {
     setDialogOpen(true)
   }
 
-  const enterCampaign = () => {
-    const campaignId = 1
-    dispatch(setCurrentCampaign(campaignId, player.id)) //Note! "players"-state will not be updated.
-  }
-  console.log(enterCampaign)
   if (!campaigns) return null
   if (!player) return null
 
