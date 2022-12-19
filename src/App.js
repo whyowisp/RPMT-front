@@ -28,7 +28,7 @@ import LoginPage from './components/LoginPage'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
-import Campaign from './components/Campaign'
+import CampaignManagement from './components/CampaignManagement'
 
 const drawerWidth = 200
 
@@ -56,7 +56,7 @@ const App = (props) => {
     }
   }
 
-  console.log(page)
+  console.log('toPage: ' + page)
 
   const content = () => {
     if (page === 'home') {
@@ -66,7 +66,7 @@ const App = (props) => {
     } else if (page === 'characterSheet') {
       return <CharacterSheet id={id} />
     } else if (page === 'campaign') {
-      return <Campaign id={id} />
+      return <CampaignManagement id={id} />
     }
   }
 
@@ -85,7 +85,7 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Campaign"
+                primary="Campaign Management"
                 onClick={toPage('campaign')}
               />
             </ListItemButton>
