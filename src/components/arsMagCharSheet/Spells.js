@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
 const Spells = ({ id }) => {
   const dispatch = useDispatch()

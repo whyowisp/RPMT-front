@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { editCharacter } from '../../reducers/characterReducer'
 
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from '../themeAndStyles'
 
 const Virtues = ({ id }) => {
   const dispatch = useDispatch()

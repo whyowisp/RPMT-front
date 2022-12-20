@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box, Input, Typography, Stack, Grid, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
 const Familiar = ({ id }) => {
   const dispatch = useDispatch()

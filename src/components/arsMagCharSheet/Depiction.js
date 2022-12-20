@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Box, Typography, Button, TextareaAutosize } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from '../themeAndStyles'
 
 const Depiction = ({ id }) => {
   const dispatch = useDispatch()

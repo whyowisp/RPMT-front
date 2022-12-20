@@ -12,7 +12,7 @@ import Image from 'mui-image'
 import AMbackground from '../../images/AMbackground.jpg'
 import AMLogo from '../../images/arm5-logo-grey.png'
 
-import { sheetThemeAM } from './themeAndStyles'
+import { sheetThemeAM } from '../themeAndStyles'
 import Decrepitude from './Decrepitude'
 import Warping from './Warping'
 import BasicAttributes from './BasicAttributes'
@@ -53,6 +53,7 @@ xl, extra-large: 1536px
     <ThemeProvider theme={sheetThemeAM}>
       <CssBaseline />
       <Paper
+        elevation={10}
         sx={{
           padding: 1,
           position: 'relative',

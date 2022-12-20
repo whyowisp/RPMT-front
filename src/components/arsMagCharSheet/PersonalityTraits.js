@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from '../themeAndStyles'
 
 const PersonalityTraits = ({ id }) => {
   const dispatch = useDispatch()

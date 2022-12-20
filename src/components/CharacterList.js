@@ -28,6 +28,7 @@ import {
   IconButton,
   TableHead,
   Box,
+  Paper,
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
@@ -72,69 +73,71 @@ const CharacterList = ({ toPage }) => {
 
   if (!characters) return null
   if (!player) return null
-  console.log(player.id)
+
   return (
     <Container>
       <Typography variant="h5">Characters</Typography>
-      <TableContainer component={Box} sx={{ paddingBottom: 10 }}>
-        <Table size="small">
-          <TableHead>
-            <TableCell width="5%"></TableCell>
-            <TableCell width="30%">Character</TableCell>
-            <TableCell></TableCell>
-            <TableCell
-              align="center"
-              sx={{
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              Visibility
-            </TableCell>
-          </TableHead>
-          <TableBody>
-            {characters.map((chr) => (
-              <CharacterRow
-                chr={chr}
-                toPage={toPage}
-                handleDialogOpen={handleDialogOpen}
-              />
-            ))}
-
-            <TableRow>
+      <Paper elevation={10}>
+        <TableContainer component={Box} sx={{ paddingBottom: 10 }}>
+          <Table size="small">
+            <TableHead>
+              <TableCell width="5%"></TableCell>
+              <TableCell width="30%">Character</TableCell>
+              <TableCell></TableCell>
               <TableCell
-                colspan={5}
                 align="center"
-                style={{ borderBottom: 'none' }}
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                }}
               >
-                <Button onClick={() => createNew()}>create new</Button>
+                Visibility
               </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {characters.map((chr) => (
+                <CharacterRow
+                  chr={chr}
+                  toPage={toPage}
+                  handleDialogOpen={handleDialogOpen}
+                />
+              ))}
 
-      <Dialog open={open} onClose={handleDialogClose}>
-        <DialogTitle>Think it over</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            This function removes your character permanently
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Character name"
-            type="name"
-            fullWidth
-            variant="outlined"
-            onChange={({ target }) => setInputName(target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}>Cancel</Button>
-          <Button onClick={() => handleDelete()}>Remove</Button>
-        </DialogActions>
-      </Dialog>
+              <TableRow>
+                <TableCell
+                  colspan={5}
+                  align="center"
+                  style={{ borderBottom: 'none' }}
+                >
+                  <Button onClick={() => createNew()}>create new</Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Dialog open={open} onClose={handleDialogClose}>
+          <DialogTitle>Think it over</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              This function removes your character permanently
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Character name"
+              type="name"
+              fullWidth
+              variant="outlined"
+              onChange={({ target }) => setInputName(target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose}>Cancel</Button>
+            <Button onClick={() => handleDelete()}>Remove</Button>
+          </DialogActions>
+        </Dialog>
+      </Paper>
     </Container>
   )
 }

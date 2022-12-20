@@ -15,7 +15,7 @@ import {
 import { CreateOutlined } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx, okButton } from './themeAndStyles'
+import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
 const Weapons = ({ id }) => {
   const dispatch = useDispatch()

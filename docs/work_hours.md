@@ -41,3 +41,4 @@
 | 15.12 | 2h | Home/Campaign service ja reducer kirjoittaminen + itusen bäkkiä |
 | 16.12 | 7h | Home/Campaign fronttia + Yleistä ohjelmalogiikan säätöä |
 | 19.12 | 3h | Management sivun mallailua (kipeänä, aikamoista hakemista) |
+| 20.12 | 4h | Management sivun toteutusta |

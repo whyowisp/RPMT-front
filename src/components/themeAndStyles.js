@@ -42,7 +42,7 @@ const sheetThemeAM = createTheme({
       main: '#5C5C5C',
     },
     background: {
-      default: '#A9BAB0',
+      default: '#7D6E57',
     },
   },
   typography: {
@@ -60,11 +60,13 @@ const sheetThemeAM = createTheme({
 })
 
 const mainTheme = createTheme({
+  /*
   palette: {
-    type: 'light',
+    type: 'dark',
     primary: {
       main: '#781d22',
       contrastText: '#dae097',
+      okStatus: '#689f38',
     },
     secondary: {
       main: '#9dada4',
@@ -72,7 +74,7 @@ const mainTheme = createTheme({
     },
     background: {
       default: '#A9BAB0',
-      paper: '#A9BAB0',
+      paper: '#92A198',
     },
   },
   typography: {
@@ -85,6 +87,25 @@ const mainTheme = createTheme({
         color: '#fff',
       },
     },
+  },*/
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#57777D',
+      contrastText: '#E3C344',
+    },
+    secondary: {
+      main: '#6AB0A9',
+      contrastText: '#7D6E57',
+    },
+    background: {
+      paper: '#B0A26A',
+      default: '#7D6E57',
+    },
+    divider: '#7D6E57',
+  },
+  typography: {
+    fontFamily: 'Do Hyeon',
   },
 })
 

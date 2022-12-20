@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { editCharacter } from '../../reducers/characterReducer'
 
-import { plainInputSx, smallBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, smallBoxSx, okButton } from '../themeAndStyles'
 
 const Warping = ({ id }) => {
   const dispatch = useDispatch()

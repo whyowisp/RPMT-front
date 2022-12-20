@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from '../themeAndStyles'
 
 const Longevity = ({ id }) => {
   const dispatch = useDispatch()

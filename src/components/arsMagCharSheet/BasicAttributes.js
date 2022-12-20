@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box, Input, Typography, Stack, Button } from '@mui/material'
 
 import { editCharacter } from '../../reducers/characterReducer'
-import { plainInputSx, commonBoxSx, okButton } from './themeAndStyles'
+import { plainInputSx, commonBoxSx, okButton } from '../themeAndStyles'
 
 const BasicAttributes = ({ id }) => {
   const dispatch = useDispatch()

@@ -23,7 +23,7 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew'
 
 import { clearPlayer, setCurrentCampaign } from './reducers/loggedPlayerReducer'
 
-import { mainTheme } from './components/arsMagCharSheet/themeAndStyles'
+import { mainTheme } from './components/themeAndStyles'
 import LoginPage from './components/LoginPage'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
@@ -47,13 +47,12 @@ const App = (props) => {
   }
 
   const toPage = (page, id) => () => {
-    setPage(page)
-    setId(id)
-
     if (page === 'home' || page === 'player' || page === 'logout') {
       console.log('exiting campaign page')
       dispatch(setCurrentCampaign(null, player.id))
     }
+    setPage(page)
+    setId(id)
   }
 
   console.log('toPage: ' + page)
@@ -65,28 +64,27 @@ const App = (props) => {
       return <CharacterList toPage={toPage} />
     } else if (page === 'characterSheet') {
       return <CharacterSheet id={id} />
-    } else if (page === 'campaign') {
+    } else if (page === 'management') {
       return <CampaignManagement id={id} />
     }
   }
 
   const drawer = (
     <div>
-      <Toolbar sx={{ backgroundColor: 'black' }}>
-        <Typography variant="h4" sx={{ ml: 7, color: 'white' }}>
+      <Toolbar sx={{ backgroundColor: 'inherit' }}>
+        <Typography variant="h4" sx={{ ml: 7 }}>
           RPMT
         </Typography>
       </Toolbar>
       <Divider />
-
       {player?.currentCampaign ? (
         <List>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Campaign Management"
-                onClick={toPage('campaign')}
+                primary="Management"
+                onClick={toPage('management')}
               />
             </ListItemButton>
           </ListItem>
@@ -178,17 +176,20 @@ const App = (props) => {
           <AppBar
             position="fixed"
             sx={{
+              backgroundColor: 'primary.main',
               width: { md: `calc(100% - ${drawerWidth}px)` },
               ml: { md: `${drawerWidth}px` },
             }}
           >
             <Toolbar>
               <IconButton
-                color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { md: 'none' } }}
+                sx={{
+                  mr: 2,
+                  display: { md: 'none' },
+                }}
               >
                 <MenuIcon />
               </IconButton>

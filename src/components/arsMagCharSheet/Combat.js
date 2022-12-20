@@ -17,7 +17,7 @@ import {
   commonBoxSx,
   smallBoxSx,
   okButton,
-} from './themeAndStyles'
+} from '../themeAndStyles'
 
 const Combat = ({ id }) => {
   const dispatch = useDispatch()

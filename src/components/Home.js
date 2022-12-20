@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Box,
   List,
   ListItem,
   ListItemButton,
@@ -17,10 +16,12 @@ import {
   Select,
   InputLabel,
   MenuItem,
+  Paper,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
+import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 
-const Home = ({ toPage }) => {
+const Home = () => {
   const campaigns = useSelector((state) => state.campaigns)
   const player = useSelector((state) => state.loggedPlayer)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -35,13 +36,19 @@ const Home = ({ toPage }) => {
     setDialogOpen(true)
   }
 
+  const setActiveCampaign = (campaignId) => {
+    console.log('setting campaign id: ' + campaignId)
+    dispatch(setCurrentCampaign(campaignId, player.id))
+  }
+
   if (!campaigns) return null
   if (!player) return null
 
   return (
     <>
       <Typography variant="h5">Campaigns</Typography>
-      <Box
+      <Paper
+        elevation={10}
         sx={{
           p: 1,
           paddingBottom: 10,
@@ -50,7 +57,7 @@ const Home = ({ toPage }) => {
         <List>
           {campaigns.map((campaign) => (
             <ListItem key={campaign.id}>
-              <ListItemButton onClick={toPage('campaign', campaign.id)}>
+              <ListItemButton onClick={() => setActiveCampaign(campaign.id)}>
                 <ListItemText
                   primary={campaign.title}
                   secondary={
@@ -79,7 +86,7 @@ const Home = ({ toPage }) => {
           setDialogOpen={setDialogOpen}
           player={player}
         />
-      </Box>
+      </Paper>
     </>
   )
 }

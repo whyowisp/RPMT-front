@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Box, Typography, List, ListItem, ListItemText } from '@mui/material'
 
-import { commonBoxSx } from './themeAndStyles'
+import { commonBoxSx } from '../themeAndStyles'
 
 const Lab = ({ id }) => {
   const character = useSelector((state) =>

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box, Input, Typography, Stack, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
-import { smallBoxSx, plainInputSx, okButton } from './themeAndStyles'
+import { smallBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
 const Decrepitude = ({ id }) => {
   const dispatch = useDispatch()
