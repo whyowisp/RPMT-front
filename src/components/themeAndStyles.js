@@ -95,14 +95,14 @@ const mainTheme = createTheme({
       contrastText: '#E3C344',
     },
     secondary: {
-      main: '#6AB0A9',
-      contrastText: '#7D6E57',
+      main: '#7D635E',
+      contrastText: '#C9A8A1',
     },
     background: {
       paper: '#B0A26A',
       default: '#7D6E57',
     },
-    divider: '#7D6E57',
+    divider: '#211D16',
   },
   typography: {
     fontFamily: 'Do Hyeon',

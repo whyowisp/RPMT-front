@@ -71,7 +71,7 @@ const MagiAttributes = ({ id }) => {
           </Stack>
           <Stack direction="row">
             <Typography variant="labelSm">
-              Covenant of Apprenticeship:{' '}
+              Covenant of Apprenticeship:
             </Typography>
             <Input
               sx={plainInputSx}
@@ -111,7 +111,7 @@ const MagiAttributes = ({ id }) => {
           </Stack>
         </Grid>
         <Stack direction="row">
-          <Typography variant="labelSm">Wizard`&apos`s Sigil: </Typography>
+          <Typography variant="labelSm">Wizard's Sigil: </Typography>
           <Input
             sx={plainInputSx}
             disableUnderline

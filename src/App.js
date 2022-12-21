@@ -38,6 +38,7 @@ const App = (props) => {
   const player = useSelector((state) => state.loggedPlayer)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [page, setPage] = useState('home')
+  //id can be character, player or campaign id. It´s definitely possible source of bugs.
   const [id, setId] = useState()
 
   const dispatch = useDispatch()
@@ -171,6 +172,7 @@ const App = (props) => {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
+
       {player ? (
         <Box sx={{ display: 'flex' }}>
           <AppBar

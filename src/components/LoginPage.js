@@ -77,7 +77,9 @@ const Login = ({ toPage }) => {
           type="password"
           onChange={({ target }) => setPassword(target.value)}
         />
-        <Button type="submit">Login</Button>
+        <Button variant="filled" type="submit">
+          Login
+        </Button>
       </form>
       <Divider>New user?</Divider>
       <Button variant="filled" onClick={toPage('createAccount')}>

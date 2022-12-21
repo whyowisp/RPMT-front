@@ -50,139 +50,141 @@ xl, extra-large: 1536px
 */
   if (!id) return null
   return (
-    <ThemeProvider theme={sheetThemeAM}>
-      <CssBaseline />
-      <Paper
-        elevation={10}
-        sx={{
-          padding: 1,
-          position: 'relative',
-          mb: 10,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'space',
-          backgroundPosition: 'left',
-          backgroundImage: `url(${AMbackground})`,
-        }}
-      >
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={12} order={{ xs: -3, md: -3 }}>
-            <Divider variant="middle">
-              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 1
-              </Typography>
-            </Divider>
-          </Grid>
-          <Grid item xs={12} md={6} order={{ xs: -1, md: -2 }}>
-            <BasicAttributes id={id} />
-          </Grid>
-          <Grid item xs={12} md={6} order={{ xs: -2, md: -1 }}>
-            <Container sx={{ mt: 6 }}>
-              <Image src={AMLogo} fit="contain" />
-            </Container>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <Decrepitude id={id} />
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <Warping id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <DescriptiveAttributes id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Grid item xs={12} marginBottom={1}>
-              <Characteristics id={id} />
+    <>
+      <ThemeProvider theme={sheetThemeAM}>
+        <CssBaseline />
+        <Paper
+          elevation={10}
+          sx={{
+            padding: 1,
+            position: 'relative',
+            mb: 10,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'space',
+            backgroundPosition: 'left',
+            backgroundImage: `url(${AMbackground})`,
+          }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={12} order={{ xs: -3, md: -3 }}>
+              <Divider variant="middle">
+                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                  page 1
+                </Typography>
+              </Divider>
+            </Grid>
+            <Grid item xs={12} md={6} order={{ xs: -1, md: -2 }}>
+              <BasicAttributes id={id} />
+            </Grid>
+            <Grid item xs={12} md={6} order={{ xs: -2, md: -1 }}>
+              <Container sx={{ mt: 6 }}>
+                <Image src={AMLogo} fit="contain" />
+              </Container>
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Decrepitude id={id} />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Warping id={id} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DescriptiveAttributes id={id} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Grid item xs={12} marginBottom={1}>
+                <Characteristics id={id} />
+              </Grid>
+              <Grid item xs={12}>
+                <VirtuesFlaws id={id} />
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Abilities id={id} />
             </Grid>
             <Grid item xs={12}>
-              <VirtuesFlaws id={id} />
+              <Divider variant="middle">
+                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                  page 2
+                </Typography>
+              </Divider>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <PersonalityTraits id={id} />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Reputations id={id} />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Combat id={id} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Fatigue id={id} />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Wounds id={id} />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Weapons id={id} />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Equipment id={id} />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider variant="middle">
+                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                  page 3
+                </Typography>
+              </Divider>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Depiction id={id} />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider variant="middle">
+                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                  page 4
+                </Typography>
+              </Divider>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <MagiAttributes id={id} />
+            </Grid>
+            <Grid item xs={12}>
+              <MagicalArts id={id} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <CastingTotals id={id} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Grid item xs={12} marginBottom={1}>
+                <Lab id={id} />
+              </Grid>
+              <Grid item xs={12} marginBottom={1}>
+                <Longevity id={id} />
+              </Grid>
+              <Grid item xs={12} marginBottom={1}>
+                <RawVis id={id} />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Familiar id={id} />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider variant="middle">
+                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                  page 5
+                </Typography>
+              </Divider>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Spells id={id} />
             </Grid>
           </Grid>
-
-          <Grid item xs={12} md={6}>
-            <Abilities id={id} />
-          </Grid>
-          <Grid item xs={12}>
-            <Divider variant="middle">
-              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 2
-              </Typography>
-            </Divider>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <PersonalityTraits id={id} />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Reputations id={id} />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Combat id={id} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Fatigue id={id} />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Wounds id={id} />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Weapons id={id} />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Equipment id={id} />
-          </Grid>
-          <Grid item xs={12}>
-            <Divider variant="middle">
-              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 3
-              </Typography>
-            </Divider>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Depiction id={id} />
-          </Grid>
-          <Grid item xs={12}>
-            <Divider variant="middle">
-              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 4
-              </Typography>
-            </Divider>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <MagiAttributes id={id} />
-          </Grid>
-          <Grid item xs={12}>
-            <MagicalArts id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <CastingTotals id={id} />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Grid item xs={12} marginBottom={1}>
-              <Lab id={id} />
-            </Grid>
-            <Grid item xs={12} marginBottom={1}>
-              <Longevity id={id} />
-            </Grid>
-            <Grid item xs={12} marginBottom={1}>
-              <RawVis id={id} />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Familiar id={id} />
-          </Grid>
-          <Grid item xs={12}>
-            <Divider variant="middle">
-              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                page 5
-              </Typography>
-            </Divider>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Spells id={id} />
-          </Grid>
-        </Grid>
-        <Dice />
-      </Paper>
-    </ThemeProvider>
+        </Paper>
+      </ThemeProvider>
+      <Dice />
+    </>
   )
 }
 

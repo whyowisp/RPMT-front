@@ -15,7 +15,6 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableCellClasses,
   Button,
   Dialog,
   DialogTitle,
@@ -35,13 +34,15 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 const CharacterList = ({ toPage }) => {
-  const dispatch = useDispatch()
-  const player = useSelector((state) => state.loggedPlayer)
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const characters = useSelector((state) => state.characters)
+  console.log(whoIsLoggedIn.currentCampaign + ' = campaignId')
   const [inputName, setInputName] = useState(undefined)
   const [referenceName, setReferenceName] = useState(undefined)
   const [id, setId] = useState(undefined)
   const [open, setOpen] = useState(false)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initCharactersReducer())
@@ -68,11 +69,11 @@ const CharacterList = ({ toPage }) => {
   }
 
   const createNew = () => {
-    dispatch(initializeNew(player.id))
+    dispatch(initializeNew(whoIsLoggedIn.id))
   }
 
   if (!characters) return null
-  if (!player) return null
+  if (!whoIsLoggedIn) return null
 
   return (
     <Container>
@@ -146,7 +147,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
-  const player = useSelector((state) => state.loggedPlayer)
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const visibilityStates = ['visible', 'disabled', 'hidden']
 
   const setVisibility = () => {
@@ -166,7 +167,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
   }
 
   const solveRowVisibility = () => {
-    if (chr.owner === player.id) return 'table-row'
+    if (chr.owner === whoIsLoggedIn.id) return 'table-row'
     if (chr.visibility === 'hidden') return 'none'
   }
 
@@ -176,7 +177,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         key={chr._id}
         sx={{
           display: solveRowVisibility(),
-          backgroundColor: chr.visibility === 'hidden' ? '#92A198' : 'inherit',
+          backgroundColor: chr.visibility === 'hidden' ? '#968A5A' : 'inherit',
         }}
       >
         <TableCell style={{ borderBottom: 'none' }}>
@@ -208,7 +209,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
           </Button>
           <Button
             onClick={() => handleDialogOpen(chr._id, chr.character)}
-            disabled={player.id === chr.owner ? false : true}
+            disabled={whoIsLoggedIn.id === chr.owner ? false : true}
           >
             <DeleteForeverTwoToneIcon />
           </Button>
@@ -222,7 +223,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         >
           <Button
             onClick={() => setVisibility()}
-            disabled={player.id === chr.owner ? false : true}
+            disabled={whoIsLoggedIn.id === chr.owner ? false : true}
           >
             {chr.visibility ? chr.visibility : 'visible'}
           </Button>
@@ -240,7 +241,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
                 <TableCell>Depiction</TableCell>
               </TableHead>
               <TableRow>
-                <TableCell>{chr.player}</TableCell>
+                <TableCell>{chr.whoIsLoggedIn}</TableCell>
                 <TableCell>
                   {chr.depiction?.depiction
                     ? chr.depiction.depiction

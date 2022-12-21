@@ -17,13 +17,16 @@ import {
   InputLabel,
   MenuItem,
   Paper,
+  ListItemAvatar,
+  Avatar,
+  Divider,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
 import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 
 const Home = () => {
   const campaigns = useSelector((state) => state.campaigns)
-  const player = useSelector((state) => state.loggedPlayer)
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const dispatch = useDispatch()
@@ -38,11 +41,21 @@ const Home = () => {
 
   const setActiveCampaign = (campaignId) => {
     console.log('setting campaign id: ' + campaignId)
-    dispatch(setCurrentCampaign(campaignId, player.id))
+    dispatch(setCurrentCampaign(campaignId, whoIsLoggedIn.id))
+  }
+
+  const isPlayerInCampaign = (campaign) => {
+    //Is whoIsLoggedIn along with campaing
+    const playersIdsInCampaign = campaign.players.map(
+      (whoIsLoggedIn) => whoIsLoggedIn.id
+    )
+    if (playersIdsInCampaign.includes(whoIsLoggedIn.id)) return true
+    //Is whoIsLoggedIn Owner of the campaign
+    if (campaign.owner.id === whoIsLoggedIn.id) return true
   }
 
   if (!campaigns) return null
-  if (!player) return null
+  if (!whoIsLoggedIn) return null
 
   return (
     <>
@@ -55,23 +68,39 @@ const Home = () => {
         }}
       >
         <List>
-          {campaigns.map((campaign) => (
-            <ListItem key={campaign.id}>
-              <ListItemButton onClick={() => setActiveCampaign(campaign.id)}>
-                <ListItemText
-                  primary={campaign.title}
-                  secondary={
-                    'Game: ' +
-                    campaign?.game +
-                    ' Started: ' +
-                    campaign.started.substring(0, 10) +
-                    ' Owner: ' +
-                    (campaign.owner.alias ? campaign.owner.alias : player.alias)
-                  }
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {campaigns.map((campaign) =>
+            isPlayerInCampaign(campaign) ? (
+              <>
+                <ListItem key={campaign.id}>
+                  <ListItemAvatar sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    <Avatar
+                      sx={{
+                        color: 'secondary.contrastText',
+                        backgroundColor: 'secondary.main',
+                      }}
+                    >
+                      {campaign.title.substring(0, 1)}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemButton
+                    onClick={() => setActiveCampaign(campaign.id)}
+                  >
+                    <ListItemText
+                      primary={campaign.title}
+                      secondary={`Game: ${
+                        campaign?.game
+                      } / Started: ${campaign?.started.substring(0, 10)} / ${
+                        campaign?.status === 'active'
+                          ? 'Continuing...'
+                          : 'Closed'
+                      } `}
+                    />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </>
+            ) : null
+          )}
 
           <ListItem>
             <ListItemButton onClick={() => handleDialogOpen()}>
@@ -84,14 +113,14 @@ const Home = () => {
         <CampaignCreationDialog
           open={dialogOpen}
           setDialogOpen={setDialogOpen}
-          player={player}
+          whoIsLoggedIn={whoIsLoggedIn}
         />
       </Paper>
     </>
   )
 }
 
-const CampaignCreationDialog = ({ open, setDialogOpen, player }) => {
+const CampaignCreationDialog = ({ open, setDialogOpen, whoIsLoggedIn }) => {
   const availableGames = [
     'Ars Magica',
     'Dungeons&Dragons (disabled)',
@@ -106,7 +135,7 @@ const CampaignCreationDialog = ({ open, setDialogOpen, player }) => {
     const newCampaign = {
       title: title,
       game: selectedGame,
-      playerId: player.id,
+      playerId: whoIsLoggedIn.id,
     }
 
     dispatch(createNewCampaign(newCampaign))

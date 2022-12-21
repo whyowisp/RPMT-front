@@ -144,11 +144,11 @@ const CampaignManagement = () => {
           <ListItem disablePadding>
             <ListItemText primary="Started: " />
             <ListItemText
-              primary={campaign.started}
+              primary={campaign?.started}
               primaryTypographyProps={{ color: 'primary.main' }}
             />
             <ListItemText
-              primary={campaign.status}
+              primary={campaign?.status}
               primaryTypographyProps={{
                 fontSize: '2em',
                 color: 'success.main',
@@ -162,7 +162,7 @@ const CampaignManagement = () => {
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText primary="Owner" secondary={campaign.owner.alias} />
+            <ListItemText primary="Owner" secondary={campaign?.owner.alias} />
             <Button
               sx={{ color: 'primary.main', m: 1 }}
               onClick={() => setTransferDialogOpen(true)}
@@ -174,7 +174,7 @@ const CampaignManagement = () => {
             <ListItemIcon>
               <TitleIcon />
             </ListItemIcon>
-            <ListItemText primary="Title" secondary={campaign.title} />
+            <ListItemText primary="Title" secondary={campaign?.title} />
             <Button
               sx={{ color: 'primary.main', m: 1 }}
               onClick={() => setTitleDialogOpen(true)}
@@ -188,7 +188,7 @@ const CampaignManagement = () => {
             </ListItemIcon>
             <ListItemText
               primary="Players"
-              secondary={campaign.players.map((player) => player.alias + ' ')}
+              secondary={campaign?.players.map((player) => player.alias + ' ')}
             />
             <Button
               sx={{ color: 'primary.main', m: 1 }}
