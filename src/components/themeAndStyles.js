@@ -89,7 +89,7 @@ const mainTheme = createTheme({
     },
   },*/
   palette: {
-    type: 'light',
+    mode: 'light',
     primary: {
       main: '#57777D',
       contrastText: '#E3C344',

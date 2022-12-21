@@ -19,11 +19,10 @@ export const campaignsSlice = createSlice({
     campaignEdition(state, action) {
       const id = action.payload.id
       const content = action.payload.content
-
-      const campaignInEdit = state.find((campaign) => campaign._id === id)
+      const campaignInEdit = state.find((campaign) => campaign.id === id)
       const editedCampaign = Object.assign(campaignInEdit, content)
 
-      state.map((campaign) => (campaign._id !== id ? campaign : editedCampaign))
+      state.map((campaign) => (campaign.id !== id ? campaign : editedCampaign))
     },
     campaignRemoval(state, action) {
       const id = action.payload
@@ -68,7 +67,7 @@ Use format:
 export const editCampaign = (data) => {
   return async (dispatch) => {
     dispatch(campaignEdition(data))
-    await campaignService.updateChar(data.content, data.id)
+    await campaignService.updateCampaign(data.content, data.id)
     //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
   }
 }

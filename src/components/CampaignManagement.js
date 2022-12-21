@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Paper,
   Typography,
@@ -9,36 +9,89 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  ListItemButton,
-  Box,
-  Stack,
   InputLabel,
   Select,
   MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
 } from '@mui/material'
 import CasinoIcon from '@mui/icons-material/Casino'
 import TitleIcon from '@mui/icons-material/Title'
 import GroupIcon from '@mui/icons-material/Group'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { editCampaign } from '../reducers/campaignReducer'
 
 const CampaignManagement = () => {
-  const player = useSelector((state) => state.loggedPlayer)
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
+  const players = useSelector((state) => state.players)
   const campaign = useSelector((state) =>
-    state.campaigns.find((campaign) => campaign.id === player.currentCampaign)
+    state.campaigns.find(
+      (campaign) => campaign.id === whoIsLoggedIn.currentCampaign
+    )
   )
 
-  const names = ['jakke', 'jukka', 'taisto', 'nallepuhi', 'robofobiitti']
-  const [visibility, setVisibility] = useState('none')
+  const [transferDialogOpen, setTransferDialogOpen] = useState(false)
+  const [selectedOwner, setSelectedOwner] = useState('')
 
-  if (!campaign) {
-    console.log('campaign missing')
-    return null
+  const [addRemoveDialogOpen, setAddRemoveDialogOpen] = useState(false)
+  const [addRemoveWho, setAddRemoveWho] = useState('')
+
+  const dispatch = useDispatch()
+
+  //Transferring ownership is disabled for now. Unnecessary complication.
+  const handleTransferOwnership = () => {
+    const data = {
+      id: campaign.id,
+      content: selectedOwner,
+    }
+    console.log('dataToSubmit: ' + JSON.stringify(data))
+    //dispatch etc.
   }
-  if (!player) {
-    console.log('player missing')
-    return null
+
+  const handleRemovePlayer = () => {
+    //Does player in THIS campaign exist?
+    const player = campaign.players.find(
+      (player) => player.alias === addRemoveWho
+    )
+    if (player) {
+      //Remove from campaign
+      dispatch(editCampaign(player.id))
+    }
+    setAddRemoveDialogOpen(false)
+    setAddRemoveWho('')
   }
-  console.log('management page should appear')
+
+  const handleAddPlayer = () => {
+    const playerInDb = players.find((player) => player.alias === addRemoveWho)
+    const playerInCampaign = campaign.players.find(
+      (player) => player.alias === addRemoveWho
+    )
+    if (!playerInDb) {
+      alert('player does not exist')
+      return
+    }
+    if (playerInCampaign) {
+      alert('campaign already has this player')
+      return
+    }
+
+    const updatedCampaignPlayers = campaign.players.concat(playerInDb)
+    const data = {
+      id: campaign.id,
+      content: {
+        players: updatedCampaignPlayers,
+      },
+    }
+    console.log('dataToSend: ' + JSON.stringify(data))
+    dispatch(editCampaign(data))
+
+    setAddRemoveWho('')
+  }
+
   return (
     <>
       <Typography variant="h5">Management</Typography>
@@ -70,7 +123,7 @@ const CampaignManagement = () => {
               primary={campaign.status}
               primaryTypographyProps={{
                 fontSize: '2em',
-                color: 'primary.okStatus',
+                color: 'success.main',
               }}
             />
           </ListItem>
@@ -82,12 +135,24 @@ const CampaignManagement = () => {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Owner" secondary={campaign.owner.alias} />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setTransferDialogOpen(true)}
+            >
+              Transfer Ownership
+            </Button>
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
               <TitleIcon />
             </ListItemIcon>
             <ListItemText primary="Title" secondary={campaign.title} />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setAddRemoveDialogOpen(true)}
+            >
+              Change
+            </Button>
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
@@ -95,55 +160,70 @@ const CampaignManagement = () => {
             </ListItemIcon>
             <ListItemText
               primary="Players"
-              secondary={names.map((name) => name + ' ')}
+              secondary={campaign.players.map((player) => player.alias + ' ')}
             />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setAddRemoveDialogOpen(true)}
+            >
+              Add/Remove
+            </Button>
           </ListItem>
-          <Divider />
-          <ListItemButton
-            sx={{ color: 'primary.main', align: 'right' }}
-            onClick={() => setVisibility('block')}
-          >
-            <ListItemText align="right" primary="Edit" />
-          </ListItemButton>
-          <Box sx={{ m: 1, display: visibility }}>
-            <Typography variant="h6">Edit</Typography>
-            <Divider />
-            <Stack direction="row">
-              <Typography sx={{ p: 1.7 }}>Edit Title:</Typography>
-              <TextField
-                margin="dense"
-                variant="standard"
-                defaultValue={campaign.title}
-              />
-            </Stack>
-            <Stack direction="row">
-              <Typography sx={{ p: 1.7 }}>Transfer ownership to:</Typography>
-              <TextField
-                margin="dense"
-                variant="standard"
-                defaultValue={campaign.title}
-              />
-            </Stack>
-            <Stack direction="row">
-              <Typography sx={{ p: 1.7 }}>Add/Remove player:</Typography>
-              <TextField
-                helperText="Type player to add"
-                margin="dense"
-                variant="standard"
-                defaultValue={campaign.title}
-              />
-              <InputLabel>Player to Remove</InputLabel>
-              <Select autoWidth value="player">
-                {names.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Stack>
-          </Box>
         </List>
       </Paper>
+
+      <Dialog open={transferDialogOpen}>
+        <DialogTitle>Transfer Ownership To?</DialogTitle>
+        <DialogContent>
+          <InputLabel>Select Player</InputLabel>
+          <Select
+            autoWidth
+            value={selectedOwner}
+            onChange={({ target }) => setSelectedOwner(target.value)}
+          >
+            {campaign.players.map((whoIsLoggedIn) => (
+              <MenuItem key={whoIsLoggedIn.alias} value={whoIsLoggedIn.alias}>
+                {whoIsLoggedIn.alias}
+              </MenuItem>
+            ))}
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setTransferDialogOpen(false)}
+            sx={{ color: 'warning.dark' }}
+          >
+            Cancel
+          </Button>
+          <Button disabled onClick={() => handleTransferOwnership()}>
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={addRemoveDialogOpen}>
+        <DialogTitle>Add/Remove Player</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Who?</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Alias"
+            fullWidth
+            onChange={({ target }) => setAddRemoveWho(target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setAddRemoveDialogOpen(false)}
+            sx={{ color: 'warning.dark' }}
+          >
+            Cancel
+          </Button>
+          <Button onClick={() => handleAddPlayer()}>Add</Button>
+          <Button onClick={() => handleRemovePlayer()}>Remove</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }

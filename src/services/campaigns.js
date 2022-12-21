@@ -11,6 +11,16 @@ const createNew = async (campaign) => {
   return res.data
 }
 
-const campaignService = { getAll, createNew }
+const updateCampaign = async (reqData, campaignId) => {
+  const res = await axios.put(`${baseUrl}/${campaignId}`, reqData)
+  return res.data
+}
+
+const deleteCampaign = async (campaignId) => {
+  const res = await axios.delete(`${baseUrl}/${campaignId}`, campaignId)
+  return res.data
+}
+
+const campaignService = { getAll, createNew, updateCampaign, deleteCampaign }
 
 export default campaignService

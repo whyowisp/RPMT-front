@@ -17,6 +17,7 @@ export const characterSlice = createSlice({
       state.push(action.payload)
     },
     characterEdition(state, action) {
+      console.log(action.payload.content)
       const id = action.payload.id
       const content = action.payload.content
 
