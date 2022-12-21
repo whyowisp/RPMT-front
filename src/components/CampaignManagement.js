@@ -40,6 +40,9 @@ const CampaignManagement = () => {
   const [addRemoveDialogOpen, setAddRemoveDialogOpen] = useState(false)
   const [addRemoveWho, setAddRemoveWho] = useState('')
 
+  const [titleDialogOpen, setTitleDialogOpen] = useState(false)
+  const [newTitle, setNewTitle] = useState('')
+
   const dispatch = useDispatch()
 
   //Transferring ownership is disabled for now. Unnecessary complication.
@@ -54,13 +57,25 @@ const CampaignManagement = () => {
 
   const handleRemovePlayer = () => {
     //Does player in THIS campaign exist?
-    const player = campaign.players.find(
+    const playerToRemove = campaign.players.find(
       (player) => player.alias === addRemoveWho
     )
-    if (player) {
-      //Remove from campaign
-      dispatch(editCampaign(player.id))
+    if (!playerToRemove) {
+      alert('No such player')
+      return
     }
+
+    const updatedCampaignPlayers = campaign.players.filter(
+      (player) => player.id !== playerToRemove.id
+    )
+    const data = {
+      id: campaign.id,
+      content: {
+        players: updatedCampaignPlayers,
+      },
+    }
+    dispatch(editCampaign(data))
+
     setAddRemoveDialogOpen(false)
     setAddRemoveWho('')
   }
@@ -86,10 +101,23 @@ const CampaignManagement = () => {
         players: updatedCampaignPlayers,
       },
     }
-    console.log('dataToSend: ' + JSON.stringify(data))
     dispatch(editCampaign(data))
 
+    setAddRemoveDialogOpen(false)
     setAddRemoveWho('')
+  }
+
+  const handleEditCampaignTitle = () => {
+    const data = {
+      id: campaign.id,
+      content: {
+        title: newTitle,
+      },
+    }
+    dispatch(editCampaign(data))
+
+    setTitleDialogOpen(false)
+    setNewTitle('')
   }
 
   return (
@@ -111,7 +139,7 @@ const CampaignManagement = () => {
             <ListItemIcon>
               <CasinoIcon />
             </ListItemIcon>
-            <ListItemText primary="Game" secondary={campaign.game} />
+            <ListItemText primary="Game" secondary={campaign?.game} />
           </ListItem>
           <ListItem disablePadding>
             <ListItemText primary="Started: " />
@@ -139,7 +167,7 @@ const CampaignManagement = () => {
               sx={{ color: 'primary.main', m: 1 }}
               onClick={() => setTransferDialogOpen(true)}
             >
-              Transfer Ownership
+              Transfer
             </Button>
           </ListItem>
           <ListItem disablePadding>
@@ -149,7 +177,7 @@ const CampaignManagement = () => {
             <ListItemText primary="Title" secondary={campaign.title} />
             <Button
               sx={{ color: 'primary.main', m: 1 }}
-              onClick={() => setAddRemoveDialogOpen(true)}
+              onClick={() => setTitleDialogOpen(true)}
             >
               Change
             </Button>
@@ -222,6 +250,28 @@ const CampaignManagement = () => {
           </Button>
           <Button onClick={() => handleAddPlayer()}>Add</Button>
           <Button onClick={() => handleRemovePlayer()}>Remove</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={titleDialogOpen}>
+        <DialogTitle>Edit Title</DialogTitle>
+        <DialogContent>
+          <DialogContentText>New Title</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            fullWidth
+            onChange={({ target }) => setNewTitle(target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setTitleDialogOpen(false)}
+            sx={{ color: 'warning.dark' }}
+          >
+            Cancel
+          </Button>
+          <Button onClick={() => handleEditCampaignTitle()}>Change</Button>
         </DialogActions>
       </Dialog>
     </>
