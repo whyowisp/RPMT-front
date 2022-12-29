@@ -1,0 +1,84 @@
+import { createSlice } from '@reduxjs/toolkit'
+import factionService from '../services/factions'
+
+//ABOUT ACTION NAMING
+//Regular action naming convention: name actions as event (broader terms than simply 'setters')
+//House action naming rules: name as what is about to happen:
+//For example: What is about to happen? - factionInitialization is about to happen.
+
+export const factionsSlice = createSlice({
+  name: 'factions',
+  initialState: null,
+  reducers: {
+    factionsInitialization(state, action) {
+      return action.payload
+    },
+    factionCreation(state, action) {
+      state.push(action.payload)
+    },
+    factionEdition(state, action) {
+      const id = action.payload.id
+      const content = action.payload.content
+      const factionInEdit = state.find((faction) => faction.id === id)
+      const editedFaction = Object.assign(factionInEdit, content)
+
+      state.map((faction) => (faction.id !== id ? faction : editedFaction))
+    },
+    factionRemoval(state, action) {
+      const id = action.payload
+      return state.filter((faction) => faction._id !== id)
+    },
+  },
+})
+
+// Action creators are generated for each case reducer function
+export const {
+  factionsInitialization,
+  factionEdition,
+  factionCreation,
+  factionRemoval,
+} = factionsSlice.actions
+
+// *** START OF THUNK FUNCTIONS ***
+
+export const initFactions = (campaignId) => {
+  return async (dispatch) => {
+    const factionsFromDb = await factionService.get(campaignId)
+    dispatch(factionsInitialization(factionsFromDb))
+  }
+}
+
+export const createNewFaction = (faction) => {
+  return async (dispatch) => {
+    const newFaction = await factionService.createNew(faction)
+    console.log('new faction created: ' + JSON.stringify(newFaction))
+    dispatch(factionCreation(newFaction))
+  }
+}
+/*
+Pass data to this function:
+Use format:
+
+{
+  id: <factionId>,
+  content: {<theData>}
+}
+*/
+export const editFaction = (data) => {
+  return async (dispatch) => {
+    dispatch(factionEdition(data))
+    await factionService.updateFaction(data.content, data.id)
+    //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
+  }
+}
+
+export const deleteOne = (id) => {
+  return async (dispatch) => {
+    dispatch(factionRemoval(id))
+    await factionService.deleteFaction(id)
+  }
+}
+
+// *** END OF THUNK FUNCTIONS ***
+
+export default factionsSlice.reducer
