@@ -16,7 +16,7 @@ const CastingTotals = ({ id }) => {
     character.abilities.find((abi) => abi.ability === 'Awareness')?.score
   )
   const parmaMagica = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Parma magica')?.score
+    character.abilities.find((abi) => abi.ability === 'Parma Magica')?.score
   )
   const concentration = parseInt(
     character.abilities.find((abi) => abi.ability === 'Concentration')?.score

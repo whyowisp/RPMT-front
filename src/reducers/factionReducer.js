@@ -26,7 +26,7 @@ export const factionsSlice = createSlice({
     },
     factionRemoval(state, action) {
       const id = action.payload
-      return state.filter((faction) => faction._id !== id)
+      return state.filter((faction) => faction.id !== id)
     },
   },
 })
@@ -43,12 +43,12 @@ export const {
 
 export const initFactions = (campaignId) => {
   return async (dispatch) => {
-    const factionsFromDb = await factionService.get(campaignId)
+    const factionsFromDb = await factionService.getAllById(campaignId)
     dispatch(factionsInitialization(factionsFromDb))
   }
 }
 
-export const createNewFaction = (faction) => {
+export const createFaction = (faction) => {
   return async (dispatch) => {
     const newFaction = await factionService.createNew(faction)
     console.log('new faction created: ' + JSON.stringify(newFaction))
@@ -72,10 +72,10 @@ export const editFaction = (data) => {
   }
 }
 
-export const deleteOne = (id) => {
+export const removeFaction = (factionId) => {
   return async (dispatch) => {
-    dispatch(factionRemoval(id))
-    await factionService.deleteFaction(id)
+    dispatch(factionRemoval(factionId))
+    await factionService.deleteFaction(factionId)
   }
 }
 

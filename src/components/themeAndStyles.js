@@ -42,7 +42,7 @@ const sheetThemeAM = createTheme({
       main: '#5C5C5C',
     },
     background: {
-      default: '#7D6E57',
+      default: '#c6ccb2',
     },
   },
   typography: {
@@ -88,25 +88,61 @@ const mainTheme = createTheme({
       },
     },
   },*/
+
   palette: {
-    mode: 'light',
+    type: 'light',
     primary: {
-      main: '#57777D',
-      contrastText: '#E3C344',
+      main: '#bf4e30',
+      contrastText: '#ddd',
     },
     secondary: {
-      main: '#7D635E',
-      contrastText: '#C9A8A1',
+      main: '#093824',
     },
     background: {
-      paper: '#B0A26A',
-      default: '#7D6E57',
+      default: '#c6ccb2',
+      paper: '#EDF5D5',
     },
-    divider: '#211D16',
+    headerAppBar: {
+      main: '#115A73',
+      contrastText: '#ddd',
+    },
+    customIcon: {
+      main: '#e5eafa',
+      contrastText: '#77918f',
+    },
+    customAppBar: {
+      main: '#4A4D43',
+      contrastText: '#ccc',
+    },
+    characterHidden: {
+      main: '#B5BDA4',
+      contrastText: '#ddd',
+    },
+    characterInfo: {
+      contrastText: '#444',
+    },
   },
   typography: {
     fontFamily: 'Do Hyeon',
+  } /*
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#6B878F',
+      contrastText: '#eeeeee',
+    },
+    secondary: {
+      main: '#C5C1C9',
+      contrastText: '#445449',
+    },
+    background: {
+      default: '#666',
+      paper: '#6D9C8C',
+    },
   },
+  typography: {
+    fontFamily: 'Do Hyeon',
+  },*/,
 })
 
 export {

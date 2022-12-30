@@ -67,7 +67,7 @@ Use format:
 export const editCampaign = (data) => {
   return async (dispatch) => {
     dispatch(campaignEdition(data))
-    await campaignService.updateCampaign(data.content, data.id)
+    //await campaignService.updateCampaign(data.content, data.id)
     //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
   }
 }

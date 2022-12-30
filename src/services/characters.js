@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 const baseUrl = '/api/characters'
 
 const getAll = async () => {
@@ -7,8 +6,13 @@ const getAll = async () => {
   return res.data
 }
 
-const initNewChar = async (playerId) => {
-  const reqBody = { playerId }
+const getAllById = async (campaignId) => {
+  const res = await axios.get(`${baseUrl}/byCampaignId/${campaignId}`)
+  return res.data
+}
+
+const initNewChar = async (playerId, campaignId) => {
+  const reqBody = { playerId, campaignId }
   const res = await axios.post(`${baseUrl}/new`, reqBody)
   return res.data
 }
@@ -25,6 +29,7 @@ const deleteChar = async (charId) => {
 
 const charService = {
   getAll,
+  getAllById,
   initNewChar,
   updateChar,
   deleteChar,

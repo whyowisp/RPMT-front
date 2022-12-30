@@ -43,3 +43,6 @@
 | 19.12 | 3h | Management sivun mallailua (kipeänä, aikamoista hakemista) |
 | 20.12 | 4h | Management sivun toteutusta |
 | 21.12 | 5h | Management toiminnot, dialogs, ohjelmalogiikkaa; kuka saa nähdä minkäkin osan sovelluksesta ja milloin |
+| 29.12 | 2h | Faction page. Faction service/reducer, Character -"- edittiä |
+| 30.12 | 3h | Faction creation/deletion |
+| väli | 147h |

@@ -29,6 +29,7 @@ import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
 import CampaignManagement from './components/CampaignManagement'
+import Factions from './components/Factions'
 
 const drawerWidth = 200
 
@@ -67,19 +68,22 @@ const App = (props) => {
       return <CharacterSheet id={id} />
     } else if (page === 'management') {
       return <CampaignManagement id={id} />
+    } else if (page === 'factions') {
+      return <Factions id={id} />
     }
   }
 
   const drawer = (
     <div>
-      <Toolbar sx={{ backgroundColor: 'inherit' }}>
-        <Typography variant="h4" sx={{ ml: 7 }}>
-          RPMT
-        </Typography>
-      </Toolbar>
+      <Toolbar sx={{ backgroundColor: 'inherit' }}></Toolbar>
       <Divider />
       {player?.currentCampaign ? (
-        <List>
+        <List
+          sx={{
+            backgroundColor: 'customAppBar.main',
+            color: 'customAppBar.contrastText',
+          }}
+        >
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemText
@@ -178,7 +182,6 @@ const App = (props) => {
           <AppBar
             position="fixed"
             sx={{
-              backgroundColor: 'primary.main',
               width: { md: `calc(100% - ${drawerWidth}px)` },
               ml: { md: `${drawerWidth}px` },
             }}
@@ -220,6 +223,8 @@ const App = (props) => {
                 '& .MuiDrawer-paper': {
                   boxSizing: 'border-box',
                   width: drawerWidth,
+                  backgroundColor: 'customAppBar.main',
+                  color: 'customAppBar.contrastText',
                 },
               }}
             >
@@ -232,6 +237,8 @@ const App = (props) => {
                 '& .MuiDrawer-paper': {
                   boxSizing: 'border-box',
                   width: drawerWidth,
+                  backgroundColor: 'customAppBar.main',
+                  color: 'customAppBar.contrastText',
                 },
               }}
               open
@@ -258,7 +265,9 @@ const App = (props) => {
           </Box>
         </Box>
       ) : (
-        <LoginPage />
+        <>
+          <LoginPage />
+        </>
       )}
     </ThemeProvider>
   )

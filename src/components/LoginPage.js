@@ -16,6 +16,7 @@ import {
 
 import { login } from '../reducers/loggedPlayerReducer'
 import { initializePlayers, addPlayer } from '../reducers/playersReducer'
+import { BoarIcon } from '../SvgIcons/BoarIcon'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)
@@ -201,7 +202,11 @@ const WelcomePage = () => {
     <Container maxWidth="xs" sx={{ mt: 13 }}>
       <Grid container spacing={1}>
         <Grid item xs={5}>
-          <Typography textAlign="right" variant="h2" sx={{ mr: 1 }}>
+          <Box align="right">
+            <BoarIcon size={130} />
+          </Box>
+
+          <Typography textAlign="right" variant="h2" sx={{ mr: 1, mt: -2 }}>
             RPMT
           </Typography>
           <Divider sx={{ mr: 1 }} />

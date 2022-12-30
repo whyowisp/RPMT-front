@@ -43,16 +43,17 @@ export const {
 
 // *** START OF THUNK FUNCTIONS ***
 
-export const initCharactersReducer = () => {
+export const initCharacters = (campaignId) => {
   return async (dispatch) => {
-    const charactersFromDb = await charService.getAll()
+    const charactersFromDb = await charService.getAllById(campaignId)
     dispatch(charactersInitialization(charactersFromDb))
   }
 }
 
-export const initializeNew = (userId) => {
+export const initializeNew = (userId, campaignId) => {
+  console.log(userId + ' ja ' + campaignId)
   return async (dispatch) => {
-    const newCharacter = await charService.initNewChar(userId)
+    const newCharacter = await charService.initNewChar(userId, campaignId)
     dispatch(characterCreation(newCharacter))
   }
 }

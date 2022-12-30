@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
-  initCharactersReducer,
+  initCharacters,
   initializeNew,
   deleteOne,
   editCharacter,
@@ -36,7 +36,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 const CharacterList = ({ toPage }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const characters = useSelector((state) => state.characters)
-  console.log(whoIsLoggedIn.currentCampaign + ' = campaignId')
+
   const [inputName, setInputName] = useState(undefined)
   const [referenceName, setReferenceName] = useState(undefined)
   const [id, setId] = useState(undefined)
@@ -45,7 +45,7 @@ const CharacterList = ({ toPage }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initCharactersReducer())
+    dispatch(initCharacters(whoIsLoggedIn.currentCampaign.id))
   }, [dispatch])
 
   const handleDialogOpen = (id, name) => {
@@ -63,13 +63,13 @@ const CharacterList = ({ toPage }) => {
       dispatch(deleteOne(id))
     }
 
-    setReferenceName(undefined)
-    setInputName(undefined)
+    setReferenceName('')
+    setInputName('')
     setOpen(false)
   }
 
   const createNew = () => {
-    dispatch(initializeNew(whoIsLoggedIn.id))
+    dispatch(initializeNew(whoIsLoggedIn.id, whoIsLoggedIn.currentCampaign.id))
   }
 
   if (!characters) return null
@@ -97,6 +97,7 @@ const CharacterList = ({ toPage }) => {
             <TableBody>
               {characters.map((chr) => (
                 <CharacterRow
+                  key={chr.id}
                   chr={chr}
                   toPage={toPage}
                   handleDialogOpen={handleDialogOpen}
@@ -177,7 +178,8 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         key={chr._id}
         sx={{
           display: solveRowVisibility(),
-          backgroundColor: chr.visibility === 'hidden' ? '#968A5A' : 'inherit',
+          backgroundColor:
+            chr.visibility === 'hidden' ? 'characterHidden.main' : 'inherit',
         }}
       >
         <TableCell style={{ borderBottom: 'none' }}>
@@ -237,12 +239,16 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Table size="small">
               <TableHead>
-                <TableCell>Player</TableCell>
-                <TableCell>Depiction</TableCell>
+                <TableCell sx={{ color: 'characterInfo.contrastText' }}>
+                  Player
+                </TableCell>
+                <TableCell sx={{ color: 'characterInfo.contrastText' }}>
+                  Depiction
+                </TableCell>
               </TableHead>
               <TableRow>
                 <TableCell>{chr.whoIsLoggedIn}</TableCell>
-                <TableCell>
+                <TableCell sx={{ color: 'characterInfo.contrastText' }}>
                   {chr.depiction?.depiction
                     ? chr.depiction.depiction
                     : 'No character depiction yet'}

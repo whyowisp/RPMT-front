@@ -22,6 +22,8 @@ import {
   Divider,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
+import { initFactions } from '../reducers/factionReducer'
+import { initCharacters } from '../reducers/characterReducer'
 import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 
 const Home = () => {
@@ -42,10 +44,13 @@ const Home = () => {
   const setActiveCampaign = (campaignId) => {
     console.log('setting campaign id: ' + campaignId)
     dispatch(setCurrentCampaign(campaignId, whoIsLoggedIn.id))
+    //Init redux store with other data directly related to selected campaign
+    dispatch(initFactions(campaignId)) //Ideally init based on (whoIsLoggedIn.currentCampaign), but it´s unreliable
+    dispatch(initCharacters(campaignId))
   }
 
   const isPlayerInCampaign = (campaign) => {
-    //Is whoIsLoggedIn along with campaing
+    //Is whoIsLoggedIn along with campaign
     const playersIdsInCampaign = campaign.players.map(
       (whoIsLoggedIn) => whoIsLoggedIn.id
     )
@@ -70,13 +75,13 @@ const Home = () => {
         <List>
           {campaigns.map((campaign) =>
             isPlayerInCampaign(campaign) ? (
-              <>
-                <ListItem key={campaign.id}>
+              <div key={campaign.id}>
+                <ListItem>
                   <ListItemAvatar sx={{ display: { xs: 'none', sm: 'block' } }}>
                     <Avatar
                       sx={{
-                        color: 'secondary.contrastText',
-                        backgroundColor: 'secondary.main',
+                        color: 'customIcon.main',
+                        backgroundColor: 'customIcon.contrastText',
                       }}
                     >
                       {campaign.title.substring(0, 1)}
@@ -98,7 +103,7 @@ const Home = () => {
                   </ListItemButton>
                 </ListItem>
                 <Divider />
-              </>
+              </div>
             ) : null
           )}
 
