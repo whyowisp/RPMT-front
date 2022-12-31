@@ -1,3 +1,12 @@
+Proxying in this react app:
+
+install
+
+```npm install --save-dev http-proxy-middleware```
+
+create file setupProxy.js in the src folder and copy/paste
+
+```
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
 module.exports = function (app) {
@@ -9,3 +18,4 @@ module.exports = function (app) {
     })
   )
 }
+```
