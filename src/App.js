@@ -30,6 +30,8 @@ import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
 import CampaignManagement from './components/CampaignManagement'
 import Factions from './components/Factions'
+import FactionSheet from './components/FactionSheet'
+import CovenantSheet from './components/arsMagCovenSheet/CovenantSheet'
 
 const drawerWidth = 200
 
@@ -69,7 +71,11 @@ const App = (props) => {
     } else if (page === 'management') {
       return <CampaignManagement id={id} />
     } else if (page === 'factions') {
-      return <Factions id={id} />
+      return <Factions toPage={toPage} />
+    } else if (page === 'regular') {
+      return <FactionSheet factionId={id} />
+    } else if (page === 'covenant') {
+      return <CovenantSheet covenantId={id} />
     }
   }
 

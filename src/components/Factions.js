@@ -21,7 +21,7 @@ import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 
 import { createFaction, removeFaction } from '../reducers/factionReducer'
 
-const Factions = () => {
+const Factions = ({ toPage }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const factions = useSelector((state) => state.factions)
 
@@ -56,7 +56,14 @@ const Factions = () => {
           {factions.map((faction) => (
             <>
               <ListItem key={faction.id}>
-                <ListItemButton>
+                <ListItemButton
+                  onClick={
+                    toPage(
+                      faction.factionType,
+                      faction.id
+                    ) /*enum in factionSchema at backend must be exactly right */
+                  }
+                >
                   <ListItemText primary={faction.title}></ListItemText>
                 </ListItemButton>
                 <Button
@@ -64,7 +71,7 @@ const Factions = () => {
                     handleDeleteDialogOpen(faction.id, faction.title)
                   }
                   disabled={
-                    whoIsLoggedIn.id === whoIsLoggedIn.currentCampaign.owner
+                    whoIsLoggedIn.id === whoIsLoggedIn.currentCampaign?.owner
                       ? false
                       : true
                   }

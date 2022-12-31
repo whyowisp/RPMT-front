@@ -30,7 +30,7 @@ const CampaignManagement = () => {
   const players = useSelector((state) => state.players)
   const campaign = useSelector((state) =>
     state.campaigns.find(
-      (campaign) => campaign.id === whoIsLoggedIn.currentCampaign
+      (campaign) => campaign.id === whoIsLoggedIn.currentCampaign.id
     )
   )
 
@@ -209,7 +209,7 @@ const CampaignManagement = () => {
             value={selectedOwner}
             onChange={({ target }) => setSelectedOwner(target.value)}
           >
-            {campaign.players.map((whoIsLoggedIn) => (
+            {campaign?.players.map((whoIsLoggedIn) => (
               <MenuItem key={whoIsLoggedIn.alias} value={whoIsLoggedIn.alias}>
                 {whoIsLoggedIn.alias}
               </MenuItem>
