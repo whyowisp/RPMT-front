@@ -51,10 +51,22 @@ const App = (props) => {
   }
 
   const toPage = (page, id) => () => {
-    if (page === 'home' || page === 'player' || page === 'logout') {
+    //Logout
+    if (page === 'logout') {
+      console.log('logging out')
+      //Naive crash prevention when user login after logout
+      //-> app cannot find page related data so 'home' is a safe bet
+      //Should consider some global store cleaning procedure instead
+      setPage('home')
+      dispatch(clearPlayer())
+      return
+    }
+    //Exit 'Gaming' state
+    if (page === 'home' || page === 'player') {
       console.log('exiting campaign page')
       dispatch(setCurrentCampaign(null, player.id))
     }
+
     setPage(page)
     setId(id)
   }
@@ -166,7 +178,7 @@ const App = (props) => {
             <ListItemText
               align="right"
               primary="Logout"
-              onClick={() => dispatch(clearPlayer())}
+              onClick={toPage('logout')}
             />
             <LogoutIcon sx={{ m: 1 }} />
           </ListItemButton>
