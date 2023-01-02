@@ -32,6 +32,7 @@ import {
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import king from '../images/king.png'
 
 const CharacterList = ({ toPage }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
@@ -76,8 +77,32 @@ const CharacterList = ({ toPage }) => {
   if (!whoIsLoggedIn) return null
 
   return (
-    <Container>
-      <Typography variant="h5">Characters</Typography>
+    <>
+      <Paper
+        elevation={1}
+        sx={{
+          maxWidth: 'md',
+          position: 'relative',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundImage: `url(${king})`,
+        }}
+      >
+        <Box
+          sx={{
+            backgroundSize: 'cover',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            mb: 2,
+            pt: 6,
+            pb: 6,
+          }}
+        >
+          <Typography variant="h3" align="right" sx={{ mr: '49%', ml: 1 }}>
+            Characters
+          </Typography>
+        </Box>
+      </Paper>
       <Paper elevation={10}>
         <TableContainer component={Box} sx={{ paddingBottom: 10 }}>
           <Table size="small">
@@ -140,7 +165,7 @@ const CharacterList = ({ toPage }) => {
           </DialogActions>
         </Dialog>
       </Paper>
-    </Container>
+    </>
   )
 }
 

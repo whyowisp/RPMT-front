@@ -20,11 +20,13 @@ import {
   ListItemAvatar,
   Avatar,
   Divider,
+  Box,
 } from '@mui/material'
 import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
 import { initFactions } from '../reducers/factionReducer'
 import { initCharacters } from '../reducers/characterReducer'
 import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
+import dragonCastle from '../images/dragonCastle.png'
 
 const Home = () => {
   const campaigns = useSelector((state) => state.campaigns)
@@ -64,7 +66,31 @@ const Home = () => {
 
   return (
     <>
-      <Typography variant="h5">Campaigns</Typography>
+      <Paper
+        elevation={1}
+        sx={{
+          maxWidth: 'md',
+          position: 'relative',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'bottom',
+          backgroundImage: `url(${dragonCastle})`,
+        }}
+      >
+        <Box
+          sx={{
+            backgroundSize: 'cover',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            mb: 2,
+            pt: 12,
+            pb: 12,
+          }}
+        >
+          <Typography variant="h3" align="right" sx={{ mr: '53%', ml: 3 }}>
+            Campaigns
+          </Typography>
+        </Box>
+      </Paper>
       <Paper
         elevation={10}
         sx={{

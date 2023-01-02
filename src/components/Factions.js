@@ -16,10 +16,12 @@ import {
   TextField,
   Paper,
   Divider,
+  Box,
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 
 import { createFaction, removeFaction } from '../reducers/factionReducer'
+import castle from '../images/castle.png'
 
 const Factions = ({ toPage }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
@@ -44,7 +46,31 @@ const Factions = ({ toPage }) => {
 
   return (
     <>
-      <Typography variant="h5">Factions</Typography>
+      <Paper
+        elevation={1}
+        sx={{
+          maxWidth: 'md',
+          position: 'relative',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundImage: `url(${castle})`,
+        }}
+      >
+        <Box
+          sx={{
+            backgroundSize: 'cover',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            mb: 2,
+            pt: 6,
+            pb: 6,
+          }}
+        >
+          <Typography variant="h3" align="right" sx={{ mr: '56%', ml: 3 }}>
+            Factions
+          </Typography>
+        </Box>
+      </Paper>
       <Paper
         elevation={10}
         sx={{
@@ -64,7 +90,12 @@ const Factions = ({ toPage }) => {
                     ) /*enum in factionSchema at backend must be exactly right */
                   }
                 >
-                  <ListItemText primary={faction.title}></ListItemText>
+                  <ListItemText
+                    primary={faction.title}
+                    secondary={
+                      faction.factionType === 'covenant' ? 'Covenant' : null
+                    }
+                  ></ListItemText>
                 </ListItemButton>
                 <Button
                   onClick={() =>

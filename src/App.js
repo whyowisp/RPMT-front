@@ -22,6 +22,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew'
 
 import { clearPlayer, setCurrentCampaign } from './reducers/loggedPlayerReducer'
+//import parchment from './images/parchment.png'
 
 import { mainTheme } from './components/themeAndStyles'
 import LoginPage from './components/LoginPage'
@@ -212,6 +213,7 @@ const App = (props) => {
                 sx={{
                   mr: 2,
                   display: { md: 'none' },
+                  color: 'secondary.main',
                 }}
               >
                 <MenuIcon />
@@ -269,8 +271,13 @@ const App = (props) => {
             component="main"
             sx={{
               flexGrow: 1,
-              p: 3,
+              p: 1,
               width: { sm: `calc(100% - ${drawerWidth}px)` },
+              height: '1000px',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'repeat',
+              backgroundPosition: 'center',
+              /*backgroundImage: `url(${parchment})`,*/
             }}
           >
             <Toolbar />

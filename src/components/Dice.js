@@ -11,7 +11,6 @@ import {
   ListItemSecondaryAction,
 } from '@mui/material'
 import Image from 'mui-image'
-import AMsnakes from '../images/arm-snakes.png'
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -49,46 +48,43 @@ const Dice = () => {
       right={0}
       sx={{
         top: 'auto',
-        bottom: 0,
-        backgroundColor: 'primary.main',
-        opacity: 0.9,
+        bottom: -3,
+        backgroundColor: 'customAppBar.main',
         color: 'divider',
+        pl: 9,
       }}
     >
       <Toolbar sx={{ m: 0 }}>
-        <Container sx={{ width: 80 }}>
-          <Image src={AMsnakes} />
-        </Container>
         <StyledFab
           aria-label="add"
           onClick={(event) => roll(event)}
           sx={{
             backgroundColor: 'secondary.main',
-            color: 'secondary.contrastText',
+            color: '#000',
+            p: 4,
           }}
         >
           <Typography variant="h5">{diceText}</Typography>
         </StyledFab>
-
         <Box sx={{ flexGrow: 1 }} />
 
         {[...previous].reverse().map((p, index) =>
           index === 0 ? (
-            <Typography sx={{ flexGrow: 1 }} variant="h4">
+            <Typography
+              sx={{ flexGrow: 1, color: 'customAppBar.contrastText' }}
+              variant="h4"
+            >
               ~ {p} ~
             </Typography>
           ) : (
             <Typography
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, color: 'customAppBar.contrastText' }}
               fontSize={(previous.length - index) * 5}
             >
               {p}
             </Typography>
           )
         )}
-        <Container sx={{ width: 80 }}>
-          <Image src={AMsnakes} />
-        </Container>
       </Toolbar>
     </AppBar>
   )

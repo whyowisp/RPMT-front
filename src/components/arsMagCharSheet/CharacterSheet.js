@@ -54,7 +54,7 @@ xl, extra-large: 1536px
       <ThemeProvider theme={sheetThemeAM}>
         <CssBaseline />
         <Paper
-          elevation={10}
+          elevation={2}
           sx={{
             padding: 1,
             position: 'relative',

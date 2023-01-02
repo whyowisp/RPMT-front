@@ -47,3 +47,4 @@
 | 30.12 | 3h | Faction creation/deletion |
 | 31.12 | 5h | Proxyamisen kanssa ongelma/ratkaisu ( -> Katso docs) + editFaction + sivun ohjaus covenantSheet + bug fixes|
 | väli | 151h |
+| 01.01 | 6h | visuaalista suunnittelua |

@@ -12,11 +12,13 @@ import {
   TextField,
   Box,
   Button,
+  Paper,
 } from '@mui/material'
 
 import { login } from '../reducers/loggedPlayerReducer'
 import { initializePlayers, addPlayer } from '../reducers/playersReducer'
 import { BoarIcon } from '../SvgIcons/BoarIcon'
+import parchment from '../images/parchment.png'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)
@@ -199,27 +201,50 @@ const WelcomePage = () => {
   }
 
   return (
-    <Container maxWidth="xs" sx={{ mt: 13 }}>
-      <Grid container spacing={1}>
-        <Grid item xs={5}>
-          <Box align="right">
-            <BoarIcon size={130} />
-          </Box>
+    <Paper
+      elevation={1}
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        position: 'relative',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundImage: `url(${parchment})`,
+      }}
+    >
+      <Container maxWidth="xs">
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          style={{ minHeight: '100vh' }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={1} />
+            <Grid item xs={5}>
+              <Box align="right">
+                <BoarIcon size={130} />
+              </Box>
 
-          <Typography textAlign="right" variant="h2" sx={{ mr: 1, mt: -2 }}>
-            RPMT
-          </Typography>
-          <Divider sx={{ mr: 1 }} />
-          <Typography textAlign="right" variant="h6" sx={{ mr: 1 }}>
-            A Campaign Management Tool for Roleplaying Games
-          </Typography>
+              <Typography textAlign="right" variant="h3" sx={{ mr: 1, mt: -2 }}>
+                RPMT
+              </Typography>
+              <Divider sx={{ mr: 1 }} />
+              <Typography textAlign="right" variant="h6" sx={{ mr: 1 }}>
+                A Campaign Management Tool for Roleplaying Games
+              </Typography>
+            </Grid>
+            <Divider orientation="vertical" flexItem></Divider>
+            <Grid item xs={5}>
+              {content()}
+            </Grid>
+          </Grid>
         </Grid>
-        <Divider orientation="vertical" flexItem></Divider>
-        <Grid item xs={6}>
-          {content()}
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Paper>
   )
 }
 

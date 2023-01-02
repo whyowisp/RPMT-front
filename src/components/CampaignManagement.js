@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -18,12 +19,14 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  Box,
 } from '@mui/material'
 import CasinoIcon from '@mui/icons-material/Casino'
 import TitleIcon from '@mui/icons-material/Title'
 import GroupIcon from '@mui/icons-material/Group'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { editCampaign } from '../reducers/campaignReducer'
+import throne from '../images/throne.png'
 
 const CampaignManagement = () => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
@@ -122,13 +125,40 @@ const CampaignManagement = () => {
 
   return (
     <>
-      <Typography variant="h5">Management</Typography>
+      <Paper
+        elevation={1}
+        sx={{
+          maxWidth: 'md',
+          position: 'relative',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundImage: `url(${throne})`,
+        }}
+      >
+        <Box
+          sx={{
+            backgroundSize: 'cover',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            mb: 2,
+            pt: 8,
+            pb: 8,
+          }}
+        >
+          <Typography
+            align="right"
+            sx={{ mr: '44%', ml: 3, typography: { sm: 'h3', xs: 'h4' } }}
+          >
+            Management
+          </Typography>
+        </Box>
+      </Paper>
+
       <Paper
         component="form"
-        elevation={10}
+        elevation={5}
         sx={{
-          width: '100%',
-          maxWidth: 'sm',
+          maxWidth: 'md',
           p: 2,
         }}
       >
@@ -136,7 +166,7 @@ const CampaignManagement = () => {
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemIcon>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
               <CasinoIcon />
             </ListItemIcon>
             <ListItemText primary="Game" secondary={campaign?.game} />
@@ -159,7 +189,7 @@ const CampaignManagement = () => {
           <Divider />
 
           <ListItem disablePadding>
-            <ListItemIcon>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Owner" secondary={campaign?.owner.alias} />
@@ -171,7 +201,7 @@ const CampaignManagement = () => {
             </Button>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemIcon>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
               <TitleIcon />
             </ListItemIcon>
             <ListItemText primary="Title" secondary={campaign?.title} />
@@ -183,7 +213,7 @@ const CampaignManagement = () => {
             </Button>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemIcon>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
               <GroupIcon />
             </ListItemIcon>
             <ListItemText
@@ -279,3 +309,69 @@ const CampaignManagement = () => {
 }
 
 export default CampaignManagement
+/*<Typography variant="h6">Campaign Info</Typography>
+        <Divider />
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <CasinoIcon />
+            </ListItemIcon>
+            <ListItemText primary="Game" secondary={campaign?.game} />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemText primary="Started: " />
+            <ListItemText
+              primary={campaign?.started}
+              primaryTypographyProps={{ color: 'primary.main' }}
+            />
+            <ListItemText
+              primary={campaign?.status}
+              primaryTypographyProps={{
+                fontSize: '2em',
+                color: 'success.main',
+              }}
+            />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem disablePadding>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Owner" secondary={campaign?.owner.alias} />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setTransferDialogOpen(true)}
+            >
+              Transfer
+            </Button>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <TitleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Title" secondary={campaign?.title} />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setTitleDialogOpen(true)}
+            >
+              Change
+            </Button>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemIcon sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Players"
+              secondary={campaign?.players.map((player) => player.alias + ' ')}
+            />
+            <Button
+              sx={{ color: 'primary.main', m: 1 }}
+              onClick={() => setAddRemoveDialogOpen(true)}
+            >
+              Add/Remove
+            </Button>
+          </ListItem>
+        </List>*/

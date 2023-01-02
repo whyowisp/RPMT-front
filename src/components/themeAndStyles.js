@@ -42,20 +42,21 @@ const sheetThemeAM = createTheme({
       main: '#5C5C5C',
     },
     background: {
-      default: '#c6ccb2',
+      default: '#8B9D83',
     },
   },
   typography: {
-    fontFamily: 'serif',
+    fontFamily: 'IM Fell Double Pica, serif',
     label: {
       fontFamily: 'MedievalSharp',
       fontSize: '1.4rem',
       textAlign: 'center',
     },
     labelSm: {
-      fontSize: '1.0rem',
-      fontFamily: 'serif',
+      fontSize: '1.1rem',
+      fontFamily: 'IM Fell Double Pica, serif',
     },
+    typography: { fontFamily: 'IM Fell Double Pica, serif' },
   },
 })
 
@@ -88,7 +89,7 @@ const mainTheme = createTheme({
       },
     },
   },*/
-
+  /*
   palette: {
     type: 'light',
     primary: {
@@ -123,25 +124,90 @@ const mainTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Do Hyeon',
-  } /*
+    fontFamily: 'Texturina',
+    h6: {
+      fontWeight: 100,
+    },
+    body1: {
+      fontWeight: 600,
+    },
+  },*/
+
   palette: {
-    type: 'dark',
+    mode: 'light',
     primary: {
-      main: '#6B878F',
-      contrastText: '#eeeeee',
+      main: '#040303',
+      contrastText: '#8B9D83',
     },
     secondary: {
-      main: '#C5C1C9',
-      contrastText: '#445449',
+      main: '#BEB0A7',
+      contrastText: '#040303',
     },
     background: {
-      default: '#666',
-      paper: '#6D9C8C',
+      default: '#8B9D83',
+      paper: 'rgba(255,255,255,0.8)',
+      //paper: 'rgba(0,0,0,0.85)',
+    },
+    customAppBar: {
+      main: '#3A4E48',
+      contrastText: '#ddd',
     },
   },
   typography: {
-    fontFamily: 'Do Hyeon',
+    fontFamily: 'Cinzel, serif',
+    h2: {
+      fontFamily: 'Cinzel Decorative, cursive',
+    },
+    h3: {
+      fontFamily: 'Cinzel Decorative',
+    },
+    h4: {
+      fontFamily: 'Cinzel Decorative',
+    },
+    h5: {
+      fontFamily: 'Cinzel Decorative',
+      fontWeight: 700,
+    },
+    button: {
+      fontWeight: 500,
+    },
+  } /*
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#6D8EA0',
+    },
+    secondary: {
+      main: '#22AED1',
+      contrastText: '#182825',
+    },
+    background: {
+      default: '#AFA98D',
+    },
+    customIcon: {
+      main: '#e5eafa',
+      contrastText: '#77918f',
+    },
+    customAppBar: {
+      main: '#182825',
+      contrastText: '#ddd',
+    },
+    characterHidden: {
+      main: '#B5BDA4',
+      contrastText: '#ddd',
+    },
+    characterInfo: {
+      contrastText: '#444',
+    },
+  },
+  typography: {
+    fontFamily: 'Cinzel',
+    h6: {
+      fontWeight: 500,
+    },
+    body1: {
+      fontWeight: 400,
+    },
   },*/,
 })
 
