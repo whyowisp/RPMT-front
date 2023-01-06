@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import playerService from '../services/players'
 
-const initialState = null
-
 export const playersSlice = createSlice({
   name: 'players',
-  initialState,
+  initialState: [],
   reducers: {
     setPlayers(state, action) {
       return action.payload

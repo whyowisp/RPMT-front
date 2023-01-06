@@ -126,12 +126,14 @@ const Abilities = ({ id }) => {
                 />
               </TableCell>
               <TableCell sx={{ border: 'none', p: 1 }}>
-                <Input
-                  sx={{ ...plainInputSx, fontSize: '14px' }}
-                  defaultValue={abi.specialty}
-                  onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'Specialty')}
-                />
+                <i>
+                  <Input
+                    sx={{ ...plainInputSx, fontSize: '14px' }}
+                    defaultValue={abi.specialty}
+                    onChange={() => setFieldIndex(index)}
+                    onBlur={(event) => prepareValues(event, 'Specialty')}
+                  />
+                </i>
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input

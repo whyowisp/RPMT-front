@@ -26,6 +26,7 @@ import { initCampaigns, createNewCampaign } from '../reducers/campaignReducer'
 import { initFactions } from '../reducers/factionReducer'
 import { initCharacters } from '../reducers/characterReducer'
 import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
+import { initCovenants } from '../reducers/covenantReducer'
 import dragonCastle from '../images/dragonCastle.png'
 
 const Home = () => {
@@ -49,6 +50,7 @@ const Home = () => {
     //Init redux store with other data directly related to selected campaign
     dispatch(initFactions(campaignId)) //Ideally init based on (whoIsLoggedIn.currentCampaign), but it´s unreliable
     dispatch(initCharacters(campaignId))
+    dispatch(initCovenants(campaignId))
   }
 
   const isPlayerInCampaign = (campaign) => {
@@ -86,8 +88,8 @@ const Home = () => {
             pb: 12,
           }}
         >
-          <Typography variant="h3" align="right" sx={{ mr: '53%', ml: 3 }}>
-            Campaigns
+          <Typography variant="h3" align="right" sx={{ mr: '61%', ml: 3 }}>
+            Home
           </Typography>
         </Box>
       </Paper>

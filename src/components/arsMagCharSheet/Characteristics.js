@@ -98,12 +98,14 @@ const Characteristics = ({ id }) => {
                 </Typography>
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
-                <Input
-                  sx={{ ...plainInputSx, width: '91%', fontSize: 14 }}
-                  defaultValue={chr.description}
-                  onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'String')}
-                />
+                <i>
+                  <Input
+                    sx={{ ...plainInputSx, width: '91%', fontSize: 14 }}
+                    defaultValue={chr.description}
+                    onChange={() => setFieldIndex(index)}
+                    onBlur={(event) => prepareValues(event, 'String')}
+                  />
+                </i>
               </TableCell>
               <TableCell align="center" sx={{ border: 'none' }}>
                 <Input

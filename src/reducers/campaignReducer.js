@@ -8,7 +8,7 @@ import campaignService from '../services/campaigns'
 
 export const campaignsSlice = createSlice({
   name: 'campaigns',
-  initialState: null,
+  initialState: [],
   reducers: {
     campaignsInitialization(state, action) {
       return action.payload

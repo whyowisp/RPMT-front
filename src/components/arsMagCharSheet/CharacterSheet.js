@@ -77,8 +77,8 @@ xl, extra-large: 1536px
               <BasicAttributes id={id} />
             </Grid>
             <Grid item xs={12} md={6} order={{ xs: -2, md: -1 }}>
-              <Container sx={{ mt: 6 }}>
-                <Image src={AMLogo} fit="contain" />
+              <Container sx={{ mt: 6, mb: 1 }}>
+                <Image src={AMLogo} fit="contain" sx={{ maxWidth: '400px' }} />
               </Container>
             </Grid>
             <Grid item xs={6} md={3}>

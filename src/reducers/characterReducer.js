@@ -8,7 +8,7 @@ import charService from '../services/characters'
 
 export const characterSlice = createSlice({
   name: 'characters',
-  initialState: null,
+  initialState: [],
   reducers: {
     charactersInitialization(state, action) {
       return action.payload

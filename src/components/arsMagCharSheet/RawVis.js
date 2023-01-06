@@ -35,18 +35,19 @@ const RawVis = ({ id }) => {
     console.log(
       'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
     )
-
+    /* eslint-disable */
     setRawVises(
       rawVises.map((vis, i) =>
         i === indexOfNewValue
           ? {
-            art: type === 'Art' ? newValue : vis.art,
-            pawns: type === 'Pawns' ? newValue : vis.pawns,
-            physicalForm: type === 'Form' ? newValue : vis.form,
-          }
+              art: type === 'Art' ? newValue : vis.art,
+              pawns: type === 'Pawns' ? newValue : vis.pawns,
+              physicalForm: type === 'Form' ? newValue : vis.form,
+            }
           : vis
       )
     )
+    /* eslint-enable */
   }
 
   const submitUpdate = (e) => {
@@ -113,12 +114,14 @@ const RawVis = ({ id }) => {
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
-                <Input
-                  sx={{ ...plainInputSx }}
-                  defaultValue={vis.physicalForm}
-                  onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'Form')}
-                />
+                <i>
+                  <Input
+                    sx={{ ...plainInputSx }}
+                    defaultValue={vis.physicalForm}
+                    onChange={() => setFieldIndex(index)}
+                    onBlur={(event) => prepareValues(event, 'Form')}
+                  />
+                </i>
               </TableCell>
             </TableRow>
           ))}

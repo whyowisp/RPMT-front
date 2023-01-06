@@ -11,21 +11,21 @@ import {
   Button,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { editCharacter } from '../../reducers/characterReducer'
+import { editCovenant } from '../../reducers/covenantReducer'
 import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
 const Reputations = ({ id }) => {
   const dispatch = useDispatch()
-  const character = useSelector((state) =>
-    state.characters.find((c) => c._id === id)
+  const covenant = useSelector((state) =>
+    state.covenants.find((c) => c.id === id)
   )
 
   const [reputations, setReputations] = useState()
   const [fieldIndex, setFieldIndex] = useState(-1)
 
   useEffect(() => {
-    setReputations(character.reputations.concat(['']))
-  }, [character])
+    setReputations(covenant.reputations.concat(['']))
+  }, [covenant])
 
   const prepareValues = (e, type) => {
     e.preventDefault()
@@ -40,9 +40,9 @@ const Reputations = ({ id }) => {
       reputations.map((rep, i) =>
         i === indexOfNewValue
           ? {
-              description: type === 'Description' ? newValue : rep.description,
-              type: type === 'Type' ? newValue : rep.type,
-              score: type === 'Score' ? newValue : rep.score,
+              reputation: type === 'reputation' ? newValue : rep.reputation,
+              repType: type === 'repType' ? newValue : rep.repType,
+              score: type === 'score' ? newValue : rep.score,
             }
           : rep
       )
@@ -53,7 +53,7 @@ const Reputations = ({ id }) => {
   const submitUpdate = (e) => {
     e.preventDefault()
 
-    //Clear replity objects that doesn't have replity name
+    //Clear reputation objects that doesn't have reputation name
     const reputationsEmptyValuesCleared = reputations.filter((rep) =>
       Object.values(rep)[0] === '' ? null : rep
     )
@@ -71,9 +71,9 @@ const Reputations = ({ id }) => {
     }
 
     //console.log('data to send: ' + JSON.stringify(data))
-    dispatch(editCharacter(data))
+    dispatch(editCovenant(data))
 
-    //Re-render will clear these anyway, but keep them to avoid bugs
+    //Re-render will clear these anyway
     setFieldIndex(-1)
     setReputations([])
     // -> to rerender
@@ -87,9 +87,13 @@ const Reputations = ({ id }) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell width="50%"></TableCell>
-            <TableCell width="40%">TYPE</TableCell>
-            <TableCell width="10%">SCORE</TableCell>
+            <TableCell width="45%" style={{ borderBottom: 'none' }}></TableCell>
+            <TableCell width="45%" sx={{ pb: 0 }}>
+              TYPE
+            </TableCell>
+            <TableCell width="10%" sx={{ pb: 0 }}>
+              SCORE
+            </TableCell>
           </TableRow>
         </TableHead>
 
@@ -99,18 +103,18 @@ const Reputations = ({ id }) => {
               <TableCell sx={{ border: 'none' }}>
                 <Input
                   sx={{ ...plainInputSx }}
-                  defaultValue={rep.description}
+                  defaultValue={rep.reputation}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'Description')}
+                  onBlur={(event) => prepareValues(event, 'reputation')}
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
                 <i>
                   <Input
                     sx={{ ...plainInputSx }}
-                    defaultValue={rep.type}
+                    defaultValue={rep.repType}
                     onChange={() => setFieldIndex(index)}
-                    onBlur={(event) => prepareValues(event, 'Type')}
+                    onBlur={(event) => prepareValues(event, 'repType')}
                   />
                 </i>
               </TableCell>
@@ -119,7 +123,7 @@ const Reputations = ({ id }) => {
                   sx={{ ...plainInputSx }}
                   defaultValue={rep.score}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'Score')}
+                  onBlur={(event) => prepareValues(event, 'score')}
                 />
               </TableCell>
             </TableRow>

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import factionService from '../services/factions'
+import { createNewCovenant } from './covenantReducer'
 
 //ABOUT ACTION NAMING
 //Regular action naming convention: name actions as event (broader terms than simply 'setters')
@@ -8,7 +9,7 @@ import factionService from '../services/factions'
 
 export const factionsSlice = createSlice({
   name: 'factions',
-  initialState: null,
+  initialState: [],
   reducers: {
     factionsInitialization(state, action) {
       return action.payload
@@ -51,8 +52,12 @@ export const initFactions = (campaignId) => {
 export const createFaction = (faction) => {
   return async (dispatch) => {
     const newFaction = await factionService.createNew(faction)
-    console.log('new faction created: ' + JSON.stringify(newFaction))
     dispatch(factionCreation(newFaction))
+
+    //Create game specific faction types
+    if (newFaction.factionType === 'covenant') {
+      dispatch(createNewCovenant(newFaction.id))
+    }
   }
 }
 /*

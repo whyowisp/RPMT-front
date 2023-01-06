@@ -4,6 +4,7 @@ import loggedPlayerReducer from './reducers/loggedPlayerReducer'
 import playersReducer from './reducers/playersReducer'
 import campaignReducer from './reducers/campaignReducer'
 import factionReducer from './reducers/factionReducer'
+import covenantReducer from './reducers/covenantReducer'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     players: playersReducer,
     campaigns: campaignReducer,
     factions: factionReducer,
+    covenants: covenantReducer,
   },
 })

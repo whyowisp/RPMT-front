@@ -17,28 +17,33 @@ import {
   Paper,
   Divider,
   Box,
+  ListSubheader,
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 
 import { createFaction, removeFaction } from '../reducers/factionReducer'
 import castle from '../images/castle.png'
+import { createNewCovenant, removeCovenant } from '../reducers/covenantReducer'
 
 const Factions = ({ toPage }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const factions = useSelector((state) => state.factions)
+  const covenants = useSelector((state) => state.covenants)
 
   const [createDialogOpen, setCreateDialogOpen] = useState(false)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [referenceTitle, setReferenceTitle] = useState('')
   const [factionId, setFactionId] = useState('')
+  const [factionType, setFactionType] = useState('')
 
   const handleDialogOpen = () => {
     setCreateDialogOpen(true)
   }
-  const handleDeleteDialogOpen = (factionId, factionTitle) => {
+  const handleDeleteDialogOpen = (factionId, factionTitle, typeOfFaction) => {
     setFactionId(factionId)
     setReferenceTitle(factionTitle)
     setDeleteDialogOpen(true)
+    setFactionType(typeOfFaction)
   }
 
   if (!factions) return null
@@ -79,27 +84,56 @@ const Factions = ({ toPage }) => {
         }}
       >
         <List>
-          {factions.map((faction) => (
+          <ListSubheader disableSticky inset color="default">
+            Covenants
+          </ListSubheader>
+          {covenants.map((covenant) => (
             <>
-              <ListItem key={faction.id}>
-                <ListItemButton
-                  onClick={
-                    toPage(
-                      faction.factionType,
-                      faction.id
-                    ) /*enum in factionSchema at backend must be exactly right */
-                  }
-                >
+              <ListItem key={covenant.id}>
+                <ListItemButton onClick={toPage('covenant', covenant.id)}>
                   <ListItemText
-                    primary={faction.title}
-                    secondary={
-                      faction.factionType === 'covenant' ? 'Covenant' : null
-                    }
-                  ></ListItemText>
+                    primary={covenant.covenantName}
+                    secondary="Type: Covenant"
+                  />
                 </ListItemButton>
                 <Button
                   onClick={() =>
-                    handleDeleteDialogOpen(faction.id, faction.title)
+                    handleDeleteDialogOpen(
+                      covenant.id,
+                      covenant.covenantName,
+                      'covenant'
+                    )
+                  }
+                  disabled={
+                    whoIsLoggedIn.id === whoIsLoggedIn.currentCampaign?.owner
+                      ? false
+                      : true
+                  }
+                >
+                  <DeleteForeverTwoToneIcon />
+                </Button>
+              </ListItem>
+            </>
+          ))}
+          <ListItem>
+            <ListItemButton onClick={() => handleDialogOpen()}>
+              <ListItemText align="center">
+                <Typography variant="h6">New Covenant</Typography>
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <ListSubheader disableSticky inset color="default">
+            Factions
+          </ListSubheader>
+          {factions.map((faction) => (
+            <>
+              <ListItem key={faction.id}>
+                <ListItemButton onClick={toPage('faction', faction.id)}>
+                  <ListItemText primary={faction.title}></ListItemText>
+                </ListItemButton>
+                <Button
+                  onClick={() =>
+                    handleDeleteDialogOpen(faction.id, faction.title, 'regular')
                   }
                   disabled={
                     whoIsLoggedIn.id === whoIsLoggedIn.currentCampaign?.owner
@@ -132,6 +166,7 @@ const Factions = ({ toPage }) => {
           setDeleteDialogOpen={setDeleteDialogOpen}
           referenceTitle={referenceTitle}
           factionId={factionId}
+          factionType={factionType}
         />
       </Paper>
     </>
@@ -142,13 +177,18 @@ const FactionDeletionDialog = ({
   setDeleteDialogOpen,
   referenceTitle,
   factionId,
+  factionType,
 }) => {
   const [titleConfirmation, setTitleConfirmation] = useState('')
   const dispatch = useDispatch()
 
   const handleDelete = () => {
-    if (titleConfirmation === referenceTitle) {
+    if (titleConfirmation !== referenceTitle) return
+    if (factionType === 'regular') {
       dispatch(removeFaction(factionId))
+    }
+    if (factionType === 'covenant') {
+      dispatch(removeCovenant(factionId))
     }
     setDeleteDialogOpen(false)
   }
@@ -188,13 +228,22 @@ const FactionCreationDialog = ({
   const dispatch = useDispatch()
 
   const handleCreate = (factionType) => {
-    const newFaction = {
-      campaignId: whoIsLoggedIn.currentCampaign.id,
-      title: title,
-      factionType: factionType,
-    }
+    if (factionType === 'regular') {
+      const newFaction = {
+        campaignId: whoIsLoggedIn.currentCampaign.id,
+        title: title,
+      }
 
-    dispatch(createFaction(newFaction))
+      dispatch(createFaction(newFaction))
+    }
+    if (factionType === 'covenant') {
+      const newCovenant = {
+        title: title,
+        campaignId: whoIsLoggedIn.currentCampaign.id,
+      }
+
+      dispatch(createNewCovenant(newCovenant))
+    }
     setCreateDialogOpen(false)
   }
 

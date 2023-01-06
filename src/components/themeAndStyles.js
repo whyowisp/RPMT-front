@@ -57,6 +57,9 @@ const sheetThemeAM = createTheme({
       fontFamily: 'IM Fell Double Pica, serif',
     },
     typography: { fontFamily: 'IM Fell Double Pica, serif' },
+    h4: {
+      fontFamily: 'MedievalSharp, serif',
+    },
   },
 })
 

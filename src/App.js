@@ -85,7 +85,7 @@ const App = (props) => {
       return <CampaignManagement id={id} />
     } else if (page === 'factions') {
       return <Factions toPage={toPage} />
-    } else if (page === 'regular') {
+    } else if (page === 'faction') {
       return <FactionSheet factionId={id} />
     } else if (page === 'covenant') {
       return <CovenantSheet covenantId={id} />
