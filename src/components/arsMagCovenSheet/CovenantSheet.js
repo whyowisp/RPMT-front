@@ -17,6 +17,21 @@ import { sheetThemeAM, commonBoxSx } from '../themeAndStyles'
 import BasicAttributes from './BasicAttributes'
 import Reputations from './Reputations'
 import BuildPoints from './BuildPoints'
+import BoonsAndHooks from './BoonsAndHooks'
+import Inhabitants from './Inhabitants'
+import Magi from './Magi'
+import Companions from './Companions'
+import Specialists from './Specialists'
+import Covenfolk from './Covenfolk'
+import HorsesAndLivestock from './HorsesAndLivestock'
+import LandsAndPossessions from './LandsAndPossessions'
+import MagicItems from './MagicItems'
+import MundaneItems from './MundaneItems'
+import WeaponsAndArmor from './WeaponsAndArmor'
+import Wealth from './Wealth'
+import SourcesOfIncome from './SourcesOfIncome'
+import YearlyExpenditure from './YearlyExpenditure'
+import CostSavings from './CostSavings'
 
 const CovenantSheet = ({ covenantId }) => {
   if (!covenantId) return
@@ -63,14 +78,141 @@ const CovenantSheet = ({ covenantId }) => {
               <Image src={AMLogo} fit="contain" sx={{ maxWidth: '400px' }} />
             </Container>
           </Grid>
-          <Grid item>
+          <Grid item order={{ xs: 0, md: 0 }}>
             <BasicAttributes id={covenantId} />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} order={{ xs: 1, md: 1 }}>
             <Reputations id={covenantId} />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} order={{ xs: 2, md: 2 }}>
             <BuildPoints id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 3, md: 3 }}>
+            <BoonsAndHooks id={covenantId} />
+          </Grid>
+
+          <Grid item xs={12} md={12} order={{ xs: 4, md: 4 }}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 2
+              </Typography>
+            </Divider>
+          </Grid>
+          <Grid item xs={12} md={8} order={{ xs: 6, md: 5 }}>
+            <Box
+              component="form"
+              sx={{
+                ...commonBoxSx,
+                background: 'rgb(0,0,0,0)',
+                border: 'none',
+              }}
+            >
+              <Typography variant="h4">Covenant Record Sheet</Typography>
+              <Typography variant="body2">
+                Covenant record sheet / page 2 of 4
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4} order={{ xs: 5, md: 6 }}>
+            <Container sx={{ mt: 6, mb: 1 }}>
+              <Image src={AMLogo} fit="contain" sx={{ maxWidth: '400px' }} />
+            </Container>
+          </Grid>
+          <Grid item xs={12} order={{ xs: 7, md: 7 }}>
+            <Inhabitants id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 8, md: 8 }}>
+            <Magi id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 9, md: 9 }}>
+            <Companions id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 10, md: 10 }}>
+            <Specialists id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 11, md: 11 }}>
+            <Covenfolk id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 12, md: 12 }}>
+            <HorsesAndLivestock id={covenantId} />
+          </Grid>
+          <Grid item xs={12} md={12} order={{ xs: 13, md: 13 }}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 3
+              </Typography>
+            </Divider>
+          </Grid>
+          <Grid item xs={12} md={8} order={{ xs: 15, md: 14 }}>
+            <Box
+              component="form"
+              sx={{
+                ...commonBoxSx,
+                background: 'rgb(0,0,0,0)',
+                border: 'none',
+              }}
+            >
+              <Typography variant="h4">Covenant Record Sheet</Typography>
+              <Typography variant="body2">
+                Covenant record sheet / page 3 of 4
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4} order={{ xs: 14, md: 15 }}>
+            <Container sx={{ mt: 6, mb: 1 }}>
+              <Image src={AMLogo} fit="contain" sx={{ maxWidth: '400px' }} />
+            </Container>
+          </Grid>
+          <Grid item xs={12} order={{ xs: 16, md: 16 }}>
+            <LandsAndPossessions id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 16, md: 16 }}>
+            <MagicItems id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 17, md: 17 }}>
+            <MundaneItems id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 18, md: 18 }}>
+            <WeaponsAndArmor id={covenantId} />
+          </Grid>
+          <Grid item xs={12} md={12} order={{ xs: 19, md: 19 }}>
+            <Divider variant="middle">
+              <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
+                page 4
+              </Typography>
+            </Divider>
+          </Grid>
+          <Grid item xs={12} md={8} order={{ xs: 20, md: 19 }}>
+            <Box
+              component="form"
+              sx={{
+                ...commonBoxSx,
+                background: 'rgb(0,0,0,0)',
+                border: 'none',
+              }}
+            >
+              <Typography variant="h4">Covenant Record Sheet</Typography>
+              <Typography variant="body2">
+                Covenant record sheet / page 4 of 4
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4} order={{ xs: 19, md: 20 }}>
+            <Container sx={{ mt: 6, mb: 1 }}>
+              <Image src={AMLogo} fit="contain" sx={{ maxWidth: '400px' }} />
+            </Container>
+          </Grid>
+          <Grid item xs={12} order={{ xs: 20, md: 20 }}>
+            <Wealth id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 21, md: 21 }}>
+            <SourcesOfIncome id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 22, md: 22 }}>
+            <YearlyExpenditure id={covenantId} />
+          </Grid>
+          <Grid item xs={12} order={{ xs: 23, md: 23 }}>
+            <CostSavings id={covenantId} />
           </Grid>
         </Grid>
       </Paper>

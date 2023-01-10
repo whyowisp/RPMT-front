@@ -125,12 +125,14 @@ const BuildPoints = ({ id }) => {
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
-                <Input
-                  sx={{ ...plainInputSx }}
-                  defaultValue={resource.currentPoints}
-                  onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'currentPoints')}
-                />
+                <i>
+                  <Input
+                    sx={{ ...plainInputSx }}
+                    defaultValue={resource.notes}
+                    onChange={() => setFieldIndex(index)}
+                    onBlur={(event) => prepareValues(event, 'notes')}
+                  />
+                </i>
               </TableCell>
             </TableRow>
           ))}
