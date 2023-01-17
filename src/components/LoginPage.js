@@ -4,20 +4,22 @@ Components responsible for both login and creating new account
 
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import {
   Container,
   Typography,
   Divider,
   Grid,
-  TextField,
   Box,
   Button,
-  // Paper,
+  Paper,
+  TextField,
 } from '@mui/material'
-
+//import { TextField } from './themeAndStyles'
 import { login } from '../reducers/loggedPlayerReducer'
 import { initializePlayers, addPlayer } from '../reducers/playersReducer'
 import { BoarIcon } from '../SvgIcons/BoarIcon'
+import login_background from '../images/login_background.png'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)
@@ -67,7 +69,10 @@ const Login = ({ toPage }) => {
         <TextField
           error={usernameError ? true : false}
           helperText={usernameError ? usernameError : ''}
-          sx={{ mt: 1 }}
+          sx={{
+            mt: 1,
+            type: 'dark',
+          }}
           label="Username"
           onChange={({ target }) => setUsername(target.value)}
         />
@@ -137,7 +142,7 @@ const CreateAccount = ({ toPage, setPage }) => {
   }
 
   return (
-    <Box sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3, color: '#ddd' }}>
       <Typography variant="h5">Create New Account</Typography>
       <form onSubmit={createPlayer}>
         <TextField
@@ -209,42 +214,59 @@ const WelcomePage = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${parchment})`,
+        backgroundImage: `url(${login_background})`,
       }}
     >
     */
   return (
-    <Container maxWidth="xs">
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: '100vh' }}
+    <Paper
+      elevation={1}
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        position: 'relative',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        backgroundImage: `url(${login_background})`,
+      }}
+    >
+      <Container
+        maxWidth="xs"
+        sx={{ backgroundColor: 'rgb(0,0,0,0.4)', color: '#ddd' }}
       >
-        <Grid container spacing={1}>
-          <Grid item xs={1} />
-          <Grid item xs={5}>
-            <Box align="right">
-              <BoarIcon size={130} />
-            </Box>
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          style={{ minHeight: '100vh' }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={1} />
+            <Grid item xs={5}>
+              <Box align="right">
+                <BoarIcon size={130} />
+              </Box>
 
-            <Typography textAlign="right" variant="h3" sx={{ mr: 1, mt: -2 }}>
-              RPMT
-            </Typography>
-            <Divider sx={{ mr: 1 }} />
-            <Typography textAlign="right" variant="h6" sx={{ mr: 1 }}>
-              A Campaign Management Tool for Roleplaying Games
-            </Typography>
-          </Grid>
-          <Divider orientation="vertical" flexItem></Divider>
-          <Grid item xs={5}>
-            {content()}
+              <Typography textAlign="right" variant="h3" sx={{ mr: 1, mt: -2 }}>
+                RPMT
+              </Typography>
+              <Divider sx={{ mr: 1 }} />
+              <Typography textAlign="right" variant="h6" sx={{ mr: 1 }}>
+                A Campaign Management Tool for Roleplaying Games
+              </Typography>
+            </Grid>
+            <Divider orientation="vertical" flexItem></Divider>
+            <Grid item xs={5}>
+              {content()}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Paper>
   )
 }
 

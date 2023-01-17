@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import TextField from '@mui/material/TextField'
 
 const plainInputSx = {
   '& input': { backgroundColor: 'rgb(255, 255, 255, 0.1)', padding: 0.7 },
@@ -218,6 +220,26 @@ const mainTheme = createTheme({
   },*/,
 })
 
+const CustomTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#BEB0A7',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#8B9D83',
+    },
+    '&:hover fieldset': {
+      borderColor: '#BEB0A7',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#BEB0A7',
+    },
+  },
+})
+
 export {
   plainInputSx,
   smallBoxSx,
@@ -225,4 +247,5 @@ export {
   sheetThemeAM,
   mainTheme,
   okButton,
+  CustomTextField,
 }

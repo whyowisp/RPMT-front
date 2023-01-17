@@ -10,32 +10,34 @@ import {
   TextareaAutosize,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { editCovenant } from '../../reducers/covenantReducer'
+import { editLaboratories } from '../../reducers/covenantReducer'
 import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
 
-const MagicItems = ({ id }) => {
+const MagicItems = ({ covenantId, labIndex }) => {
   const dispatch = useDispatch()
-  const covenant = useSelector((state) =>
-    state.covenants.find((c) => c.id === id)
+  const laboratories = useSelector(
+    (state) =>
+      state.covenants.find((covenant) => covenant.id === covenantId)
+        .laboratories
   )
-  const [magicItems, setMagicItems] = useState('')
+  if (!laboratories) return null
+  const currentLab = laboratories[labIndex]
+  const [items, setItems] = useState()
+  const [fieldIndex, setFieldIndex] = useState(-1)
 
   useEffect(() => {
-    setMagicItems(covenant.magicItems.concat(''))
-  }, [covenant])
+    setItems(currentLab.magicItems.concat(''))
+  }, [laboratories])
 
-  const prepareMagicItems = (event, itemIndex, type) => {
-    console.log(itemIndex + ' ' + type)
+  const prepareValues = (event, itemIndex, type) => {
     event.preventDefault()
     const editedProperty = event.target.value
     console.log(editedProperty)
-    setMagicItems(
-      magicItems.map((item, i) =>
+    setItems(
+      items.map((item, i) =>
         i === itemIndex
           ? {
-              name: type === 'name' ? editedProperty : item.name,
-              creator: type === 'creator' ? editedProperty : item.creator,
-              year: type === 'year' ? editedProperty : item.year,
+              item: type === 'item' ? editedProperty : item.item,
               effect: type === 'effect' ? editedProperty : item.effect,
               arts: type === 'arts' ? editedProperty : item.arts,
               lvl: type === 'lvl' ? editedProperty : item.lvl,
@@ -51,74 +53,62 @@ const MagicItems = ({ id }) => {
 
   const submitAll = (event) => {
     event.preventDefault()
-    console.log('submitAll called')
-    const emptyMagicItemsCleared = magicItems.filter((item) =>
+    const emptyMagicItemsCleared = items.filter((item) =>
       Object.values(item)[0] === '' ? null : item
     )
     const data = {
-      id: id,
+      id: covenantId,
+      labId: currentLab._id,
       content: {
+        ...currentLab,
         magicItems: emptyMagicItemsCleared,
       },
     }
-    console.log(data)
-    dispatch(editCovenant(data))
+    dispatch(editLaboratories(data))
     // -> to rerender
   }
 
-  if (!magicItems) return null
+  if (!items) return null
 
   return (
     <Box sx={{ ...commonBoxSx }}>
       <Typography variant="label">Magic Items</Typography>
-      {magicItems.map((item, index) => (
+      {items.map((item, index) => (
         <Grid key={item.name} sx={{ borderBottom: '1px solid', p: 0.5 }}>
           <Box component="form">
             <Stack direction="row" spacing={1}>
               <Typography variant="labelXs">Item</Typography>
               <Input
-                defaultValue={item?.name}
+                defaultValue={item?.item}
                 placeholder={'Title of an item'}
-                onBlur={(event) => prepareMagicItems(event, index, 'name')}
-              />
-              <Typography variant="labelXs">Creator</Typography>
-              <Input
-                defaultValue={item?.creator}
-                onBlur={(event) => prepareMagicItems(event, index, 'creator')}
-              />
-            </Stack>
-            <Stack direction="row" spacing={1}>
-              <Typography variant="labelXs">Year</Typography>
-              <Input
-                defaultValue={item?.year}
-                onBlur={(event) => prepareMagicItems(event, index, 'year')}
+                onBlur={(event) => prepareValues(event, index, 'item')}
               />
               <Typography variant="labelXs">Arts</Typography>
               <Input
                 defaultValue={item?.arts}
-                placeholder={'Circle'}
-                onBlur={(event) => prepareMagicItems(event, index, 'arts')}
+                placeholder={'Tech/Form'}
+                onBlur={(event) => prepareValues(event, index, 'arts')}
               />
             </Stack>
             <Stack direction="row" spacing={1}>
               <Typography variant="labelXs">Level</Typography>
               <Input
                 defaultValue={item?.lvl}
-                onBlur={(event) => prepareMagicItems(event, index, 'lvl')}
+                onBlur={(event) => prepareValues(event, index, 'lvl')}
               />
               <Typography variant="labelXs">R/D/T</Typography>
               <Input
                 defaultValue={item?.rdt}
                 placeholder={'Moon'}
-                onBlur={(event) => prepareMagicItems(event, index, 'rdt')}
+                onBlur={(event) => prepareValues(event, index, 'rdt')}
               />
               <Typography variant="labelXs">Uses</Typography>
               <Input
                 defaultValue={item?.uses}
-                onBlur={(event) => prepareMagicItems(event, index, 'uses')}
+                onBlur={(event) => prepareValues(event, index, 'uses')}
               />
             </Stack>
-
+            <Stack direction="row" spacing={1}></Stack>
             <Typography variant="labelXs">Description & Effect</Typography>
             <TextareaAutosize
               sx={{ ...plainInputSx }}
@@ -126,7 +116,7 @@ const MagicItems = ({ id }) => {
               style={{ width: '100%' }}
               placeholder="Describe item and it's effects"
               defaultValue={item?.description}
-              onBlur={(event) => prepareMagicItems(event, index, 'description')}
+              onBlur={(event) => prepareValues(event, index, 'description')}
             />
             <Button
               type="submit"

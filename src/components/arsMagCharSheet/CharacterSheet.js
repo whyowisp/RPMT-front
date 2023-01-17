@@ -9,6 +9,7 @@ import {
 } from '@mui/material'
 import Image from 'mui-image'
 //import Image from 'mui-image' might want to uninstall this
+
 import AMbackground from '../../images/AMbackground.jpg'
 import AMLogo from '../../images/arm5-logo-grey.png'
 
@@ -48,6 +49,7 @@ md, medium: 900px
 lg, large: 1200px
 xl, extra-large: 1536px
 */
+
   if (!id) return null
   return (
     <>

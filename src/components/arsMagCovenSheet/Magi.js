@@ -27,7 +27,7 @@ const Magi = ({ id }) => {
     setMagi(covenant.magi.concat(['']))
   }, [covenant])
 
-  const prepareValues = (e, type) => {
+  const pmageareValues = (e, type) => {
     e.preventDefault()
     const newValue = e.target.value
     const indexOfNewValue = fieldIndex
@@ -57,8 +57,8 @@ const Magi = ({ id }) => {
     e.preventDefault()
 
     //Clear name objects that doesn't have name name
-    const magiEmptyValuesCleared = magi.filter((rep) =>
-      Object.values(rep)[0] === '' ? null : rep
+    const magiEmptyValuesCleared = magi.filter((mage) =>
+      Object.values(mage)[0] === '' ? null : mage
     )
 
     console.log(
@@ -110,7 +110,7 @@ const Magi = ({ id }) => {
                   sx={{ ...plainInputSx, width: '95%' }}
                   defaultValue={magus.name}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'name')}
+                  onBlur={(event) => pmageareValues(event, 'name')}
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
@@ -118,7 +118,7 @@ const Magi = ({ id }) => {
                   sx={{ ...plainInputSx, width: '95%' }}
                   defaultValue={magus.born}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'born')}
+                  onBlur={(event) => pmageareValues(event, 'born')}
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
@@ -127,7 +127,7 @@ const Magi = ({ id }) => {
                     sx={{ ...plainInputSx, width: '95%' }}
                     defaultValue={magus.titlesOrResponsibilities}
                     onChange={() => setFieldIndex(index)}
-                    onBlur={(event) => prepareValues(event, 'title')}
+                    onBlur={(event) => pmageareValues(event, 'title')}
                   />
                 </i>
               </TableCell>
@@ -136,7 +136,7 @@ const Magi = ({ id }) => {
                   sx={{ ...plainInputSx, width: '95%' }}
                   defaultValue={magus.loyalty}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'loyalty')}
+                  onBlur={(event) => pmageareValues(event, 'loyalty')}
                 />
               </TableCell>
               <TableCell sx={{ border: 'none' }}>
@@ -144,7 +144,7 @@ const Magi = ({ id }) => {
                   sx={{ ...plainInputSx, width: '95%' }}
                   defaultValue={magus.points}
                   onChange={() => setFieldIndex(index)}
-                  onBlur={(event) => prepareValues(event, 'points')}
+                  onBlur={(event) => pmageareValues(event, 'points')}
                 />
               </TableCell>
             </TableRow>

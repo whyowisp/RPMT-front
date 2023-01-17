@@ -27,6 +27,18 @@ export const covenantSlice = createSlice({
 
       state.map((covenant) => (covenant.id !== id ? covenant : editedCovenant))
     },
+    laboratoryEdition(state, action) {
+      const id = action.payload.id
+      const labId = action.payload.labId
+      const content = action.payload.content
+      const labInEdit = state
+        .find((covenant) => covenant.id === id)
+        .laboratories.find((lab) => lab._id === labId)
+      const editedLab = Object.assign(labInEdit, content)
+      state
+        .find((covenant) => covenant.id === id)
+        .laboratories.map((lab) => (lab._id === labId ? editedLab : lab))
+    },
     covenantRemoval(state, action) {
       const id = action.payload
       return state.filter((covenant) => covenant.id !== id)
@@ -38,6 +50,7 @@ export const covenantSlice = createSlice({
 export const {
   covenantInitialization,
   covenantEdition,
+  laboratoryEdition,
   covenantCreation,
   covenantRemoval,
 } = covenantSlice.actions
@@ -72,6 +85,28 @@ export const editCovenant = (data) => {
     dispatch(covenantEdition(data))
     await covenantService.updateCovenant(data.content, data.id)
     //.then((result) =>console.log('result of update: ' + JSON.stringify(result)))
+  }
+}
+
+/*
+Pass data to this function:
+Use format:
+
+{
+  id: <covenantId>,
+  index: <labIndex>
+  content: {<theData>}
+}
+*/
+export const editLaboratories = (data) => {
+  console.log(data)
+  return async (dispatch) => {
+    dispatch(laboratoryEdition(data))
+    await covenantService
+      .updateLaboratory(data.content, data.id, data.labId)
+      .then((result) =>
+        console.log('result of update: ' + JSON.stringify(result))
+      )
   }
 }
 
