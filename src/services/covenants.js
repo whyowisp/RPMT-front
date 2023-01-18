@@ -21,6 +21,11 @@ const updateLaboratory = async (reqData, covenantId, labId) => {
   return res.data
 }
 
+const updateYearlySummary = async (reqData, covenantId, summaryId) => {
+  const res = await axios.put(`${baseUrl}/${covenantId}/${summaryId}`, reqData)
+  return res.data
+}
+
 const deleteCovenant = async (covenantId) => {
   const res = await axios.delete(`${baseUrl}/${covenantId}`, covenantId)
   return res.data
@@ -31,6 +36,7 @@ const covenantService = {
   createNew,
   updateCovenant,
   updateLaboratory,
+  updateYearlySummary,
   deleteCovenant,
 }
 

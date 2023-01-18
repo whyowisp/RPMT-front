@@ -39,6 +39,20 @@ export const covenantSlice = createSlice({
         .find((covenant) => covenant.id === id)
         .laboratories.map((lab) => (lab._id === labId ? editedLab : lab))
     },
+    yearlySummaryEdition(state, action) {
+      const id = action.payload.id
+      const summaryId = action.payload.summaryId
+      const content = action.payload.content
+      const summaryInEdit = state
+        .find((covenant) => covenant.id === id)
+        .yearlySummaries.find((summary) => summary._id === summaryId)
+      const editedSummary = Object.assign(summaryInEdit, content)
+      state
+        .find((covenant) => covenant.id === id)
+        .yearlySummaries.map((summary) =>
+          summary._id === summaryId ? editedSummary : summary
+        )
+    },
     covenantRemoval(state, action) {
       const id = action.payload
       return state.filter((covenant) => covenant.id !== id)
@@ -51,6 +65,7 @@ export const {
   covenantInitialization,
   covenantEdition,
   laboratoryEdition,
+  yearlySummaryEdition,
   covenantCreation,
   covenantRemoval,
 } = covenantSlice.actions
@@ -102,11 +117,29 @@ export const editLaboratories = (data) => {
   console.log(data)
   return async (dispatch) => {
     dispatch(laboratoryEdition(data))
-    await covenantService
-      .updateLaboratory(data.content, data.id, data.labId)
-      .then((result) =>
-        console.log('result of update: ' + JSON.stringify(result))
-      )
+    await covenantService.updateLaboratory(data.content, data.id, data.labId)
+  }
+}
+
+/*
+Pass data to this function:
+Use format:
+
+{
+  id: <covenantId>,
+  index: <summaryIndex>
+  content: {<theData>}
+}
+*/
+export const editYearlySummaries = (data) => {
+  console.log(data)
+  return async (dispatch) => {
+    dispatch(yearlySummaryEdition(data))
+    await covenantService.updateYearlySummary(
+      data.content,
+      data.id,
+      data.summaryId
+    )
   }
 }
 
