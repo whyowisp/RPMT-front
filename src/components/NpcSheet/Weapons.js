@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
@@ -8,36 +9,32 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Button,
 } from '@mui/material'
 
-import { useEffect, useState } from 'react'
-import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
+import { editNpc } from '../../reducers/npcReducer'
+import { plainInputSx } from '../themeAndStyles'
 
-const Weapons = ({ id }) => {
+import HeaderButton from './HeaderButton'
+
+const Weapons = ({ npcId }) => {
   const dispatch = useDispatch()
-  const character = useSelector((state) =>
-    state.characters.find((c) => c._id === id)
+  const npc = useSelector((state) =>
+    state.npcs.find((npc) => npc._id === npcId)
   )
-
   const [weapons, setWeapons] = useState()
   const [fieldIndex, setFieldIndex] = useState(-1)
+  const [propertyIsEdited, setPropertyIsEdited] = useState(false)
 
   useEffect(() => {
-    setWeapons(character.weapons.concat(['']))
-  }, [character])
+    setWeapons(npc.weapons.concat(['']))
+  }, [npc])
 
   const prepareValues = (e, type) => {
     e.preventDefault()
     const newValue = e.target.value
     const indexOfNewValue = fieldIndex
 
-    console.log(
-      'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
-    )
-
-    /*eslint-disable*/
+    /* eslint-disable */
     setWeapons(
       weapons.map((wpn, i) =>
         i === indexOfNewValue
@@ -54,42 +51,39 @@ const Weapons = ({ id }) => {
           : wpn
       )
     )
-    /*eslint-enable*/
+    /* eslint-enable */
+    setPropertyIsEdited(true)
   }
 
   const submitUpdate = (e) => {
     e.preventDefault()
 
-    const weaponsEmptyValuesCleared = weapons.filter((wpn) =>
-      Object.values(wpn)[0] === '' ? null : wpn
-    )
-
-    console.log(
-      'array of empty values cleared(?): ' +
-        JSON.stringify(weaponsEmptyValuesCleared)
+    const weaponsEmptyValuesCleared = weapons.filter((trait) =>
+      Object.values(trait)[0] === '' ? null : trait
     )
 
     const data = {
-      id: id,
+      id: npcId,
       content: {
         weapons: weaponsEmptyValuesCleared,
       },
     }
+    dispatch(editNpc(data))
 
-    console.log('data to send: ' + JSON.stringify(data))
-    dispatch(editCharacter(data))
-
-    //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
     setWeapons([])
-    // -> to rerender
+    setPropertyIsEdited(false)
   }
 
   if (!weapons) return null
 
   return (
-    <TableContainer component="form" sx={{ ...commonBoxSx }}>
-      <Typography variant="label">Weapons</Typography>
+    <TableContainer component="form" sx={{ p: 1.2 }}>
+      <HeaderButton
+        submitUpdate={submitUpdate}
+        primaryText={'WEAPONS'}
+        propertyIsEdited={propertyIsEdited}
+      />
       <Table size="small" padding="none">
         <TableHead>
           <TableRow>
@@ -172,10 +166,6 @@ const Weapons = ({ id }) => {
           ))}
         </TableBody>
       </Table>
-
-      <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
-        ok
-      </Button>
       <Typography
         color="info.main"
         sx={{

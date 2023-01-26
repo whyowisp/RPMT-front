@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -9,7 +8,6 @@ import {
   editCharacter,
 } from '../reducers/characterReducer'
 import {
-  Container,
   TableContainer,
   Table,
   TableRow,
@@ -103,7 +101,8 @@ const CharacterList = ({ toPage }) => {
           </Typography>
         </Box>
       </Paper>
-      <Paper elevation={10}>
+
+      <Paper elevation={3}>
         <TableContainer component={Box} sx={{ paddingBottom: 10 }}>
           <Table size="small">
             <TableHead>
@@ -131,7 +130,7 @@ const CharacterList = ({ toPage }) => {
 
               <TableRow>
                 <TableCell
-                  colspan={5}
+                  colSpan={5}
                   align="center"
                   style={{ borderBottom: 'none' }}
                 >
@@ -203,8 +202,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         key={chr._id}
         sx={{
           display: solveRowVisibility(),
-          backgroundColor:
-            chr.visibility === 'hidden' ? 'characterHidden.main' : 'inherit',
+          backgroundColor: chr.visibility === 'hidden' ? '#ddd' : 'inherit',
         }}
       >
         <TableCell style={{ borderBottom: 'none' }}>
@@ -218,13 +216,13 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         </TableCell>
         <TableCell
           style={{ borderBottom: 'none' }}
-          sx={{ color: chr.visibility === 'disabled' ? 'gray' : 'black' }}
+          sx={{ color: chr.visibility === 'disabled' ? '#bf4e30' : 'black' }}
         >
           <Typography
             variant="subtitle1"
-            sx={{ color: chr.visibility === 'disabled' ? 'gray' : 'black' }}
+            sx={{ color: chr.visibility === 'disabled' ? '#bf4e30' : 'black' }}
           >
-            {chr.character}
+            {chr.name}
           </Typography>
         </TableCell>
         <TableCell style={{ borderBottom: 'none' }} align="right">
@@ -235,7 +233,7 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
             Enter
           </Button>
           <Button
-            onClick={() => handleDialogOpen(chr._id, chr.character)}
+            onClick={() => handleDialogOpen(chr._id, chr.name)}
             disabled={whoIsLoggedIn.id === chr.owner ? false : true}
           >
             <DeleteForeverTwoToneIcon />

@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
   ThemeProvider,
   CssBaseline,
@@ -6,9 +8,9 @@ import {
   Divider,
   Typography,
   Container,
+  Button,
 } from '@mui/material'
 import Image from 'mui-image'
-//import Image from 'mui-image' might want to uninstall this
 
 import AMbackground from '../../images/AMbackground.jpg'
 import AMLogo from '../../images/arm5-logo-grey.png'
@@ -39,7 +41,30 @@ import Familiar from './Familiar'
 import Spells from './Spells'
 import Dice from '../Dice'
 
+import Header from '../Header'
+import { editCharacter } from '../../reducers/characterReducer'
+
+const headerData = {
+  title: 'Ars Magica - Character Sheet',
+}
+
 const CharacterSheet = ({ id }) => {
+  const dispatch = useDispatch()
+  const character = useSelector((state) =>
+    state.characters.find((c) => c._id === id)
+  )
+  const isMagus = character.isMagus //boolean
+
+  const switchCharacterType = () => {
+    const data = {
+      id: id,
+      content: {
+        isMagus: !isMagus,
+      },
+    }
+    dispatch(editCharacter(data))
+  }
+
   //Note <Grid item xs={12} md={6}> means that element takes full width(12) over sx(600px)
   //and half width(6) over md(900px). Think breakpoints as 'bigger than...'
   /*
@@ -53,6 +78,7 @@ xl, extra-large: 1536px
   if (!id) return null
   return (
     <>
+      <Header toPage={null} headerData={headerData} />
       <ThemeProvider theme={sheetThemeAM}>
         <CssBaseline />
         <Paper
@@ -69,6 +95,11 @@ xl, extra-large: 1536px
         >
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} order={{ xs: -3, md: -3 }}>
+              <Button onClick={() => switchCharacterType()}>
+                {character.isMagus
+                  ? 'close magus extension (safe)'
+                  : 'set as magus'}
+              </Button>
               <Divider variant="middle">
                 <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
                   page 1
@@ -142,47 +173,55 @@ xl, extra-large: 1536px
             <Grid item xs={12} md={12}>
               <Depiction id={id} />
             </Grid>
-            <Grid item xs={12}>
-              <Divider variant="middle">
-                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                  page 4
-                </Typography>
-              </Divider>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <MagiAttributes id={id} />
-            </Grid>
-            <Grid item xs={12}>
-              <MagicalArts id={id} />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <CastingTotals id={id} />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Grid item xs={12} marginBottom={1}>
-                <Lab id={id} />
-              </Grid>
-              <Grid item xs={12} marginBottom={1}>
-                <Longevity id={id} />
-              </Grid>
-              <Grid item xs={12} marginBottom={1}>
-                <RawVis id={id} />
-              </Grid>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Familiar id={id} />
-            </Grid>
-            <Grid item xs={12}>
-              <Divider variant="middle">
-                <Typography sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}>
-                  page 5
-                </Typography>
-              </Divider>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Spells id={id} />
-            </Grid>
           </Grid>
+          {character.isMagus && (
+            <Grid container>
+              <Grid item xs={12}>
+                <Divider variant="middle">
+                  <Typography
+                    sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}
+                  >
+                    page 4
+                  </Typography>
+                </Divider>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <MagiAttributes id={id} />
+              </Grid>
+              <Grid item xs={12}>
+                <MagicalArts id={id} />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <CastingTotals id={id} />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Grid item xs={12} marginBottom={1}>
+                  <Lab id={id} />
+                </Grid>
+                <Grid item xs={12} marginBottom={1}>
+                  <Longevity id={id} />
+                </Grid>
+                <Grid item xs={12} marginBottom={1}>
+                  <RawVis id={id} />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Familiar id={id} />
+              </Grid>
+              <Grid item xs={12}>
+                <Divider variant="middle">
+                  <Typography
+                    sx={{ fontFamily: 'MedievalSharp', fontSize: 16 }}
+                  >
+                    page 5
+                  </Typography>
+                </Divider>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Spells id={id} />
+              </Grid>
+            </Grid>
+          )}
         </Paper>
       </ThemeProvider>
       <Dice />

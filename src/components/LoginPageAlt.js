@@ -19,7 +19,7 @@ import {
 import { login } from '../reducers/loggedPlayerReducer'
 import { initializePlayers, addPlayer } from '../reducers/playersReducer'
 import { BoarIcon } from '../SvgIcons/BoarIcon'
-import login_background from '../images/login_background.png'
+import login_background from '../images/login_background_bw.png'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)
@@ -64,7 +64,9 @@ const Login = ({ toPage }) => {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h5">Login</Typography>
+      <Typography variant="h5" sx={{ color: 'primary.main' }}>
+        Login
+      </Typography>
       <form onSubmit={handleLogin}>
         <TextField
           error={usernameError ? true : false}
@@ -84,7 +86,7 @@ const Login = ({ toPage }) => {
           type="password"
           onChange={({ target }) => setPassword(target.value)}
         />
-        <Button type="submit" sx={{ m: 0.3 }}>
+        <Button type="submit" sx={{ m: 0.3, color: 'primary.main' }}>
           Login
         </Button>
       </form>
@@ -143,7 +145,9 @@ const CreateAccount = ({ toPage, setPage }) => {
 
   return (
     <Box sx={{ mt: 3 }}>
-      <Typography variant="h5">Create Account</Typography>
+      <Typography variant="h5" sx={{ color: 'primary.main' }}>
+        Create Account
+      </Typography>
       <form onSubmit={createPlayer}>
         <TextField
           color={username && username.length < 5 ? 'warning' : 'success'}
@@ -235,12 +239,7 @@ const WelcomePage = () => {
           backgroundImage: `url(${login_background})`,
         }}
       >
-        <Container
-          maxWidth="xs"
-          sx={{
-            backgroundColor: 'rgba(235,235,235, 0.7)',
-          }}
-        >
+        <Container maxWidth="xs">
           <Grid
             container
             spacing={1}
@@ -267,7 +266,7 @@ const WelcomePage = () => {
                 <Typography
                   textAlign="right"
                   variant="h6"
-                  sx={{ mr: 1, color: 'customAppBar.main' }}
+                  sx={{ mr: 1, color: 'primary.main' }}
                 >
                   A Campaign Management Tool for Roleplaying Games
                 </Typography>

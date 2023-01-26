@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Input,
@@ -9,25 +8,19 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Button,
   Checkbox,
-  TextareaAutosize,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { editCharacter } from '../../reducers/characterReducer'
-import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
+import { editNpc } from '../../reducers/npcReducer'
 
-const Wounds = ({ id }) => {
+const Wounds = ({ npcId }) => {
   const dispatch = useDispatch()
-  const character = useSelector((state) =>
-    state.characters.find((c) => c._id === id)
-  )
+  const npc = useSelector((state) => state.npcs.find((n) => n._id === npcId))
   const [wounds, setWounds] = useState([])
   const [range, setRange] = useState('')
-  const [notes, setNotes] = useState('')
 
   useEffect(() => {
-    setWounds(character.wounds)
+    setWounds(npc.wounds)
   }, [dispatch])
 
   //Wrap wounds to data object and dispatch
@@ -35,13 +28,13 @@ const Wounds = ({ id }) => {
     //useEffect is eager to launch in first render, before any data has initialized.
     if (wounds.length === 0) return
     const data = {
-      id: id,
+      id: npcId,
       content: {
         wounds: wounds,
       },
     }
 
-    dispatch(editCharacter(data))
+    dispatch(editNpc(data))
   }, [wounds])
 
   const handleChecked = (yIndex, xIndex) => {
@@ -60,9 +53,10 @@ const Wounds = ({ id }) => {
   const prepareValues = (index) => {
     const ranges = range.split('-')
     const checkedsByRange = Array.from(Array(1 + (ranges[1] - ranges[0]))).map(
-      (x, i) => false
+      () => false
     )
 
+    /* eslint-disable */
     setWounds(
       wounds.map((wnd, i) =>
         i === index
@@ -74,35 +68,34 @@ const Wounds = ({ id }) => {
           : wnd
       )
     )
+    /* eslint-enable */
   }
 
-  if (!character) return null
+  if (!npc) return null
   return (
-    <TableContainer component="form" sx={{ ...commonBoxSx }}>
-      <Typography variant="label">Wounds</Typography>
+    <TableContainer component="form" sx={{ p: 1.2 }}>
+      <Typography variant="button">WOUNDS</Typography>
       <Table size="small" padding="none">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ width: '30%' }} />
+            <TableCell></TableCell>
             <TableCell sx={{ width: '12%' }}>
-              {window.innerWidth < 600 ? 'RNG' : 'RANGE'}
+              {window.innerWidth < 600 ? 'Rng.' : 'Range'}
             </TableCell>
-            <TableCell sx={{ width: '45%' }} align="center">
-              NUMBER
-            </TableCell>
-            <TableCell sx={{ width: '5%' }}>
-              {window.innerWidth < 600 ? 'PLTY' : 'PENALTY'}
+            <TableCell align="center">Number</TableCell>
+            <TableCell sx={{ width: '10%' }}>
+              {window.innerWidth < 600 ? 'Plty.' : 'Penalty'}
             </TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
           {wounds.map((wnd, yIndex) => (
-            <TableRow key={wnd.level + yIndex}>
-              <TableCell sx={{ pb: 1, pt: 2 }}>{wnd.level}</TableCell>
+            <TableRow key={wnd.title}>
+              <TableCell>{wnd.title}</TableCell>
               <TableCell>
                 <Input
-                  sx={{ width: '95%' }}
+                  size="small"
                   placeholder={
                     (yIndex * 5 + 1).toString() +
                     '-' +
@@ -116,8 +109,11 @@ const Wounds = ({ id }) => {
               <TableCell align="center">
                 {wnd.checked.map((isChecked, xIndex) => (
                   <Checkbox
-                    key={xIndex}
-                    sx={{ p: '0.1rem' }}
+                    key={xIndex + Math.random(1000)}
+                    sx={{
+                      p: '0.1px',
+                    }}
+                    size="small"
                     checked={isChecked}
                     onChange={() => handleChecked(yIndex, xIndex)}
                     inputProps={{ 'aria-label': 'controlled' }}
@@ -131,15 +127,6 @@ const Wounds = ({ id }) => {
           ))}
         </TableBody>
       </Table>
-      <TextareaAutosize
-        sx={{ ...plainInputSx }}
-        minRows={5}
-        style={{ width: '100%' }}
-        placeholder="Example: Cannot use right hand (currently this field cannot be saved)"
-      />
-      <Button disabled sx={okButton} onClick={(e) => submitUpdate(e)}>
-        ok
-      </Button>
     </TableContainer>
   )
 }

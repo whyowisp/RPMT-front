@@ -11,7 +11,7 @@ const BasicAttributes = ({ id }) => {
     state.characters.find((c) => c._id === id)
   )
 
-  const [characterName, setCharacterName] = useState(character.character)
+  const [characterName, setCharacterName] = useState(character.name)
   const [player, setPlayer] = useState(character.player)
   const [saga, setSaga] = useState(character.saga)
   const [setting, setSetting] = useState(character.setting)
@@ -26,7 +26,7 @@ const BasicAttributes = ({ id }) => {
     const data = {
       id: id,
       content: {
-        character: characterName,
+        name: characterName,
         player: player,
         saga: saga,
         setting: setting,
@@ -54,7 +54,7 @@ const BasicAttributes = ({ id }) => {
         <Input
           sx={{ ...plainInputSx, fontSize: '1.2rem' }}
           disableUnderline
-          defaultValue={character.character}
+          defaultValue={character.name}
           onChange={({ target }) => setCharacterName(target.value)}
         />
       </Stack>

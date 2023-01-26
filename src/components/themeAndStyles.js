@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 
 const plainInputSx = {
-  '& input': { backgroundColor: 'rgb(255, 255, 255, 0.1)', padding: 0.7 },
+  '& input': { backgroundColor: 'rgb(255, 255, 255, 0.1)', padding: 0.5 },
   '& input:hover': { backgroundColor: 'rgb(202, 217, 236, 0.2)' },
   '& input:focus': { backgroundColor: 'rgb(0, 0, 0, 0.1)' },
   width: '100%',
@@ -12,14 +12,12 @@ const plainInputSx = {
 const smallBoxSx = {
   p: 1.5,
   border: '2px solid',
-
   backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
 
 const commonBoxSx = {
   p: 1.5,
   border: '2px solid',
-
   backgroundColor: 'rgb(255, 255, 255, 0.5)',
 }
 
@@ -61,6 +59,16 @@ const sheetThemeAM = createTheme({
     labelXs: {
       fontSize: '0.9rem',
       fontFamily: 'IM Fell Double Pica, serif',
+    },
+    labelBold: {
+      fontSize: '1rem',
+      fontWeight: 600,
+      fontFamily: 'IM Fell Double Pica, serif',
+    },
+    lightProperty: {
+      fontSize: '0.9rem',
+      fontFamily: 'IM Fell Double Pica, serif',
+      color: '#666',
     },
     typography: { fontFamily: 'IM Fell Double Pica, serif' },
     h4: {
@@ -142,6 +150,7 @@ const mainTheme = createTheme({
     },
   },*/
 
+  //Interesting purple shade to think #9C8389. (Hit #3A4E48 and split complementary to adobe)
   palette: {
     mode: 'light',
     primary: {
@@ -154,12 +163,12 @@ const mainTheme = createTheme({
     },
     background: {
       default: '#8B9D83',
-      paper: 'rgba(255,255,255,0.8)',
+      paper: 'rgba(255,255,255,0.9)',
       //paper: 'rgba(0,0,0,0.85)',
     },
     customAppBar: {
       main: '#3A4E48',
-      contrastText: '#ddd',
+      contrastText: '#eee',
     },
   },
   typography: {
@@ -172,10 +181,6 @@ const mainTheme = createTheme({
     },
     h4: {
       fontFamily: 'Cinzel Decorative',
-    },
-    h5: {
-      fontFamily: 'Cinzel Decorative',
-      fontWeight: 700,
     },
     button: {
       fontWeight: 500,

@@ -25,14 +25,16 @@ import { clearPlayer, setCurrentCampaign } from './reducers/loggedPlayerReducer'
 //import parchment from './images/parchment.png'
 
 import { mainTheme } from './components/themeAndStyles'
-import LoginPage from './components/LoginPage'
+//import LoginPage from './components/LoginPage'
+import LoginPageAlt from './components/LoginPageAlt'
 import CharacterList from './components/CharacterList'
 import CharacterSheet from './components/arsMagCharSheet/CharacterSheet'
 import Home from './components/Home'
 import CampaignManagement from './components/CampaignManagement'
-import Factions from './components/Factions'
+import FactionList from './components/FactionList'
 import FactionSheet from './components/FactionSheet'
 import CovenantSheet from './components/arsMagCovenSheet/CovenantSheet'
+import NpcList from './components/NpcList/NpcList'
 
 const drawerWidth = 200
 
@@ -84,11 +86,15 @@ const App = (props) => {
     } else if (page === 'management') {
       return <CampaignManagement id={id} />
     } else if (page === 'factions') {
-      return <Factions toPage={toPage} />
+      return <FactionList toPage={toPage} />
     } else if (page === 'faction') {
       return <FactionSheet factionId={id} />
     } else if (page === 'covenant') {
       return <CovenantSheet covenantId={id} />
+    } else if (page === 'npcs') {
+      return <NpcList />
+    } else if (page === 'questMode') {
+      return null
     }
   }
 
@@ -116,15 +122,6 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Characters"
-                onClick={toPage('characterList')}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText
-                align="right"
                 primary="Factions"
                 onClick={toPage('factions')}
               />
@@ -134,8 +131,8 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Quests"
-                onClick={toPage('quests')}
+                primary="Characters"
+                onClick={toPage('characterList')}
               />
             </ListItemButton>
           </ListItem>
@@ -143,8 +140,17 @@ const App = (props) => {
             <ListItemButton>
               <ListItemText
                 align="right"
-                primary="Other"
-                onClick={toPage('other')}
+                primary="NPC's & Creatures"
+                onClick={toPage('npcs')}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                align="right"
+                primary="Quest Mode"
+                onClick={toPage('questMode')}
               />
             </ListItemButton>
           </ListItem>
@@ -156,32 +162,20 @@ const App = (props) => {
       <List>
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText
-              align="right"
-              primary="Home"
-              onClick={toPage('home')}
-            />
             <HomeIcon sx={{ m: 1 }} />
+            <ListItemText primary="Home" onClick={toPage('home')} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText
-              align="right"
-              primary="Player"
-              onClick={toPage('player')}
-            />
             <AccessibilityNewIcon sx={{ m: 1 }} />
+            <ListItemText primary="Player" onClick={toPage('player')} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
-            <ListItemText
-              align="right"
-              primary="Logout"
-              onClick={toPage('logout')}
-            />
             <LogoutIcon sx={{ m: 1 }} />
+            <ListItemText primary="Logout" onClick={toPage('logout')} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -291,7 +285,7 @@ const App = (props) => {
         </Box>
       ) : (
         <>
-          <LoginPage />
+          <LoginPageAlt />
         </>
       )}
     </ThemeProvider>
