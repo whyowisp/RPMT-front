@@ -161,6 +161,10 @@ const mainTheme = createTheme({
       main: '#BEB0A7',
       contrastText: '#040303',
     },
+    hidden: {
+      main: '#EBE8E8',
+      contrast: '#040303',
+    },
     background: {
       default: '#8B9D83',
       paper: 'rgba(255,255,255,0.9)',

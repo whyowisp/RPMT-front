@@ -10,19 +10,14 @@ import {
 
 import NpcRow from './NpcRow'
 
-const NpcColumn = ({
-  typeOfNpcs,
-  handleDialogOpen,
-  createNew,
-  isCreatures,
-}) => {
+const NpcColumn = ({ typeOfNpcs, handleDialogOpen, createNew, isCreature }) => {
   return (
     <Paper elevation={3} sx={{ paddingBottom: 10 }}>
       <Table size="small" padding="none">
         <TableHead>
           <TableCell></TableCell>
           <TableCell sx={{ pt: 1, pl: 1 }}>
-            {isCreatures ? 'Creatures' : 'Non-Player Characters'}
+            {isCreature ? 'Creatures' : 'Non-Player Characters'}
           </TableCell>
           <TableCell></TableCell>
           <TableCell
@@ -47,7 +42,7 @@ const NpcColumn = ({
               align="center"
               style={{ borderBottom: 'none' }}
             >
-              <Button onClick={() => createNew()}>create new</Button>
+              <Button onClick={() => createNew(isCreature)}>create new</Button>
             </TableCell>
           </TableRow>
         </TableBody>

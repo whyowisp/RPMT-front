@@ -35,7 +35,7 @@ const NpcSheet = ({ npcId }) => {
           margin: 1,
           position: 'relative',
           mb: 10,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundRepeat: 'space',
           backgroundPosition: 'top',
           backgroundImage: `url(${AMbackground})`,

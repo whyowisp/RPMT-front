@@ -35,6 +35,7 @@ import FactionList from './components/FactionList'
 import FactionSheet from './components/FactionSheet'
 import CovenantSheet from './components/arsMagCovenSheet/CovenantSheet'
 import NpcList from './components/NpcList/NpcList'
+import QuestMode from './components/QuestMode'
 
 const drawerWidth = 200
 
@@ -45,6 +46,7 @@ const App = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [page, setPage] = useState('home')
   //id can be character, player or campaign id. It´s definitely possible source of bugs.
+  //Solution: Use redux inside components to get data that is needed. Fix this later.
   const [id, setId] = useState()
 
   const dispatch = useDispatch()
@@ -94,7 +96,7 @@ const App = (props) => {
     } else if (page === 'npcs') {
       return <NpcList />
     } else if (page === 'questMode') {
-      return null
+      return <QuestMode />
     }
   }
 

@@ -84,6 +84,7 @@ const CampaignManagement = () => {
   }
 
   const handleAddPlayer = () => {
+    //Aliases are unique. Still i think it would be better to find them by id.
     const playerInDb = players.find((player) => player.alias === addRemoveWho)
     const playerInCampaign = campaign.players.find(
       (player) => player.alias === addRemoveWho

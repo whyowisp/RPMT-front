@@ -38,7 +38,7 @@ const NpcList = () => {
 
   const handleDialogOpen = (id, name) => {
     setId(id)
-    setReferenceName(name)
+    setReferenceName(name ? name : '') //if name is undef, bugses: Can't remove but one npc per page reload
     setOpen(true)
   }
 
@@ -56,8 +56,14 @@ const NpcList = () => {
     setOpen(false)
   }
 
-  const createNew = () => {
-    dispatch(initializeNew(whoIsLoggedIn.id, whoIsLoggedIn.currentCampaign.id))
+  const createNew = (isCreature) => {
+    dispatch(
+      initializeNew(
+        whoIsLoggedIn.id,
+        whoIsLoggedIn.currentCampaign.id,
+        isCreature
+      )
+    )
   }
 
   if (!allNpcs) return null
@@ -96,7 +102,6 @@ const NpcList = () => {
             typeOfNpcs={npcs}
             handleDialogOpen={handleDialogOpen}
             createNew={createNew}
-            setInputName={setInputName}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -104,47 +109,33 @@ const NpcList = () => {
             typeOfNpcs={creatures}
             handleDialogOpen={handleDialogOpen}
             createNew={createNew}
-            setInputName={setInputName}
-            isCreatures={true}
+            isCreature={true}
           />
         </Grid>
       </Grid>
-      <RemoveDialog
-        open={open}
-        handleDialogClose={handleDialogClose}
-        handleDelete={handleDelete}
-      />
+
+      <Dialog open={open} onClose={handleDialogClose}>
+        <DialogTitle>Remove NPC</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Remove this NPC permanently?</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="NPC name"
+            type="name"
+            fullWidth
+            variant="outlined"
+            onChange={({ target }) => setInputName(target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose}>Cancel</Button>
+          <Button onClick={() => handleDelete()}>Remove</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
 
-const RemoveDialog = ({
-  open,
-  handleDialogClose,
-  handleDelete,
-  setInputName,
-}) => {
-  return (
-    <Dialog open={open} onClose={handleDialogClose}>
-      <DialogTitle>Remove NPC</DialogTitle>
-      <DialogContent>
-        <DialogContentText>Remove this NPC permanently?</DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="NPC name"
-          type="name"
-          fullWidth
-          variant="outlined"
-          onChange={({ target }) => setInputName(target.value)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleDialogClose}>Cancel</Button>
-        <Button onClick={() => handleDelete()}>Remove</Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
 export default NpcList

@@ -50,7 +50,8 @@ const NpcRow = ({ npc, handleDialogOpen }) => {
         key={npc._id}
         sx={{
           display: solveRowVisibility(),
-          backgroundColor: npc.visibility === 'hidden' ? '#ddd' : 'inherit',
+          backgroundColor: npc.visibility === 'hidden' && 'hidden.main',
+          color: npc.visibility === 'hidden' && 'hidden.contrast',
         }}
       >
         <TableCell style={{ borderBottom: 'none' }}>

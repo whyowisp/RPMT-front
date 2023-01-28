@@ -11,8 +11,8 @@ const getAllById = async (campaignId) => {
   return res.data
 }
 
-const initNewNpc = async (playerId, campaignId) => {
-  const reqBody = { playerId, campaignId }
+const initNewNpc = async (playerId, campaignId, isCreature) => {
+  const reqBody = { playerId, campaignId, isCreature }
   const res = await axios.post(`${baseUrl}/new`, reqBody)
   return res.data
 }

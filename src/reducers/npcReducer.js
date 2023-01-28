@@ -46,10 +46,10 @@ export const initNpcs = (campaignId) => {
   }
 }
 
-export const initializeNew = (userId, campaignId) => {
-  console.log(userId + ' ja ' + campaignId)
+export const initializeNew = (userId, campaignId, isCreature) => {
+  console.log(userId + ' ja ' + campaignId + ' ja ' + isCreature)
   return async (dispatch) => {
-    const newNpc = await npcService.initNewNpc(userId, campaignId)
+    const newNpc = await npcService.initNewNpc(userId, campaignId, isCreature)
     dispatch(npcCreation(newNpc))
   }
 }
@@ -72,6 +72,7 @@ export const editNpc = (data) => {
 }
 
 export const deleteOne = (id) => {
+  console.log('id: ' + id)
   return async (dispatch) => {
     dispatch(npcRemoval(id))
     await npcService.deleteNpc(id)

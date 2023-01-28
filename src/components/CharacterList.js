@@ -121,7 +121,7 @@ const CharacterList = ({ toPage }) => {
             <TableBody>
               {characters.map((chr) => (
                 <CharacterRow
-                  key={chr.id}
+                  key={chr._id}
                   chr={chr}
                   toPage={toPage}
                   handleDialogOpen={handleDialogOpen}
@@ -202,7 +202,8 @@ const CharacterRow = ({ chr, toPage, handleDialogOpen }) => {
         key={chr._id}
         sx={{
           display: solveRowVisibility(),
-          backgroundColor: chr.visibility === 'hidden' ? '#ddd' : 'inherit',
+          backgroundColor: chr.visibility === 'hidden' && 'hidden.main',
+          color: chr.visibility === 'hidden' && 'hidden.contrast',
         }}
       >
         <TableCell style={{ borderBottom: 'none' }}>

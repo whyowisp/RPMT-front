@@ -1,5 +1,15 @@
 import { Typography, Box, ButtonGroup, Button, Toolbar } from '@mui/material'
 
+/* SEND ME
+toPage <Function>
+headerData = {
+  title: String,
+  sections: [
+    { name: String, alt: String },
+  ],
+}
+*/
+
 const Header = ({ toPage, headerData }) => {
   return (
     <>
