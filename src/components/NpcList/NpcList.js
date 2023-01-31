@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { initNpcs, initializeNew, deleteOne } from '../../reducers/npcReducer'
+import { initializeNew, deleteOne } from '../../reducers/npcReducer'
 import {
   Grid,
   Button,
@@ -31,10 +31,6 @@ const NpcList = () => {
   const [open, setOpen] = useState(false)
 
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initNpcs(whoIsLoggedIn.currentCampaign.id))
-  }, [dispatch])
 
   const handleDialogOpen = (id, name) => {
     setId(id)

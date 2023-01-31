@@ -72,6 +72,24 @@ export const editCampaign = (data) => {
   }
 }
 
+export const campaignAddGroup = (data) => {
+  return async (dispatch) => {
+    const updatedCampaign = await campaignService.updateCampaign(
+      data.content,
+      data.id
+    )
+
+    const editedData = {
+      id: data.id,
+      content: {
+        groups: updatedCampaign.groups,
+      },
+    }
+
+    dispatch(campaignEdition(editedData))
+  }
+}
+
 export const deleteOne = (id) => {
   return async (dispatch) => {
     dispatch(campaignRemoval(id))

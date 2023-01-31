@@ -27,6 +27,7 @@ import { initFactions } from '../reducers/factionReducer'
 import { initCharacters } from '../reducers/characterReducer'
 import { setCurrentCampaign } from '../reducers/loggedPlayerReducer'
 import { initCovenants } from '../reducers/covenantReducer'
+import { initNpcs } from '../reducers/npcReducer'
 import dragonCastle from '../images/dragonCastle.png'
 
 const Home = () => {
@@ -51,6 +52,7 @@ const Home = () => {
     dispatch(initFactions(campaignId)) //Ideally init based on (whoIsLoggedIn.currentCampaign), but it´s unreliable
     dispatch(initCharacters(campaignId))
     dispatch(initCovenants(campaignId))
+    dispatch(initNpcs(campaignId))
   }
 
   const isPlayerInCampaign = (campaign) => {

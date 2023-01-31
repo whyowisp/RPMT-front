@@ -15,18 +15,21 @@ const NpcColumn = ({ typeOfNpcs, handleDialogOpen, createNew, isCreature }) => {
     <Paper elevation={3} sx={{ paddingBottom: 10 }}>
       <Table size="small" padding="none">
         <TableHead>
-          <TableCell></TableCell>
-          <TableCell sx={{ pt: 1, pl: 1 }}>
-            {isCreature ? 'Creatures' : 'Non-Player Characters'}
-          </TableCell>
-          <TableCell></TableCell>
-          <TableCell
-            align="center"
-            sx={{ pt: 1, pr: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Visibility
-          </TableCell>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell sx={{ pt: 1, pl: 1 }}>
+              {isCreature ? 'Creatures' : 'Non-Player Characters'}
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell
+              align="center"
+              sx={{ pt: 1, pr: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              Visibility
+            </TableCell>
+          </TableRow>
         </TableHead>
+
         <TableBody>
           {typeOfNpcs.map((npc) => (
             <NpcRow

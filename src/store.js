@@ -6,6 +6,7 @@ import campaignReducer from './reducers/campaignReducer'
 import factionReducer from './reducers/factionReducer'
 import covenantReducer from './reducers/covenantReducer'
 import npcReducer from './reducers/npcReducer'
+import groupReducer from './reducers/groupReducer'
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     factions: factionReducer,
     covenants: covenantReducer,
     npcs: npcReducer,
+    groups: groupReducer,
   },
 })

@@ -35,7 +35,7 @@ import FactionList from './components/FactionList'
 import FactionSheet from './components/FactionSheet'
 import CovenantSheet from './components/arsMagCovenSheet/CovenantSheet'
 import NpcList from './components/NpcList/NpcList'
-import QuestMode from './components/QuestMode'
+import QuestMode from './components/QuestMode/QuestMode'
 
 const drawerWidth = 200
 
@@ -191,7 +191,6 @@ const App = (props) => {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-
       {player ? (
         <Box sx={{ display: 'flex' }}>
           <AppBar
