@@ -19,7 +19,21 @@ const Abilities = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
+  /*
+  const getFatiguePenalty = () => {
+    //Return fatigue levels that have been flagged as true
+    const ftgValues = character.fatigue.map((ftg) =>
+      ftg.penalty && ftg.checked ? ftg.penalty : 0
+    )
+    const greatestPenalty = Math.min(...ftgValues)
 
+    const fatiguePenalties = ftgValues.reduce(
+      (acc, currentValue) => acc + currentValue.penalty,
+      0
+    )
+    setFatiguePenalty(greatestPenalty)
+  }
+  const [fatiguePenalty, setFatiguePenalty] = useState(getFatiguePenalty())*/
   const [abilities, setAbilities] = useState()
   const [fieldIndex, setFieldIndex] = useState(-1)
 

@@ -21,10 +21,7 @@ const NpcColumn = ({ typeOfNpcs, handleDialogOpen, createNew, isCreature }) => {
               {isCreature ? 'Creatures' : 'Non-Player Characters'}
             </TableCell>
             <TableCell></TableCell>
-            <TableCell
-              align="center"
-              sx={{ pt: 1, pr: 1, display: { xs: 'none', sm: 'block' } }}
-            >
+            <TableCell align="center" sx={{ pt: 1, pr: 1 }}>
               Visibility
             </TableCell>
           </TableRow>

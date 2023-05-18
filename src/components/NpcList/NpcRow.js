@@ -86,11 +86,7 @@ const NpcRow = ({ npc, handleDialogOpen }) => {
             <DeleteForeverTwoToneIcon />
           </Button>
         </TableCell>
-        <TableCell
-          style={{ borderBottom: 'none' }}
-          align="center"
-          sx={{ display: { xs: 'none', md: 'block' } }}
-        >
+        <TableCell style={{ borderBottom: 'none' }} align="center">
           <Button
             onClick={() => setVisibility()}
             disabled={whoIsLoggedIn.id === npc.owner ? false : true}

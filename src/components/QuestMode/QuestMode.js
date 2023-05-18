@@ -10,10 +10,12 @@ import {
 import GroupAddTwoToneIcon from '@mui/icons-material/GroupAddTwoTone'
 
 import Group from './Group'
+import Dice from '../Dice'
 
 import { campaignAddGroup } from '../../reducers/campaignReducer'
 
 const QuestMode = () => {
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const campaignID = useSelector(
     (state) => state.loggedPlayer.currentCampaign.id
   )
@@ -27,6 +29,7 @@ const QuestMode = () => {
   const addGroup = () => {
     const data = {
       id: campaignID,
+      owner: whoIsLoggedIn.id,
       content: {
         groups: groups.concat({ name: 'New Group', characters: [] }),
       },
@@ -68,6 +71,7 @@ const QuestMode = () => {
           <Group group={group} campaignID={campaignID} />
         </Grid>
       ))}
+      <Dice />
     </Grid>
   )
 }

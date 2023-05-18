@@ -184,8 +184,9 @@ const Weapons = ({ id }) => {
           textAlign: 'center',
         }}
       >
-        Qik + Weap - Enc = INIT / Dex + Ability + Weap = ATK / Qik + Ability +
-        Weap = DFN / Str + Weap = DAM
+        Qik + Weap - Enc = INIT / Dex + Ability + Weap ={' '}
+        <span style={{ color: 'red' }}>ATK</span> / Qik + Ability + Weap ={' '}
+        <span style={{ color: 'blue' }}>DFN</span> / Str + Weap = DAM
       </Typography>
     </TableContainer>
   )

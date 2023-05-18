@@ -15,6 +15,7 @@ import NpcSheet from '../NpcSheet/NpcSheet'
 import { editCampaign } from '../../reducers/campaignReducer'
 
 const CharacterRow = ({ characterID, group, campaignID }) => {
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const character = useSelector((state) =>
     state.npcs.find((npc) => npc._id === characterID)
   )
@@ -44,16 +45,26 @@ const CharacterRow = ({ characterID, group, campaignID }) => {
       },
     }
     /* eslint-enable */
-
     console.log(data)
     dispatch(editCampaign(data))
   }
 
-  console.log('hello from ROW: ' + characterID, group)
+  const solveRowVisibility = () => {
+    if (character.owner === whoIsLoggedIn.id) return 'table-row'
+    if (character.visibility === 'hidden') return 'none'
+  }
+
   if (!character) return null
   return (
     <>
-      <TableRow key={character._id}>
+      <TableRow
+        key={character._id}
+        sx={{
+          display: solveRowVisibility(),
+          backgroundColor: character.visibility === 'hidden' && 'hidden.main',
+          color: character.visibility === 'hidden' && 'hidden.contrast',
+        }}
+      >
         <TableCell style={{ borderBottom: 'none' }}>
           <IconButton
             aria-label="expand row"

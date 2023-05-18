@@ -19,7 +19,7 @@ import {
 import { login } from '../reducers/loggedPlayerReducer'
 import { initializePlayers, addPlayer } from '../reducers/playersReducer'
 import { BoarIcon } from '../SvgIcons/BoarIcon'
-import login_background from '../images/login_background_bw.png'
+import login_background from '../images/login_background.png'
 
 const Login = ({ toPage }) => {
   const players = useSelector((state) => state.players)

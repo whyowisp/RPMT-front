@@ -15,9 +15,10 @@ import {
 } from '@mui/material'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-
+//import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import GroupRemoveOutlinedIcon from '@mui/icons-material/GroupRemoveOutlined'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
+
 import CharacterRow from './CharacterRow'
 import AddCharacterDialog from './AddCharacterDialog'
 import { editCampaign } from '../../reducers/campaignReducer'
@@ -26,6 +27,8 @@ const Group = ({ group, campaignID }) => {
   const [newName, setNewName] = useState('')
   const [nameEditVisible, setNameEditVisible] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
+
+  const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
 
   const campaign = useSelector((state) =>
     state.campaigns.find((campaign) => campaign.id === campaignID)
@@ -59,13 +62,27 @@ const Group = ({ group, campaignID }) => {
     editName(newName)
     setNameEditVisible(false)
   }
+
+  const solveGroupVisibility = () => {
+    if (group.owner === whoIsLoggedIn.id) return 'block'
+    if (group.visibility === 'hidden') return 'none'
+  }
+
   console.log('hello from GROUP: ' + JSON.stringify(group))
   return (
-    <Paper elevation={3} sx={{ paddingBottom: 10 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        paddingBottom: 6,
+        display: solveGroupVisibility(),
+      }}
+    >
       <Toolbar
         variant="dense"
         sx={{
           borderRadius: 1,
+          backgroundColor: group.visibility === 'hidden' && 'hidden.main',
+          color: group.visibility === 'hidden' && 'hidden.contrast',
         }}
       >
         <IconButton

@@ -1,19 +1,5 @@
-/* eslint-disable */
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Input,
-  Typography,
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableRow,
-  Button,
-  Grid,
-  Box,
-  Stack,
-} from '@mui/material'
+import { Input, Typography, Button, Grid, Box, Stack } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { editCharacter } from '../../reducers/characterReducer'
 import { commonBoxSx, plainInputSx, okButton } from '../themeAndStyles'
@@ -39,7 +25,7 @@ const Equipment = ({ id }) => {
     console.log(
       'newValue: ' + newValue + ', at index: ' + fieldIndex + ', type: ' + type
     )
-
+    /* eslint-disable */
     seEquipment(
       equipment.map((eqp, i) =>
         i === indexOfNewValue
@@ -50,6 +36,7 @@ const Equipment = ({ id }) => {
           : eqp
       )
     )
+    /* eslint-enable */
   }
 
   const submitUpdate = (e) => {
@@ -80,6 +67,39 @@ const Equipment = ({ id }) => {
     // -> to rerender
   }
 
+  const getPenalty = () => {
+    const compareNumbers = [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
+
+    //Find out total weight of items
+    const loads = character.equipment.map((eqp) =>
+      typeof parseInt(eqp.load) === 'number' ? parseInt(eqp.load) : 0
+    )
+    const totalLoad = loads.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    )
+
+    //Compare to compareNumbers list and return burden value
+    const totalBurden = compareNumbers.reduce((burden, currentValue, index) => {
+      if (currentValue <= totalLoad) {
+        //This value is set as burden in every iteration (if if-condition met)
+        return index
+      }
+      //This value is returned after exiting function
+      return burden
+    })
+
+    //Get this characters strength score and if it´s positive, subtract it from burden
+    const strength = character.characteristics.find(
+      (chr) => chr.characteristic === 'Strength'
+    )
+    const totalPenalty =
+      strength.score > 0 ? totalBurden - strength.score : totalBurden
+
+    //If penalty is NOT negative value return it as negative number (sorry), otherwise return 0
+    return totalPenalty > 0 ? -totalPenalty : 0
+  }
+
   if (!equipment) return null
 
   return (
@@ -108,6 +128,10 @@ const Equipment = ({ id }) => {
           </Grid>
         ))}
       </Grid>
+      <Typography sx={{ p: 1 }}>
+        <b>Total Penalty: </b>
+        {getPenalty()}
+      </Typography>
       <Button sx={okButton} onClick={(e) => submitUpdate(e)}>
         ok
       </Button>

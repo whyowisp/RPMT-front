@@ -167,7 +167,7 @@ const mainTheme = createTheme({
     },
     background: {
       default: '#8B9D83',
-      paper: 'rgba(255,255,255,0.9)',
+      paper: 'rgba(255,255,255,1.0)',
       //paper: 'rgba(0,0,0,0.85)',
     },
     customAppBar: {
