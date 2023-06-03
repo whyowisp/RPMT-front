@@ -76,7 +76,7 @@ const MagicalBooks = ({ id }) => {
       },
     }
 
-    console.log('data to send: ' + JSON.stringify(data))
+    //console.log('data to send: ' + JSON.stringify(data))
     if (data.content.magicalBooks.length === 0) {
       if (
         window.confirm(

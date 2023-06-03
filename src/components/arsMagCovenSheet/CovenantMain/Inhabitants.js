@@ -11,26 +11,32 @@ const Inhabitants = ({ id }) => {
     state.covenants.find((covenant) => covenant.id === id)
   )
 
-  const [governanceType, setGovernanceType] = useState(covenant.governanceType)
+  const [governanceType, setGovernanceType] = useState(
+    covenant.inhabitants.governanceType
+  )
   const [baseLoyaltyPoints, setBaseLoyaltyPoints] = useState(
-    covenant.baseLoyaltyPoints
+    covenant.inhabitants.baseLoyaltyPoints
   )
   const [currentLoyaltyPoints, setCurrentLoyaltyPoints] = useState(
-    covenant.currentLoyaltyPoints
+    covenant.inhabitants.currentLoyaltyPoints
   )
   const [prevailingLoyaltyScore, setPrevailingLoyaltyScore] = useState(
-    covenant.prevailingLoyaltyScore
+    covenant.inhabitants.prevailingLoyaltyScore
   )
   const [sitModLivingConditions, setSitModLivingConditions] = useState(
-    covenant.sitModLivingConditions
+    covenant.inhabitants.sitModLivingConditions
   )
   const [sitModEquipment, setSitModEquipment] = useState(
-    covenant.sitModEquipment
+    covenant.inhabitants.sitModEquipment
   )
-  const [sitModMoney, setSitModMoney] = useState(covenant.sitModMoney)
+  const [sitModMoney, setSitModMoney] = useState(
+    covenant.inhabitants.sitModMoney
+  )
   const [sitModSpecialists, setSitModSpecialists] = useState(
-    covenant.sitModSpecialists
+    covenant.inhabitants.sitModSpecialists
   )
+
+  console.log('govern: ', covenant.inhabitants.governanceType)
 
   const dispatch = useDispatch()
 
@@ -51,7 +57,7 @@ const Inhabitants = ({ id }) => {
         },
       },
     }
-
+    console.log('dada: ', data)
     dispatch(editCovenant(data))
   }
 
@@ -70,7 +76,7 @@ const Inhabitants = ({ id }) => {
         <Input
           sx={{ ...plainInputSx, width: '50%' }}
           disableUnderline
-          defaultValue={covenant.governanceType}
+          defaultValue={governanceType}
           onChange={({ target }) => setGovernanceType(target.value)}
         />
       </Stack>
@@ -83,7 +89,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx, width: '20%' }}
               disableUnderline
-              defaultValue={covenant.baseLoyaltyPoints}
+              defaultValue={baseLoyaltyPoints}
               onChange={({ target }) => setBaseLoyaltyPoints(target.value)}
             />
           </Stack>
@@ -94,7 +100,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx, width: '40%' }}
               disableUnderline
-              defaultValue={covenant.currentLoyaltyPoints}
+              defaultValue={currentLoyaltyPoints}
               onChange={({ target }) => setCurrentLoyaltyPoints(target.value)}
             />
           </Stack>
@@ -105,7 +111,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx, width: '40%' }}
               disableUnderline
-              defaultValue={covenant.prevailingLoyaltyScore}
+              defaultValue={prevailingLoyaltyScore}
               onChange={({ target }) => setPrevailingLoyaltyScore(target.value)}
             />
           </Stack>
@@ -122,7 +128,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx, width: '50%' }}
               disableUnderline
-              defaultValue={covenant.sitModLivingConditions}
+              defaultValue={sitModLivingConditions}
               onChange={({ target }) => setSitModLivingConditions(target.value)}
             />
           </Stack>
@@ -133,7 +139,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx }}
               disableUnderline
-              defaultValue={covenant.sitModEquipment}
+              defaultValue={sitModEquipment}
               onChange={({ target }) => setSitModEquipment(target.value)}
             />
           </Stack>
@@ -145,7 +151,7 @@ const Inhabitants = ({ id }) => {
             <Input
               sx={{ ...plainInputSx }}
               disableUnderline
-              defaultValue={covenant.sitModMoney}
+              defaultValue={sitModMoney}
               onChange={({ target }) => setSitModMoney(target.value)}
             />
           </Stack>

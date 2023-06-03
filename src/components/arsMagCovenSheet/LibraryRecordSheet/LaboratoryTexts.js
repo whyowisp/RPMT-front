@@ -74,12 +74,11 @@ const LaboratoryTexts = ({ id }) => {
       },
     }
 
-    //console.log('data to send: ' + JSON.stringify(data))
+    console.log('data to send: ' + JSON.stringify(data))
     dispatch(editCovenant(data))
 
     //Re-render will clear these anyway
     setFieldIndex(-1)
-    setLabTexts([])
     // -> to rerender
   }
 
@@ -96,12 +95,18 @@ const LaboratoryTexts = ({ id }) => {
                 borderBottom: 'none',
               }}
             ></TableCell>
-            <TableCell>Author / Scribe</TableCell>
-            <TableCell>Year</TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+              Author / Scribe
+            </TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+              Year
+            </TableCell>
             <TableCell>Arts</TableCell>
             <TableCell>Level</TableCell>
             <TableCell>R/D/T</TableCell>
-            <TableCell>Notes</TableCell>
+            <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+              Notes
+            </TableCell>
           </TableRow>
         </TableHead>
 
@@ -118,7 +123,7 @@ const LaboratoryTexts = ({ id }) => {
                     ...plainInputSx,
                     width: '95%',
                   }}
-                  defaultValue={labText.text}
+                  defaultValue={labText.labText}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'text')}
                 />

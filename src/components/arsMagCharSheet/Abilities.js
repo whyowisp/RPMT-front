@@ -87,12 +87,22 @@ const Abilities = ({ id }) => {
       },
     }
 
-    //console.log('data to send: ' + JSON.stringify(data))
-    dispatch(editCharacter(data))
+    console.log('data to send: ' + JSON.stringify(data))
+    if (data.content.abilities.length === 0) {
+      if (
+        window.confirm(
+          'Client is sending empty abilities list! Cancel if not intended.'
+        )
+      ) {
+        dispatch(editCharacter(data))
+      }
+    } else {
+      dispatch(editCharacter(data))
+    }
 
     //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    setAbilities([])
+    //setAbilities([])
     // -> to rerender
   }
 

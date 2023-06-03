@@ -94,7 +94,7 @@ const BasicStats = ({ npcId }) => {
         <Input
           sx={{ ...plainInputSx, width: '20%' }}
           disableUnderline
-          defaultValue={npc.born}
+          defaultValue={npc.confidence}
           onChange={({ target }) => setConfidence(target.value)}
         />
       </Stack>
