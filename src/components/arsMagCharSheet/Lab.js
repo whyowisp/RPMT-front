@@ -15,7 +15,9 @@ const Lab = ({ id }) => {
     )?.score
   )
   const theory = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Magic Theory')?.score
+    character.abilities.find(
+      (abi) => abi.ability.toLowerCase() === 'magic theory'
+    )?.score
   )
 
   return (

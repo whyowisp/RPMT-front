@@ -76,12 +76,21 @@ const MagicalBooks = ({ id }) => {
       },
     }
 
-    //console.log('data to send: ' + JSON.stringify(data))
-    dispatch(editCovenant(data))
+    console.log('data to send: ' + JSON.stringify(data))
+    if (data.content.magicalBooks.length === 0) {
+      if (
+        window.confirm(
+          'You are sending empty books array! Cancel if not intended.'
+        )
+      ) {
+        dispatch(editCovenant(data))
+      }
+    } else {
+      dispatch(editCovenant(data))
+    }
 
     //Re-render will clear these anyway
     setFieldIndex(-1)
-    setBooks([])
     // -> to rerender
   }
 

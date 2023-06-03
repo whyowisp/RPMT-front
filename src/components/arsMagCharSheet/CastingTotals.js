@@ -7,22 +7,24 @@ const CastingTotals = ({ id }) => {
   const character = useSelector((state) =>
     state.characters.find((c) => c._id === id)
   )
+
+  const returnAbilityValue = (abilityArray, abilityName) => {
+    const abilityIndex = abilityArray.findIndex(
+      (a) => a.ability?.toLowerCase() === abilityName
+    )
+    if (abilityIndex !== -1) {
+      return parseInt(abilityArray[abilityIndex].score)
+    }
+    return 0
+  }
+
   if (!character) return null
 
-  const finesse = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Finesse')?.score
-  )
-  const awareness = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Awareness')?.score
-  )
-  const parmaMagica = parseInt(
-    character.abilities.find(
-      (abi) => abi.ability === 'Parma Magica' || abi.ability === 'Parma magica'
-    )?.score
-  )
-  const concentration = parseInt(
-    character.abilities.find((abi) => abi.ability === 'Concentration')?.score
-  )
+  const finesse = returnAbilityValue(character.abilities, 'finesse')
+  const awareness = returnAbilityValue(character.abilities, 'awareness')
+  const parmaMagica = returnAbilityValue(character.abilities, 'parma magica')
+  const concentration = returnAbilityValue(character.abilities, 'concentration')
+
   const quickness = parseInt(
     character.characteristics.find((chr) => chr.characteristic === 'Quickness')
       ?.score
@@ -53,37 +55,37 @@ const CastingTotals = ({ id }) => {
       primary: 'Fast Casting Speed',
       secondary: '(+ stress die)',
       add: 'Qik + Finesse =',
-      total: (quickness + finesse).toString(),
+      total: isNaN(finesse) ? 0 : quickness + finesse,
     },
     {
       primary: 'Determining Effect',
       secondary: '(+ die, vs 15-magnitude)',
       add: 'Per + Awareness =',
-      total: (perception + awareness).toString(),
+      total: isNaN(awareness) ? 0 : perception + awareness,
     },
     {
       primary: 'Base Targeting',
       secondary: '(+ die)',
       add: 'Per + Finesse =',
-      total: (perception + finesse).toString(),
+      total: isNaN(finesse) ? 0 : perception + finesse,
     },
     {
       primary: 'Concentration',
       secondary: '(+ die)',
       add: 'Sta + Concentration =',
-      total: (stamina + concentration).toString(),
+      total: isNaN(concentration) ? 0 : stamina + concentration,
     },
     {
       primary: 'Magic Resistance',
       secondary: '(+ Form)',
       add: 'Parma Magica x5 =',
-      total: (parmaMagica * 5).toString(),
+      total: isNaN(parmaMagica) ? 0 : parmaMagica * 5,
     },
     {
       primary: 'Multiple Casting',
       secondary: '(+ stress die - no. of spells, vs 9)',
       add: 'Int + Finesse =',
-      total: (intelligence + finesse).toString(),
+      total: isNaN(finesse) ? 0 : intelligence + finesse,
     },
   ]
 
