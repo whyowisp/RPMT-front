@@ -279,7 +279,7 @@ const App = (props) => {
             <Typography align="right">
               Logged in as <b>{player.alias}</b>
             </Typography>
-            <Container maxWidth="md" sx={{ p: 0 }}>
+            <Container maxWidth="md" sx={{ pb: 9 }}>
               {content()}
             </Container>
           </Box>

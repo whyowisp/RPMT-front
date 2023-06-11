@@ -91,6 +91,7 @@ const MagicalBooks = ({ id }) => {
 
     //Re-render will clear these anyway
     setFieldIndex(-1)
+    setBooks([])
     // -> to rerender
   }
 

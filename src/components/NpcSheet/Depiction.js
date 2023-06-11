@@ -17,9 +17,10 @@ const Depiction = ({ npcId }) => {
   const [notes, setNotes] = useState(npc.depiction?.notes)
 
   const submitUpdate = (e) => {
+    console.log('updating')
     e.preventDefault()
     const data = {
-      npcId: npcId,
+      id: npcId,
       content: {
         depiction: {
           depiction: depiction,

@@ -102,7 +102,7 @@ const Abilities = ({ id }) => {
 
     //Re-render will clear these anyway, but keep them to avoid bugs
     setFieldIndex(-1)
-    //setAbilities([])
+    setAbilities([])
     // -> to rerender
   }
 

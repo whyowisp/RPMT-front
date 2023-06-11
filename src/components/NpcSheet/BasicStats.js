@@ -85,7 +85,7 @@ const BasicStats = ({ npcId }) => {
         <Input
           sx={{ ...plainInputSx, width: '20%' }}
           disableUnderline
-          defaultValue={npc.age}
+          defaultValue={npc.size}
           onChange={({ target }) => setSize(target.value)}
         />
         <Typography variant="lightProperty" sx={{ pt: 0.7 }}>

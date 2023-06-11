@@ -86,7 +86,6 @@ xl, extra-large: 1536px
           sx={{
             padding: 1,
             position: 'relative',
-            mb: 10,
             backgroundSize: 'contain',
             backgroundRepeat: 'space',
             backgroundPosition: 'left',

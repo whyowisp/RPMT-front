@@ -40,7 +40,7 @@ const LaboratoryTexts = ({ id }) => {
       labTexts.map((labText, i) =>
         i === indexOfNewValue
           ? {
-              labText: type === 'text' ? newValue : labText.text,
+              text: type === 'text' ? newValue : labText.text,
               author: type === 'author' ? newValue : labText.author,
               year: type === 'year' ? newValue : labText.year,
               arts: type === 'arts' ? newValue : labText.arts,
@@ -123,7 +123,7 @@ const LaboratoryTexts = ({ id }) => {
                     ...plainInputSx,
                     width: '95%',
                   }}
-                  defaultValue={labText.labText}
+                  defaultValue={labText.text}
                   onChange={() => setFieldIndex(index)}
                   onBlur={(event) => prepareValues(event, 'text')}
                 />
