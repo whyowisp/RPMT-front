@@ -22,6 +22,7 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
 import CharacterRow from './CharacterRow'
 import AddCharacterDialog from './AddCharacterDialog'
 import { editCampaign } from '../../reducers/campaignReducer'
+import { deleteOne } from '../../reducers/npcReducer'
 
 const Group = ({ group, campaignID }) => {
   const [newName, setNewName] = useState('')
@@ -29,7 +30,7 @@ const Group = ({ group, campaignID }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
-
+  const npcs = useSelector((state) => state.npcs)
   const campaign = useSelector((state) =>
     state.campaigns.find((campaign) => campaign.id === campaignID)
   )
@@ -44,6 +45,11 @@ const Group = ({ group, campaignID }) => {
       },
     }
     dispatch(editCampaign(data))
+    //also remove all npcs from this group
+    const npcsToRemove = npcs.filter(
+      (npc) => npc.group === group._id && npc.copy === true
+    )
+    npcsToRemove.forEach((npc) => dispatch(deleteOne(npc._id)))
   }
 
   const editName = (newName) => {
@@ -68,7 +74,7 @@ const Group = ({ group, campaignID }) => {
     if (group.visibility === 'hidden') return 'none'
   }
 
-  console.log('hello from GROUP: ' + JSON.stringify(group))
+  console.log('hello from GROUP: ', group)
   return (
     <Paper
       elevation={3}
@@ -154,14 +160,12 @@ const Group = ({ group, campaignID }) => {
           <TableCell></TableCell>
         </TableHead>
         <TableBody>
-          {group.characters.map((characterID) => (
-            <CharacterRow
-              key={characterID}
-              characterID={characterID}
-              group={group}
-              campaignID={campaignID}
-            />
-          ))}
+          {npcs.map(
+            (character) =>
+              group._id === character.group && (
+                <CharacterRow key={character._id} characterID={character._id} />
+              )
+          )}
         </TableBody>
       </Table>
 

@@ -17,6 +17,12 @@ const initNewNpc = async (playerId, campaignId, isCreature) => {
   return res.data
 }
 
+const initNewNpcFromExisting = async (playerId, campaignId, npc) => {
+  const reqBody = { playerId, campaignId, npc }
+  const res = await axios.post(`${baseUrl}/newFromExisting`, reqBody)
+  return res.data
+}
+
 const updateNpc = async (reqData, npcId) => {
   const res = await axios.put(`${baseUrl}/${npcId}`, reqData)
   return res.data
@@ -31,6 +37,7 @@ const npcService = {
   getAll,
   getAllById,
   initNewNpc,
+  initNewNpcFromExisting,
   updateNpc,
   deleteNpc,
 }

@@ -21,9 +21,11 @@ import dragonCastle from '../../images/dragonCastle.png'
 
 const NpcList = () => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
-  const allNpcs = useSelector((state) => state.npcs)
-  const npcs = allNpcs.filter((npc) => !npc.isCreature)
-  const creatures = allNpcs.filter((npc) => npc.isCreature)
+  const allNpcsNotPartOfGroup = useSelector((state) => state.npcs).filter(
+    (npc) => !npc.group
+  )
+  const npcs = allNpcsNotPartOfGroup.filter((npc) => !npc.isCreature)
+  const creatures = allNpcsNotPartOfGroup.filter((npc) => npc.isCreature)
 
   const [inputName, setInputName] = useState()
   const [referenceName, setReferenceName] = useState()
@@ -62,7 +64,7 @@ const NpcList = () => {
     )
   }
 
-  if (!allNpcs) return null
+  if (!allNpcsNotPartOfGroup) return null
   if (!whoIsLoggedIn) return null
 
   return (

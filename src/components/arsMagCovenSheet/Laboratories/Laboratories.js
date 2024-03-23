@@ -21,7 +21,7 @@ const Laboratories = ({ covenantId }) => {
       state.covenants.find((covenant) => covenant.id === covenantId)
         ?.laboratories
   )
-  //console.log(JSON.stringify(laboratories))
+  console.log(JSON.stringify(laboratories))
   return (
     <>
       {laboratories.map((lab, index) => (

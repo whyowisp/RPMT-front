@@ -21,7 +21,11 @@ import {
 } from '@mui/material'
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone'
 
-import { createFaction, removeFaction } from '../reducers/factionReducer'
+import {
+  createFaction,
+  initFactions,
+  removeFaction,
+} from '../reducers/factionReducer'
 import castle from '../images/castle.png'
 import { createNewCovenant, removeCovenant } from '../reducers/covenantReducer'
 
@@ -115,13 +119,6 @@ const FactionList = ({ toPage }) => {
               </ListItem>
             </>
           ))}
-          <ListItem>
-            <ListItemButton onClick={() => handleDialogOpen()}>
-              <ListItemText align="center">
-                <Typography variant="h6">New Covenant</Typography>
-              </ListItemText>
-            </ListItemButton>
-          </ListItem>
           <ListSubheader disableSticky inset color="default">
             Factions
           </ListSubheader>
@@ -244,6 +241,7 @@ const FactionCreationDialog = ({
 
       dispatch(createNewCovenant(newCovenant))
     }
+    dispatch(initFactions())
     setCreateDialogOpen(false)
   }
 

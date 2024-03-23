@@ -46,6 +46,7 @@ export const initNpcs = (campaignId) => {
   }
 }
 
+//This function creates new npc with empty data
 export const initializeNew = (userId, campaignId, isCreature) => {
   console.log(userId + ' ja ' + campaignId + ' ja ' + isCreature)
   return async (dispatch) => {
@@ -53,6 +54,21 @@ export const initializeNew = (userId, campaignId, isCreature) => {
     dispatch(npcCreation(newNpc))
   }
 }
+
+//This function creates new npc with existing npc object
+export const initializeNewFromExisting = (userId, campaignId, npc) => {
+  console.log(userId + ' ja ' + campaignId + ' ja ' + npc)
+  return async (dispatch) => {
+    const newNpc = await npcService.initNewNpcFromExisting(
+      userId,
+      campaignId,
+      npc
+    )
+    console.log('newNpc: ', newNpc)
+    dispatch(npcCreation(newNpc))
+  }
+}
+
 /*
 Pass data to this function:
 Use format:

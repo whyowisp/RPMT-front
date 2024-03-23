@@ -12,41 +12,20 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import PersonRemoveIcon from '@mui/icons-material/PersonRemoveAlt1Outlined'
 
 import NpcSheet from '../NpcSheet/NpcSheet'
-import { editCampaign } from '../../reducers/campaignReducer'
+import { deleteOne } from '../../reducers/npcReducer'
 
-const CharacterRow = ({ characterID, group, campaignID }) => {
+const CharacterRow = ({ characterID }) => {
   const whoIsLoggedIn = useSelector((state) => state.loggedPlayer)
   const character = useSelector((state) =>
     state.npcs.find((npc) => npc._id === characterID)
-  )
-  const campaign = useSelector((state) =>
-    state.campaigns.find((campaign) => campaign.id === campaignID)
   )
 
   const [open, setOpen] = useState(false)
 
   const dispatch = useDispatch()
 
-  /* eslint-disable */
-  const removeCharacter = () => {
-    const data = {
-      id: campaignID,
-      content: {
-        groups: campaign.groups.map((grp) =>
-          grp._id === group._id
-            ? {
-                ...grp,
-                characters: grp.characters.filter(
-                  (chrID) => chrID !== characterID
-                ),
-              }
-            : grp
-        ),
-      },
-    }
-    /* eslint-enable */
-    console.log(data)
-    dispatch(editCampaign(data))
+  const removeCharacter = (characterID) => {
+    dispatch(deleteOne(characterID))
   }
 
   const solveRowVisibility = () => {
@@ -84,7 +63,7 @@ const CharacterRow = ({ characterID, group, campaignID }) => {
           </Typography>
         </TableCell>
         <TableCell style={{ borderBottom: 'none' }}>
-          <IconButton edge="end" onClick={() => removeCharacter()}>
+          <IconButton edge="end" onClick={() => removeCharacter(characterID)}>
             <PersonRemoveIcon />
           </IconButton>
         </TableCell>

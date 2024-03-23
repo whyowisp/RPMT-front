@@ -10,17 +10,17 @@ const Wealth = ({ id }) => {
   const covenant = useSelector((state) =>
     state.covenants.find((covenant) => covenant.id === id)
   )
-  const [income, setIncome] = useState(covenant.wealth.income)
-  const [expenditure, setExpenditure] = useState(covenant.wealth.expenditure)
-  const [savings, setSavings] = useState(covenant.wealth.savings)
+  const [income, setIncome] = useState(covenant.wealth?.income)
+  const [expenditure, setExpenditure] = useState(covenant.wealth?.expenditure)
+  const [savings, setSavings] = useState(covenant.wealth?.savings)
   const [pointsInhabitants, setPointsInhabitants] = useState(
-    covenant.wealth.pointsInhabitants
+    covenant.wealth?.pointsInhabitants
   )
   const [pointsLaboratories, setPointsLaboratories] = useState(
-    covenant.wealth.pointsLaboratories
+    covenant.wealth?.pointsLaboratories
   )
   const [pointsWeaponArmor, setPointsWeaponArmor] = useState(
-    covenant.wealth.pointsWeaponArmor
+    covenant.wealth?.pointsWeaponArmor
   )
 
   const dispatch = useDispatch()

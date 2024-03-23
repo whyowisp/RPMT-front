@@ -12,31 +12,29 @@ const Inhabitants = ({ id }) => {
   )
 
   const [governanceType, setGovernanceType] = useState(
-    covenant.inhabitants.governanceType
+    covenant.inhabitants?.governanceType
   )
   const [baseLoyaltyPoints, setBaseLoyaltyPoints] = useState(
-    covenant.inhabitants.baseLoyaltyPoints
+    covenant.inhabitants?.baseLoyaltyPoints
   )
   const [currentLoyaltyPoints, setCurrentLoyaltyPoints] = useState(
-    covenant.inhabitants.currentLoyaltyPoints
+    covenant.inhabitants?.currentLoyaltyPoints
   )
   const [prevailingLoyaltyScore, setPrevailingLoyaltyScore] = useState(
-    covenant.inhabitants.prevailingLoyaltyScore
+    covenant.inhabitants?.prevailingLoyaltyScore
   )
   const [sitModLivingConditions, setSitModLivingConditions] = useState(
-    covenant.inhabitants.sitModLivingConditions
+    covenant.inhabitants?.sitModLivingConditions
   )
   const [sitModEquipment, setSitModEquipment] = useState(
-    covenant.inhabitants.sitModEquipment
+    covenant.inhabitants?.sitModEquipment
   )
   const [sitModMoney, setSitModMoney] = useState(
-    covenant.inhabitants.sitModMoney
+    covenant.inhabitants?.sitModMoney
   )
   const [sitModSpecialists, setSitModSpecialists] = useState(
-    covenant.inhabitants.sitModSpecialists
+    covenant.inhabitants?.sitModSpecialists
   )
-
-  console.log('govern: ', covenant.inhabitants.governanceType)
 
   const dispatch = useDispatch()
 

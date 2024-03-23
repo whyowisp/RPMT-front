@@ -175,6 +175,7 @@ const CampaignCreationDialog = ({ open, setDialogOpen, whoIsLoggedIn }) => {
 
     dispatch(createNewCampaign(newCampaign))
     setDialogOpen(false)
+    dispatch(initCampaigns())
   }
 
   return (

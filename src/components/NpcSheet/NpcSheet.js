@@ -4,6 +4,7 @@ import {
   ThemeProvider,
   CssBaseline,
   Divider,
+  Button,
 } from '@mui/material'
 
 import { sheetThemeAM } from '../themeAndStyles'
@@ -24,7 +25,23 @@ import Depiction from './Depiction'
 import Vis from './Vis'
 import Powers from './Powers'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { editNpc } from '../../reducers/npcReducer'
+
 const NpcSheet = ({ npcId }) => {
+  const dispatch = useDispatch()
+  const npc = useSelector((state) => state.npcs.find((n) => n._id === npcId))
+  const showCombatStats = npc.showCombatStats
+
+  const switchToCombat = () => {
+    const data = {
+      id: npcId,
+      content: {
+        showCombatStats: !showCombatStats,
+      },
+    }
+    dispatch(editNpc(data))
+  }
   return (
     <ThemeProvider theme={sheetThemeAM}>
       <CssBaseline />
@@ -42,23 +59,31 @@ const NpcSheet = ({ npcId }) => {
           border: '2px solid',
         }}
       >
-        <Box display="flex" justifyContent="center" sx={{ p: 1, pb: 0 }}>
-          <Typography variant="label">- Ars Magica -</Typography>
-        </Box>
-        <Box display="flex" justifyContent="center" sx={{ p: 1, pb: 0 }}>
-          <Typography variant="labelSm">NPC & CREATURE SHEET</Typography>
-        </Box>
+        <Button onClick={() => switchToCombat()}>
+          {npc.showCombatStats ? 'full sheet' : 'combat mode'}
+        </Button>
+        {!npc.showCombatStats && (
+          <Box display="flex" justifyContent="center" sx={{ p: 1, pb: 0 }}>
+            <Typography variant="label">- Ars Magica -</Typography>
+          </Box>
+        )}
+        {!npc.showCombatStats && (
+          <Box display="flex" justifyContent="center" sx={{ p: 1, pb: 0 }}>
+            <Typography variant="labelSm">NPC & CREATURE SHEET</Typography>
+          </Box>
+        )}
+
         <BasicStats npcId={npcId} />
         <Divider />
         <Characteristics npcId={npcId} />
         <Divider />
-        <VirtuesAndFlaws npcId={npcId} />
+        {!npc.showCombatStats && <VirtuesAndFlaws npcId={npcId} />}
         <Divider />
-        <Abilities npcId={npcId} />
+        {!npc.showCombatStats && <Abilities npcId={npcId} />}
         <Divider />
-        <PersonalityTraits npcId={npcId} />
+        {!npc.showCombatStats && <PersonalityTraits npcId={npcId} />}
         <Divider />
-        <Reputations npcId={npcId} />
+        {!npc.showCombatStats && <Reputations npcId={npcId} />}
         <Divider />
         <Combat npcId={npcId} />
         <Divider />
@@ -68,11 +93,11 @@ const NpcSheet = ({ npcId }) => {
         <Divider />
         <Weapons npcId={npcId} />
         <Divider />
-        <Equipment npcId={npcId} />
+        {!npc.showCombatStats && <Equipment npcId={npcId} />}
         <Divider />
-        <Depiction npcId={npcId} />
+        {!npc.showCombatStats && <Depiction npcId={npcId} />}
         <Divider />
-        <Vis npcId={npcId} />
+        {!npc.showCombatStats && <Vis npcId={npcId} />}
         <Divider />
         <Powers npcId={npcId} />
       </Box>
